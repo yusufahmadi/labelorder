@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/text_home"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:textAlignment="center"
+            android:textSize="20sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight=".3"
+                android:text="@string/lbl1" />
+
+            <EditText
+                android:id="@+id/txtPanjangBahan"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight=".7"
+                android:autofillHints=""
+                android:ems="10"
+                android:hint="Input Panjang Bahan (Meter)"
+                android:inputType="number" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight=".3"
+                android:text="@string/lbl2" />
+
+            <EditText
+                android:id="@+id/txtLebar"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight=".7"
+                android:autofillHints=""
+                android:ems="10"
+                android:hint="Input Lebar Label (mm)"
+                android:inputType="number" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight=".3"
+                android:text="@string/lbl3" />
+
+            <EditText
+                android:id="@+id/txtGap"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:autofillHints=""
+                android:layout_weight=".7"
+                android:ems="10"
+                android:hint="Input gap (mm)"
+                android:inputType="number" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/buttonCalculate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Calculate" />
+        <TextView
+            android:id="@+id/labelOutput"
+            android:textSize="20dp"
+            android:layout_width="match_parent"
+            android:textColor="@color/colorPrimary"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
