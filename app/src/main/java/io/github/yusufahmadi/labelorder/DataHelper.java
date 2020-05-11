@@ -48,15 +48,15 @@ public class DataHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(selectQuery, null);//selectQuery,selectedArguments
 
 
-        mdlPublic.ListBahan = new ArrayList<Bahan>();
-        mdlPublic.ListBahan.clear();
-        for (int i = 0; i < cursor.getCount(); i++) {
-            Bahan Obj = new Bahan();
-            Obj.setId(cursor.getInt(1));
-            Obj.setNama(cursor.getString(2));
-            Obj.setHarga(cursor.getInt(3));
-            mdlPublic.ListBahan.add(Obj);
-        }
+        mdlPublic.ListStrBahan = new ArrayList<String>();
+        mdlPublic.ListStrBahan.clear();
+//        for (int i = 0; i < cursor.getCount(); i++) {
+//            Bahan Obj = new Bahan();
+//            Obj.setId(cursor.getInt(1));
+//            Obj.setNama(cursor.getString(2));
+//            Obj.setHarga(cursor.getInt(3));
+//            mdlPublic.ListBahan.add(Obj);
+//        }
     }
 
 }
