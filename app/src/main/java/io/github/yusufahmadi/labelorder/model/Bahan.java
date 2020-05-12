@@ -1,4 +1,4 @@
-package io.github.yusufahmadi.labelorder;
+package io.github.yusufahmadi.labelorder.model;
 
 public class Bahan {
 
