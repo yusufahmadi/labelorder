@@ -8,13 +8,18 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewTreeObserver;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.widget.NestedScrollView;
+
+import com.google.android.material.card.MaterialCardView;
 
 import io.github.yusufahmadi.labelorder.R;
+import io.github.yusufahmadi.labelorder.repository.mdlPublic;
 
 public class RibbonInputActivity extends AppCompatActivity {
 
@@ -24,6 +29,33 @@ public class RibbonInputActivity extends AppCompatActivity {
         setContentView(R.layout.activity_input_ribbon);
 
         initToolbar();
+        initLayout();
+    }
+
+    private void initLayout() {
+        final NestedScrollView nested = findViewById(R.id.nestedScrollView);
+        final MaterialCardView footer = findViewById(R.id.footer);
+
+        nested.getViewTreeObserver().addOnScrollChangedListener(new ViewTreeObserver.OnScrollChangedListener() {
+            @Override
+            public void onScrollChanged() {
+                if (nested != null) {
+
+//                    if (nested.getChildAt(0).getBottom() <= (nested.getHeight() + nested.getScrollY())) {
+//                        relativeLayout.setVisibility(View.VISIBLE);
+//                    }
+//                    else {
+//                        relativeLayout.setVisibility(View.INVISIBLE);
+//                    }
+                }
+
+                //measuring for alpha
+                int toolBarHeight = footer.getMeasuredHeight();
+                int appBarHeight = nested.getMeasuredHeight();
+                Float f = ((((float) appBarHeight - toolBarHeight) + (nested.getHeight() + nested.getScrollY())) / ( (float) appBarHeight - toolBarHeight)) * 255;
+                footer.setAlpha(Math.round(f));
+            }
+        });
     }
 
     private void initToolbar() {
@@ -36,19 +68,11 @@ public class RibbonInputActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-//        switch (item.getItemId()) {
-//            case android.R.id.home:
-//                GoBackMenu(RESULT_CANCELED, null);
-//                return true;
-//            case R.id.cart:
-//                if (mdlPublic.MemberLogin.NoID >= 1 || asGuest) {
-//                    BtnChartClick();
-//                } else {
-//                    Intent intent = new Intent(getApplicationContext(), LoginGuestAcyivity.class);
-//                    startActivityForResult(intent, mdlPublic.activity_login);
-//                }
-//                return true;
-//        }
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                GoBackMenu(RESULT_CANCELED, null);
+                return true;
+        }
         return super.onOptionsItemSelected(item);
     }
 
@@ -95,27 +119,5 @@ public class RibbonInputActivity extends AppCompatActivity {
                 ((InputMethodManager) this.getSystemService(Context.INPUT_METHOD_SERVICE)).hideSoftInputFromWindow((this.getWindow().getDecorView().getApplicationWindowToken()), 0);
         }
         return super.dispatchTouchEvent(ev);
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        // Check which request we're responding to
-//        switch (requestCode) {
-//            case mdlPublic.activity_login:
-//                if (resultCode == RESULT_OK) {
-//                    SharedPreferences settings = getSharedPreferences(mdlPublic.PREFS_GUEST, 0);
-//                    asGuest = settings.getBoolean("AsGuest", false);
-//
-//                    navigate(DetailProdukActivity.this, Adapter.getItem(0).NoID, true);
-//                    this.finish();
-//                }
-//                break;
-//            case mdlPublic.activity_detail_produk:
-//                if (resultCode == RESULT_OK) {
-//                    GoBackMenu(resultCode, data);
-//                }
-//            default:
-//                break;
-//        }
     }
 }

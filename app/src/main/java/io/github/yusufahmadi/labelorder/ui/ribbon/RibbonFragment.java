@@ -14,6 +14,7 @@ import androidx.lifecycle.ViewModelProviders;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import io.github.yusufahmadi.labelorder.R;
+import io.github.yusufahmadi.labelorder.repository.mdlPublic;
 
 public class RibbonFragment extends Fragment {
 
@@ -32,7 +33,7 @@ public class RibbonFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), RibbonInputActivity.class);
-                startActivityForResult(intent, 10001);
+                startActivityForResult(intent, mdlPublic.Activity_RibbonInput);
             }
         });
 

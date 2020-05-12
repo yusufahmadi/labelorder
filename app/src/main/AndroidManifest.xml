@@ -47,7 +47,7 @@
             android:name=".ui.label.LabelInputActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar"
-            android:windowSoftInputMode="adjustPan|adjustResize" />
+            android:windowSoftInputMode="adjustResize" />
     </application>
 
 </manifest>

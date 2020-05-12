@@ -1,15 +1,16 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light.DarkActionBar">
         <!-- Customize your theme here. -->
         <item name="windowNoTitle">true</item>
         <item name="windowActionBar">false</item>
         <item name="colorPrimary">@color/primaryColor</item>
         <item name="colorPrimaryDark">@color/primaryDarkColor</item>
         <item name="colorAccent">@color/colorAccent</item>
-        <item name="android:textColorPrimary">@color/primaryTextColor</item>
-        <item name="android:textColorSecondary">@color/secondaryTextColor</item>
+        <item name="colorSurface">@color/cardview_light_background</item>
+        <item name="colorOnSurface">@color/grey_90</item>
+        <item name="materialCardViewStyle">@style/Widget.App.CardView</item>
     </style>
 
     <style name="AppTheme.NoActionBar" parent="AppTheme">
@@ -17,34 +18,21 @@
         <item name="windowNoTitle">true</item>
     </style>
 
-    <style name="MyMaterialTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
+    <style name="MyMaterialTheme.AppBarOverlay" parent="ThemeOverlay.MaterialComponents.Dark.ActionBar">
         <item name="android:titleTextColor">@color/dark_gray</item>
     </style>
 
-    <style name="MyMaterialTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light">
+    <style name="MyMaterialTheme.PopupOverlay" parent="ThemeOverlay.MaterialComponents.Light">
         <item name="android:titleTextColor">@color/space_white</item>
     </style>
 
-    <style name="DialogButtom" parent="Theme.AppCompat.Light.Dialog">
+    <style name="DialogButtom" parent="Theme.MaterialComponents.Light.Dialog">
         <item name="android:windowBackground">@null</item>
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowIsFloating">false</item>
     </style>
 
-    <style name="MyCardViewNoPadding" parent="CardView">
-        <item name="cardBackgroundColor">@color/cardview_light_background</item>
-        <item name="cardUseCompatPadding">true</item>
-        <item name="cardCornerRadius">8dp</item>
-        <item name="cardElevation">4dp</item>
-        <item name="android:foreground">?android:attr/selectableItemBackground</item>
-        <item name="android:hardwareAccelerated">true</item>
-    </style>
-
-    <style name="MyCardView.Dark" parent="MyCardView">
-        <item name="cardBackgroundColor">@color/cardview_dark_background</item>
-    </style>
-
-    <style name="TextLabel" parent="TextAppearance.AppCompat">
+    <style name="TextLabel" parent="TextAppearance.MaterialComponents.Caption">
         <!-- Hint color and label color in FALSE state -->
 <!--        <item name="android:fontFamily">@font/cc_opensans_reguler</item>-->
         <item name="android:textColorHint">#fff</item>
@@ -55,43 +43,19 @@
         <item name="colorControlActivated">#fff</item>
     </style>
 
-    <style name="MyCardView" parent="CardView">
-        <item name="cardBackgroundColor">@color/cardview_light_background</item>
-        <item name="cardUseCompatPadding">true</item>
-        <item name="cardCornerRadius">8dp</item>
-        <item name="cardElevation">4dp</item>
-        <item name="contentPadding">5dp</item>
-        <item name="android:foreground">?android:attr/selectableItemBackground</item>
-        <item name="android:hardwareAccelerated">true</item>
+    <style name="ShapeAppearance.App.MediumComponent" parent="ShapeAppearance.MaterialComponents.MediumComponent">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">8dp</item>
     </style>
 
-    <style name="MyCardView.Menu" parent="CardView">
-        <item name="cardBackgroundColor">@color/cardview_light_background</item>
-        <item name="cardUseCompatPadding">true</item>
-        <item name="cardCornerRadius">8dp</item>
-        <item name="cardElevation">4dp</item>
-        <item name="android:foreground">?android:attr/selectableItemBackground</item>
-        <item name="android:hardwareAccelerated">true</item>
+    <style name="Widget.App.CardView" parent="Widget.MaterialComponents.CardView">
+        <item name="materialThemeOverlay">@style/ThemeOverlay.App.Card</item>
+        <item name="shapeAppearance">@style/ShapeAppearance.App.MediumComponent</item>
     </style>
 
-    <style name="MyCardView.Menu.Dark" parent="MyCardView.Menu">
-        <item name="cardBackgroundColor">@color/cardview_dark_background</item>
-    </style>
-
-    <style name="MyCardView.MenuSmall" parent="CardView">
-        <item name="cardBackgroundColor">@color/colorAccent</item>
-        <item name="cardUseCompatPadding">true</item>
-        <item name="cardCornerRadius">2dp</item>
-        <item name="cardElevation">0dp</item>
-        <item name="android:foreground">?android:attr/selectableItemBackground</item>
-        <item name="android:hardwareAccelerated">true</item>
-    </style>
-
-    <style name="MyCardView.MenuSmall.Red" parent="MyCardView.MenuSmall">
-        <item name="cardBackgroundColor">@color/red</item>
-    </style>
-
-    <style name="MyCardView.MenuSmall.Green" parent="MyCardView.MenuSmall">
-        <item name="cardBackgroundColor">@color/primaryColor</item>
+    <style name="ThemeOverlay.App.Card" parent="">
+        <item name="colorPrimary">@color/grey_80</item>
+        <item name="colorSurface">@color/cardview_light_background</item>
+        <item name="colorOnSurface">@color/grey_90</item>
     </style>
 </resources>
