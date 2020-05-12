@@ -20,10 +20,32 @@
     <color name="grey_3">#f7f7f7</color>
     <color name="grey_5">#f2f2f2</color>
     <color name="grey_10">#e6e6e6</color>
-    <color name="grey_20">#CCCCCC</color>
+    <color name="grey_20">#cccccc</color>
     <color name="grey_40">#999999</color>
     <color name="grey_60">#666666</color>
     <color name="grey_80">#37474F</color>
     <color name="grey_90">#263238</color>
     <color name="white">#FFFFFF</color>
+
+    <color name="colorGreen">#00c853</color>
+    <color name="colorWhite">#FFFFFF</color>
+    <color name="colorWindowsBackground">#ffebee</color>
+
+    <color name="red">#ff0000</color>
+    <color name="content">#666666</color>
+    <color name="content2">#888888</color>
+    <color name="list_divider">#604b4b</color>
+    <color name="list_row_start_color">#ffffff</color>
+    <color name="list_row_end_color">#ffffff</color>
+    <color name="list_row_hover_start_color">#ebeef0</color>
+    <color name="list_row_hover_end_color">#ebeef0</color>
+
+
+    <color name="list_row_red_start_color">#FF5722</color>
+    <color name="list_row_red_end_color">#FF5722</color>
+    <color name="list_row_red_hover_start_color">#F44336</color>
+    <color name="list_row_red_hover_end_color">#F44336</color>
+
+    <color name="ColorCardView">#CBCACA</color>
+    <color name="MenuColor">#000000</color>
 </resources>
