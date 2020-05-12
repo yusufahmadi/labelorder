@@ -50,7 +50,7 @@ public class RibbonFragment extends Fragment {
         final EditText editTextLebar = root.findViewById(R.id.editTextLebar);
         final EditText editTextPanjang = root.findViewById(R.id.editTextPanjang);
         final MaterialSpinner spinner_bahann = root.findViewById(R.id.spinner_bahan);
-        final TextView textViewModalPerM2 = root.findViewById(R.id.textViewModalPerM2);
+        final TextView textViewModalPerM2 = root.findViewById(R.id.textViewHargaM2);
 
         final EditText editTextModal = root.findViewById(R.id.editTextModal);
         final TextView textView10Persen = root.findViewById(R.id.textView10Persen);
@@ -539,7 +539,7 @@ public class RibbonFragment extends Fragment {
 //        DataHelper db = new DataHelper(context);
 //        db.refreshBahan();
 
-        mdlPublic.ListStrBahan = new ArrayList<String>();
+//        mdlPublic.ListStrBahan = new ArrayList<String>();
         mdlPublic.ListBahan = new Bahan[5];
         for (int i = 0; i < 5; i++) {
             mdlPublic.ListBahan[i] = new Bahan();

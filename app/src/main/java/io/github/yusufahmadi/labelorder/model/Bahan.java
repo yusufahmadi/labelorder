@@ -13,11 +13,11 @@ public class Bahan {
         this._harga=0;
     }
 
-    public Bahan (int id,String Nama ,int Harga){
-        this._id = id;
-        this._nama = Nama;
-        this._harga = Harga;
-    }
+//    public Bahan (int id,String Nama ,int Harga){
+//        this._id = id;
+//        this._nama = Nama;
+//        this._harga = Harga;
+//    }
 
     public void setId(int id){
         this._id = id;
