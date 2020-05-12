@@ -7,10 +7,7 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,8 +16,6 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.jaredrummler.materialspinner.MaterialSpinner;
-
-import org.json.JSONObject;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -55,7 +50,7 @@ public class DashboardFragment extends Fragment {
         final EditText editTextLebar = root.findViewById(R.id.editTextLebar);
         final EditText editTextPanjang = root.findViewById(R.id.editTextPanjang);
         final MaterialSpinner spinner_bahann = root.findViewById(R.id.spinner_bahan);
-        final TextView textViewModalPerM2 = root.findViewById(R.id.textViewModalPerM2);
+        final TextView textViewModalPerM2 = root.findViewById(R.id.textViewHargaM2);
 
         final EditText editTextModal = root.findViewById(R.id.editTextModal);
         final TextView textView10Persen = root.findViewById(R.id.textView10Persen);
@@ -544,7 +539,7 @@ public class DashboardFragment extends Fragment {
 //        DataHelper db = new DataHelper(context);
 //        db.refreshBahan();
 
-        mdlPublic.ListStrBahan = new ArrayList<String>();
+//        mdlPublic.ListStrBahan = new ArrayList<String>();
         mdlPublic.ListBahan = new Bahan[5];
         for (int i = 0; i < 5; i++) {
             mdlPublic.ListBahan[i] = new Bahan();
