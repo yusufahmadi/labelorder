@@ -1,16 +1,16 @@
-package io.github.yusufahmadi.labelorder.ui.dashboard;
+package io.github.yusufahmadi.labelorder.ui.ribbon;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class DashboardViewModel extends ViewModel {
+public class RibbonViewModel extends ViewModel {
 
     private MutableLiveData<String> mText;
 
-    public DashboardViewModel() {
+    public RibbonViewModel() {
         mText = new MutableLiveData<>();
-        mText.setValue("This is dashboard fragment");
+        mText.setValue("This is ribbon fragment");
     }
 
     public LiveData<String> getText() {

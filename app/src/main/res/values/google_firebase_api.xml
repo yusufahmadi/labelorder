@@ -1,0 +1,21 @@
+<resources>
+    <!--
+    TODO: Before you run your application, you need a Google Maps API key.
+    https://console.developers.google.com/apis/credentials/key/705218e6-566f-4ae6-90a6-8bd92d55c926?project=label-order-276921
+
+    You can also add your credentials to an existing key, using these values:
+
+    Certificate fingerprints:
+    MD5:  69:10:87:9C:1B:28:89:E5:FA:78:39:9C:79:59:BF:94
+    SHA1: 2F:8B:C4:03:56:9A:43:6A:FB:76:25:22:D7:1D:EB:14:5B:91:7C:2E
+    SHA256: 1A:37:72:5A:FE:9B:97:5C:59:1D:20:8A:1C:E6:2B:15:A8:2D:E9:BC:00:9C:05:CE:4A:5B:7F:3D:15:D8:F1:33
+
+    Alternatively, follow the directions here:
+    https://developers.google.com/maps/documentation/android/start#get-key
+
+    Once you have your key (it starts with "AIza"), replace the "google_maps_key"
+    string in this file.
+    -->
+    <string name="google_firebase_key" templateMergeStrategy="preserve" translatable="false">
+        AIzaSyAj_Wecg7cNe6GxpU4A8e6LDmPNU7n04Xo</string>
+</resources>

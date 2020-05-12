@@ -1,4 +1,4 @@
-package io.github.yusufahmadi.labelorder.ui.dashboard;
+package io.github.yusufahmadi.labelorder.ui.ribbon;
 
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -21,13 +21,13 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 import io.github.yusufahmadi.labelorder.R;
-import io.github.yusufahmadi.labelorder.BahanAdapter;
-import io.github.yusufahmadi.labelorder.Bahan;
-import io.github.yusufahmadi.labelorder.mdlPublic;
+import io.github.yusufahmadi.labelorder.adapter.BahanAdapter;
+import io.github.yusufahmadi.labelorder.model.Bahan;
+import io.github.yusufahmadi.labelorder.repository.mdlPublic;
 
-public class DashboardFragment extends Fragment {
+public class RibbonFragment extends Fragment {
 
-    private DashboardViewModel dashboardViewModel;
+    private RibbonViewModel ribbonViewModel;
 
     DecimalFormat n0 = new DecimalFormat("#,###,###");
     DecimalFormat n2 = new DecimalFormat("#,###,###.##");
@@ -37,11 +37,11 @@ public class DashboardFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         context = container.getContext();
-        dashboardViewModel =
-                ViewModelProviders.of(this).get(DashboardViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_dashboard, container, false);
+        ribbonViewModel =
+                ViewModelProviders.of(this).get(RibbonViewModel.class);
+        View root = inflater.inflate(R.layout.activity_input_ribbon, container, false);
 //        final TextView textView = root.findViewById(R.id.text_dashboard);
-//        dashboardViewModel.getText().observe(this, new Observer<String>() {
+//        ribbonViewModel.getText().observe(this, new Observer<String>() {
 //            @Override
 //            public void onChanged(@Nullable String s) {
 //                textView.setText(s);

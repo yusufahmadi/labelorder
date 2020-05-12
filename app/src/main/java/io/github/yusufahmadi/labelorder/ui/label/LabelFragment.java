@@ -1,6 +1,5 @@
-package io.github.yusufahmadi.labelorder.ui.home;
+package io.github.yusufahmadi.labelorder.ui.label;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -10,7 +9,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.NonNull;
@@ -22,14 +20,14 @@ import java.text.DecimalFormat;
 
 import io.github.yusufahmadi.labelorder.R;
 
-public class HomeFragment extends Fragment {
+public class LabelFragment extends Fragment {
 
-    private HomeViewModel homeViewModel;
+    private LabelViewModel labelViewModel;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        homeViewModel =
-                ViewModelProviders.of(this).get(HomeViewModel.class);
+        labelViewModel =
+                ViewModelProviders.of(this).get(LabelViewModel.class);
         View root = inflater.inflate(R.layout.fragment_home, container, false);
         final TextView textView = root.findViewById(R.id.text_home);
 
@@ -39,7 +37,7 @@ public class HomeFragment extends Fragment {
         final Button btnCalc = root.findViewById(R.id.buttonCalculate);
         final TextView labelOutput = root.findViewById(R.id.labelOutput);
 
-        homeViewModel.getText().observe(this, new Observer<String>() {
+        labelViewModel.getText().observe(this, new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
                 textView.setText(s);

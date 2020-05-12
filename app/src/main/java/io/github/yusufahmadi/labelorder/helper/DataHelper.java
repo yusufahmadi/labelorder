@@ -1,18 +1,14 @@
-package io.github.yusufahmadi.labelorder;
+package io.github.yusufahmadi.labelorder.helper;
 
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.text.TextUtils;
-import io.github.yusufahmadi.labelorder.mdlPublic;
-import io.github.yusufahmadi.labelorder.Bahan;
 import android.util.Log;
 
-import org.json.JSONObject;
-
 import java.util.ArrayList;
-import java.util.List;
+
+import io.github.yusufahmadi.labelorder.repository.mdlPublic;
 
 public class DataHelper extends SQLiteOpenHelper {
 

@@ -1,8 +1,10 @@
 <resources>
-    <string name="app_name">LabelOrder</string>
-    <string name="title_home">Home</string>
-    <string name="title_dashboard">Ribbon</string>
-    <string name="title_notifications">History</string>
+    <string name="app_name">Label Order</string>
+
+    <string name="title_label">Label</string>
+    <string name="title_ribbon">Ribbon</string>
+    <string name="title_notifications">Notifications</string>
+
     <string name="lbl1">Panjang</string>
     <string name="lbl2">Lebar</string>
     <string name="lbl3">Gap</string>

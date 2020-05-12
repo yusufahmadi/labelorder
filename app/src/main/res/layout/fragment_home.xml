@@ -100,7 +100,7 @@
             android:id="@+id/labelOutput"
             android:textSize="20dp"
             android:layout_width="match_parent"
-            android:textColor="@color/colorPrimary"
+            android:textColor="@color/primaryColor"
             android:layout_height="wrap_content" />
 
     </LinearLayout>
