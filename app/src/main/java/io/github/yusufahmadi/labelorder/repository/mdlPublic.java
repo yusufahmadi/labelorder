@@ -14,6 +14,11 @@ import io.github.yusufahmadi.labelorder.model.PO;
 
 public class mdlPublic {
 
+    //Activity
+    public static int Activity_RibbonInput = 10001;
+    public static int Activity_LabelInput = 10002;
+    //End Activity
+
     public static Bahan[] ListBahan = new Bahan[0];
     public static List<String> ListStrBahan = new ArrayList<String>();
 

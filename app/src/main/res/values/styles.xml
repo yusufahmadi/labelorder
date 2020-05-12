@@ -55,7 +55,7 @@
         <item name="colorControlActivated">#fff</item>
     </style>
 
-    <style name="MyCardView2" parent="CardView">
+    <style name="MyCardView" parent="CardView">
         <item name="cardBackgroundColor">@color/cardview_light_background</item>
         <item name="cardUseCompatPadding">true</item>
         <item name="cardCornerRadius">8dp</item>
@@ -92,6 +92,6 @@
     </style>
 
     <style name="MyCardView.MenuSmall.Green" parent="MyCardView.MenuSmall">
-        <item name="cardBackgroundColor">@color/colorPrimary</item>
+        <item name="cardBackgroundColor">@color/primaryColor</item>
     </style>
 </resources>

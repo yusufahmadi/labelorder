@@ -55,21 +55,7 @@ public class RibbonInputActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-//        getMenuInflater().inflate(R.menu.menu_detail_produk, menu);
-//
-//        menuChart = menu.findItem(R.id.cart);
-//
-//        View actionView = menuChart.getActionView();
-//        textCartItemCount = actionView.findViewById(R.id.cart_badge);
-//
-//        setupBadge();
-//
-//        actionView.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                onOptionsItemSelected(menuChart);
-//            }
-//        });
+        // getMenuInflater().inflate(R.menu.menu_detail_produk, menu);
 
         return true;
     }
