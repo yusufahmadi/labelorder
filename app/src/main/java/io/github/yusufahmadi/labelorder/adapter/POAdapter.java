@@ -1,22 +1,21 @@
-package io.github.yusufahmadi.labelorder;
+package io.github.yusufahmadi.labelorder.adapter;
 
 import android.app.Activity;
 import android.content.Context;
-import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.Filter;
-import android.widget.Filterable;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
+import io.github.yusufahmadi.labelorder.model.PO;
+import io.github.yusufahmadi.labelorder.R;
+import io.github.yusufahmadi.labelorder.repository.mdlPublic;
 
 public class POAdapter  extends BaseAdapter {
     private Activity activity;

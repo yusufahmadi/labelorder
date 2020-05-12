@@ -1,4 +1,4 @@
-package io.github.yusufahmadi.labelorder;
+package io.github.yusufahmadi.labelorder.model;
 
 import java.sql.Date;
 
