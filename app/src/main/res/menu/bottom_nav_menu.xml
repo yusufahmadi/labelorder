@@ -4,15 +4,20 @@
     <item
         android:id="@+id/navigation_label"
         android:icon="@drawable/ic_label"
-        android:title="@string/title_label" />
+        android:title="Calc Label" />
 
     <item
         android:id="@+id/navigation_ribbon"
         android:icon="@drawable/ic_ribbon"
-        android:title="@string/title_ribbon" />
+        android:title="Calc Ribbon" />
 
     <item
-        android:id="@+id/navigation_notifications"
-        android:icon="@drawable/ic_notification"
-        android:title="@string/title_notifications" />
+        android:id="@+id/navigation_taffeta"
+        android:icon="@drawable/ic_fabric"
+        android:title="Calc Taffeta" />
+
+    <item
+        android:id="@+id/navigation_master"
+        android:icon="@drawable/ic_home"
+        android:title="Master Data" />
 </menu>

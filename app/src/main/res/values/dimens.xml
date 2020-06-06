@@ -22,6 +22,10 @@
     <dimen name="keyline_4">16dp</dimen>
     <dimen name="keyline_5">24dp</dimen>
 
+    <dimen name="small_padding">4dp</dimen>
+    <dimen name="medium_padding">8dp</dimen>
+    <dimen name="large_padding">16dp</dimen>
+
     <dimen name="component_label_horizontal_margin">@dimen/keyline_4</dimen>
     <dimen name="elevation_default_top_app_bar">4dp</dimen>
 </resources>

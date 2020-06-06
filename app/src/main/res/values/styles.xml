@@ -18,6 +18,13 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
 
     <!--Components-->
+    <style name="MyMaterialTheme.AppBarOverlay" parent="ThemeOverlay.MaterialComponents.Dark.ActionBar">
+        <item name="android:titleTextColor">@color/dark_gray</item>
+    </style>
+
+    <style name="MyMaterialTheme.PopupOverlay" parent="ThemeOverlay.MaterialComponents.Light">
+        <item name="android:titleTextColor">@color/space_white</item>
+    </style>
 
     <!--Bottom Sheets-->
     <style name="ThemeOverlay.MyTheme.BottomSheetDialog" parent="ThemeOverlay.MaterialComponents.Dialog">

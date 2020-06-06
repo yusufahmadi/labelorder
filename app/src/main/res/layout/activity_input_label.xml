@@ -45,7 +45,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight=".3"
-                android:text="@string/lbl1" />
+                android:text="Panjang" />
 
             <EditText
                 android:id="@+id/txtPanjangBahan"
@@ -69,7 +69,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight=".3"
-                android:text="@string/lbl2" />
+                android:text="Lebar" />
 
             <EditText
                 android:id="@+id/txtLebar"
@@ -92,7 +92,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight=".3"
-                android:text="@string/lbl3" />
+                android:text="Gap" />
 
             <EditText
                 android:id="@+id/txtGap"
