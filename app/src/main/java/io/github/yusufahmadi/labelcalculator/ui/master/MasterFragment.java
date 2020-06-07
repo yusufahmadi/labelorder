@@ -12,9 +12,9 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 
 import io.github.yusufahmadi.labelcalculator.BahanActivity;
+import io.github.yusufahmadi.labelcalculator.BahanLabelActivity;
 import io.github.yusufahmadi.labelcalculator.R;
 import io.github.yusufahmadi.labelcalculator.repository.mdlPublic;
-import io.github.yusufahmadi.labelcalculator.ui.ribbon.RibbonInputActivity;
 
 public class MasterFragment extends Fragment {
 
@@ -32,6 +32,15 @@ public class MasterFragment extends Fragment {
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), BahanActivity.class);
                 startActivityForResult(intent, mdlPublic.Activity_MasterBahanRibbon);
+            }
+        });
+
+        CardView cvBahanLabel = root.findViewById(R.id.cvBahanLabel);
+        cvBahanLabel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), BahanLabelActivity.class);
+                startActivityForResult(intent, mdlPublic.Activity_MasterBahanLabel);
             }
         });
 

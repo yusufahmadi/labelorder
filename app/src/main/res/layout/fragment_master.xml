@@ -23,8 +23,7 @@
             android:layout_marginVertical="@dimen/small_padding"
             android:clickable="true"
             android:focusable="true"
-            android:focusableInTouchMode="false"
-            app:contentPadding="@dimen/medium_padding">
+            app:contentPadding="@dimen/large_padding">
 
             <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="match_parent"
@@ -43,20 +42,20 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_marginStart="@dimen/medium_padding"
-                    android:text="Bahan Ribbon" />
+                    android:text="Bahan Ribbon"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"/>
             </androidx.appcompat.widget.LinearLayoutCompat>
 
         </com.google.android.material.card.MaterialCardView>
 
         <com.google.android.material.card.MaterialCardView
-            android:id="@+id/cvBahan"
+            android:id="@+id/cvBahanLabel"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginVertical="@dimen/small_padding"
             android:clickable="true"
             android:focusable="true"
-            android:focusableInTouchMode="false"
-            app:contentPadding="@dimen/medium_padding">
+            app:contentPadding="@dimen/large_padding">
 
             <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="match_parent"
@@ -75,7 +74,8 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_marginStart="@dimen/medium_padding"
-                    android:text="Bahan" />
+                    android:text="Bahan Label"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"/>
             </androidx.appcompat.widget.LinearLayoutCompat>
 
         </com.google.android.material.card.MaterialCardView>

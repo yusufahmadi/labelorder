@@ -41,6 +41,11 @@
             android:label="@string/app_name"
             android:theme="@style/Theme.MyApp"
             android:windowSoftInputMode="adjustPan|adjustResize" />
+        <activity
+            android:name=".BahanLabelActivity"
+            android:label="@string/app_name"
+            android:theme="@style/Theme.MyApp"
+            android:windowSoftInputMode="adjustPan|adjustResize" />
 
         <meta-data
             android:name="preloaded_fonts"

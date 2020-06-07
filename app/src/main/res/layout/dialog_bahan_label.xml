@@ -74,7 +74,23 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/medium_padding"
-                            android:hint="Harga Modal /M2">
+                            android:hint="Kode / Seri">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/txtCode"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:inputType="text"
+                                android:minHeight="48dp"
+                                android:text="Code" />
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/medium_padding"
+                            android:hint="Harga Include Tax">
 
                             <com.google.android.material.textfield.TextInputEditText
                                 android:id="@+id/txtHargaModal"

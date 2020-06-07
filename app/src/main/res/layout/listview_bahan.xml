@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:descendantFocusability="blocksDescendants"
-    android:orientation="vertical"
-    android:padding="@dimen/medium_padding">
+    android:layout_margin="@dimen/small_padding"
+    app:contentPadding="@dimen/large_padding"
+    app:cardCornerRadius="8dp">
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
@@ -16,7 +18,17 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.6"
-            android:text="Desc" />
+            android:text="Desc"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"/>
+
+        <TextView
+            android:id="@+id/tvCode"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.4"
+            android:text="Code"
+            android:visibility="gone"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"/>
 
         <TextView
             android:id="@+id/tvHarga"
@@ -24,7 +36,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="0.4"
             android:text="Rp. 0"
-            android:textAlignment="textEnd" />
+            android:textAlignment="textEnd"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"/>
     </androidx.appcompat.widget.LinearLayoutCompat>
 
-</androidx.appcompat.widget.LinearLayoutCompat>
+</com.google.android.material.card.MaterialCardView>

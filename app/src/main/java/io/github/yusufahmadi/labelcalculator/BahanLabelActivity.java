@@ -37,17 +37,17 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-import io.github.yusufahmadi.labelcalculator.adapter.BahanRecyclerAdapter;
+import io.github.yusufahmadi.labelcalculator.adapter.BahanLabelRecyclerAdapter;
 import io.github.yusufahmadi.labelcalculator.model.Bahan;
 import io.github.yusufahmadi.labelcalculator.repository.DataAccess;
 import io.github.yusufahmadi.labelcalculator.repository.RecyclerItemClickListener;
 
-public class BahanActivity extends AppCompatActivity {
+public class BahanLabelActivity extends AppCompatActivity {
     private SearchView menuSearch = null;
     private RecyclerView recyclerView = null;
-    private BahanRecyclerAdapter recyclerAdapter;
+    private BahanLabelRecyclerAdapter recyclerAdapter;
     private int item_limit = 10, last_item_count =0;
-    private static String TAG = "BahanActivity";
+    private static String TAG = "BahanLabelActivity";
     private ImageView imgNotFound;
     private TextView tvNotFound;
 
@@ -95,9 +95,9 @@ public class BahanActivity extends AppCompatActivity {
             recyclerView = findViewById(R.id.recyclerView1);
             recyclerView.setLayoutManager(new LinearLayoutManager(this, RecyclerView.VERTICAL, false));
             recyclerView.setHasFixedSize(true);
-            recyclerAdapter = new BahanRecyclerAdapter(this, recyclerView, new ArrayList<Bahan>(), item_limit);
+            recyclerAdapter = new BahanLabelRecyclerAdapter(this, recyclerView, new ArrayList<Bahan>(), item_limit);
             recyclerView.setAdapter(recyclerAdapter);
-            recyclerAdapter.setOnLoadMoreListener(new BahanRecyclerAdapter.OnLoadMoreListener() {
+            recyclerAdapter.setOnLoadMoreListener(new BahanLabelRecyclerAdapter.OnLoadMoreListener() {
                 @Override
                 public void onLoadMore(int current_page) {
                     if (last_item_count >=1 && current_page != 0) {
@@ -151,8 +151,8 @@ public class BahanActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        setTitle("Bahan Ribbon");
-        toolbar.setTitle("Bahan Ribbon");
+        setTitle("Bahan Label");
+        toolbar.setTitle("Bahan Label");
     }
 
     @Override
@@ -250,11 +250,11 @@ public class BahanActivity extends AppCompatActivity {
             this.Page = iPage;
             this.Cari = Filter;
 
-            Items = DataAccess.getListBahan(getApplicationContext(), Filter, iPage, iLimit);
+            Items = DataAccess.getListBahanLabel(getApplicationContext(), Filter, iPage, iLimit);
             last_item_count = Items.size();
 
         } catch (Exception e) {
-            Toast.makeText(BahanActivity.this, "Error : " + e.getMessage(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(BahanLabelActivity.this, "Error : " + e.getMessage(), Toast.LENGTH_SHORT).show();
             e.printStackTrace();
         } finally {
             try {
@@ -282,12 +282,13 @@ public class BahanActivity extends AppCompatActivity {
     private void ShowDetail(final Bahan obj) {
         final DecimalFormat df = new DecimalFormat("###,###,###", new DecimalFormatSymbols(Locale.US));
         try {
-            View modelBottomSheet = View.inflate(BahanActivity.this, R.layout.dialog_bahan, null);
-            final BottomSheetDialog dialog = new BottomSheetDialog(BahanActivity.this);
+            View modelBottomSheet = View.inflate(BahanLabelActivity.this, R.layout.dialog_bahan_label, null);
+            final BottomSheetDialog dialog = new BottomSheetDialog(BahanLabelActivity.this);
             dialog.setContentView(modelBottomSheet);
             dialog.setCancelable(true);
 
             final TextInputEditText txtDesc         = dialog.findViewById(R.id.txtDescription);
+            final TextInputEditText txtCode         = dialog.findViewById(R.id.txtCode);
             final TextInputEditText txtHargaJual    = dialog.findViewById(R.id.txtHargaModal);
             txtHargaJual.setOnFocusChangeListener(new View.OnFocusChangeListener() {
                 @Override
@@ -312,8 +313,10 @@ public class BahanActivity extends AppCompatActivity {
             if (obj != null) {
                 txtDesc.setText(obj.nama);
                 txtHargaJual.setText(df.format(obj.harga));
+                txtCode.setText(obj.code);
             } else {
                 txtDesc.setText("");
+                txtCode.setText("");
                 txtHargaJual.setText(df.format(0.0));
             }
 
@@ -336,7 +339,7 @@ public class BahanActivity extends AppCompatActivity {
                             isValidasi = false;
                         }
                         if (isValidasi &&
-                                !DataAccess.cekValidasiBahan(getApplication(), txtDesc.getText().toString(), (obj != null ? obj.id : -1))) {
+                                !DataAccess.cekValidasiBahanLabel(getApplication(), txtDesc.getText().toString(), (obj != null ? obj.id : -1))) {
                             Toast.makeText(getApplicationContext(),
                                     "Deskripsi bahan sudah dipakai.",
                                     Toast.LENGTH_SHORT).show();
@@ -352,7 +355,8 @@ public class BahanActivity extends AppCompatActivity {
                             }
                             bahan.harga = df.parse(txtHargaJual.getText().toString()).doubleValue();
                             bahan.nama = txtDesc.getText().toString();
-                            if (DataAccess.saveBahan(getApplication(), bahan)) {
+                            bahan.code = txtCode.getText().toString();
+                            if (DataAccess.saveBahanLabel(getApplication(), bahan)) {
                                 refreshList("", 1, item_limit);
                                 dialog.dismiss();
                             }

@@ -11,7 +11,7 @@ import io.github.yusufahmadi.labelcalculator.model.Bahan;
 
 public class DataHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "labelcalculator.db";
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 3;
     public DataHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
         // TODO Auto-generated constructor stub
@@ -19,16 +19,69 @@ public class DataHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         // TODO Auto-generated method stub
-        String sql = "create table bahan(no integer primary key, nama text null, harga real null);";
+        String sql = "create table bahan([no] integer primary key, nama text, harga real);";
         Log.d("Data", "onCreate: " + sql);
         db.execSQL(sql);
-        sql = "INSERT INTO bahan (no, nama, harga) VALUES ('1', 'Wax',1650),('2', 'Wax Resin',3410),('3', 'Resin / CL',5500),('4', 'Resin Frosen',6380);";
+        sql = "INSERT INTO bahan ([no], nama, harga) VALUES ('1', 'Wax',1650),('2', 'Wax Resin',3410),('3', 'Resin / CL',5500),('4', 'Resin Frosen',6380);";
         db.execSQL(sql);
+
+        dbUpgrade2(db);
+        dbUpgrade3(db);
     }
 
     @Override
-    public void onUpgrade(SQLiteDatabase arg0, int arg1, int arg2) {
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         // TODO Auto-generated method stub
 
+        if (oldVersion<2) {
+            dbUpgrade2(db);
+        }
+
+        if (oldVersion<3) {
+            dbUpgrade3(db);
+        }
+    }
+
+    private void dbUpgrade2(SQLiteDatabase db) {
+        Log.d("On Upgrade", "DB Struktur 2");
+        String sql = "create table bahan_label([no] integer primary key, nama text, code text, harga real);";
+        db.execSQL(sql);
+        sql = "INSERT INTO bahan_label ([no], nama, code, harga) VALUES " +
+                "('1', 'SC Avery', 'AW0416FT', 4642)," +
+                "('2', 'Yupo Avery', 'BW0277', 9864.8)," +
+                "('3', 'Thermal Avery', 'NW0045FN', 6791.4)," +
+                "('4', 'HVS Avery', 'AW0289',  5276.7)," +
+                "('5', 'Overlaminating Avery', 'BW0112N',  7276.5)," +
+                "('6', 'SC Camel Backing Putih', 'LP ART-B / GL P-E',  4480)," +
+                "('7', 'SC Camel Backing Biru', 'LP ART-B / GL BM',  4480)," +
+                "('8', 'Cromo Camel Backing Putih', 'LP CC / GL P-A',  5160)," +
+                "('9', 'Cromo Camel Backing Biru', 'LP CC / GL BM',  5160)," +
+                "('10', 'Yupo Camel', 'LF OPP PSM / GL P-A',  9220)," +
+                "('11', 'Thermal Putih/Biru Camel', 'LP THERMAL GL P-A/BM',  6850)," +
+                "('12', 'HVS Camel', 'LP HVS-A / GL P-A/BM',  4520);";
+        db.execSQL(sql);
+    }
+
+    private void dbUpgrade3(SQLiteDatabase db) {
+        Log.d("On Upgrade", "DB Struktur 3");
+        String sql = "create table label([no] integer primary key, " +
+                "dokumen text, " +
+                "tgl datetime default current_timestamp," +
+                "id_bahan int," +
+                "harga_bahan real," +
+                "lebar real," +
+                "tinggi real," +
+                "gap real," +
+                "pisau real," +
+                "pembulatan real," +
+                "qty_order real," +
+                "qty_jual real," +
+                "biaya_pisau real," +
+                "biaya_tinta real," +
+                "biaya_toyobo real," +
+                "biaya_operator real," +
+                "biaya_kirim real," +
+                "biaya_total real);";
+        db.execSQL(sql);
     }
 }

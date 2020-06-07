@@ -16,29 +16,30 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             app:title="@string/app_name"
+            style="@style/Widget.MaterialComponents.Toolbar.Primary" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             style="@style/Widget.MaterialComponents.Toolbar.Surface">
 
-            <RelativeLayout
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                app:cardCornerRadius="8dp"
+                app:cardUseCompatPadding="true">
 
-                <androidx.cardview.widget.CardView
+                <androidx.appcompat.widget.SearchView
+                    android:id="@+id/txtSearch"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
-                    app:cardCornerRadius="8dp"
-                    app:cardUseCompatPadding="true">
+                    android:elevation="2dp"
+                    app:iconifiedByDefault="false"
+                    app:queryHint="Cari data ..." />
+            </androidx.cardview.widget.CardView>
+        </RelativeLayout>
 
-                    <androidx.appcompat.widget.SearchView
-                        android:id="@+id/txtSearch"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:elevation="2dp"
-                        app:iconifiedByDefault="false"
-                        app:queryHint="Cari data ..." />
-                </androidx.cardview.widget.CardView>
-            </RelativeLayout>
-        </com.google.android.material.appbar.MaterialToolbar>
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.appcompat.widget.LinearLayoutCompat
