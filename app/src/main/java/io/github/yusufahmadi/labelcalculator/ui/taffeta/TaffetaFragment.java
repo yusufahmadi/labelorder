@@ -32,7 +32,7 @@ public class TaffetaFragment extends Fragment {
         View root = inflater.inflate(R.layout.fragment_recyclerview, container, false);
 
         menuSearch = root.findViewById(R.id.txtSearch);
-        menuSearch.setQueryHint("Cari data Label ...");
+        menuSearch.setQueryHint("Cari data Taffeta ...");
         SearchManager searchManager = (SearchManager) getActivity().getSystemService(Context.SEARCH_SERVICE);
         menuSearch.setSearchableInfo(searchManager.getSearchableInfo(getActivity().getComponentName()));
         final View closeButton = menuSearch.findViewById(R.id.search_close_btn);

@@ -14,6 +14,7 @@ import androidx.lifecycle.ViewModelProviders;
 import io.github.yusufahmadi.labelcalculator.BahanActivity;
 import io.github.yusufahmadi.labelcalculator.BahanLabelActivity;
 import io.github.yusufahmadi.labelcalculator.R;
+import io.github.yusufahmadi.labelcalculator.TypeTaffetaActivity;
 import io.github.yusufahmadi.labelcalculator.repository.mdlPublic;
 
 public class MasterFragment extends Fragment {
@@ -41,6 +42,15 @@ public class MasterFragment extends Fragment {
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), BahanLabelActivity.class);
                 startActivityForResult(intent, mdlPublic.Activity_MasterBahanLabel);
+            }
+        });
+
+        CardView cvTypeTaffeta = root.findViewById(R.id.cvTypeTaffeta);
+        cvTypeTaffeta.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), TypeTaffetaActivity.class);
+                startActivityForResult(intent, mdlPublic.Activity_MasterTypeTaffeta);
             }
         });
 

@@ -12,6 +12,7 @@ public class mdlPublic {
     public static int Activity_TeffetaInput = 10003;
     public static int Activity_MasterBahanRibbon = 10004;
     public static int Activity_MasterBahanLabel = 10005;
+    public static int Activity_MasterTypeTaffeta = 10006;
     //End Activity
 
     public static MainActivity mainActivity;

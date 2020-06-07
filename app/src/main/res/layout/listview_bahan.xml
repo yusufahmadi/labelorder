@@ -19,7 +19,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="0.6"
             android:text="Desc"
-            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"/>
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"/>
 
         <TextView
             android:id="@+id/tvCode"
@@ -28,7 +28,7 @@
             android:layout_weight="0.4"
             android:text="Code"
             android:visibility="gone"
-            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"/>
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"/>
 
         <TextView
             android:id="@+id/tvHarga"
@@ -37,7 +37,7 @@
             android:layout_weight="0.4"
             android:text="Rp. 0"
             android:textAlignment="textEnd"
-            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"/>
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"/>
     </androidx.appcompat.widget.LinearLayoutCompat>
 
 </com.google.android.material.card.MaterialCardView>
