@@ -16,6 +16,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -69,6 +70,8 @@ public class RibbonInputActivity extends AppCompatActivity {
 
     private TextInputEditText editTextHargaModal, editTextLebar, editTextPanjang, editTextModal;
     private AutoCompleteTextView spinner_bahan;
+    private TextInputEditText  editTextQty, editTextJualRoll, editTextJumlahProfitKotor , editTextTransport, editTextKomisiSalesProsen,editTextKomisiSalesNominal, editTextNetProfit;
+    private TextView textView10Persen,textView15Persen,textView25Persen,textView35Persen,textView45Persen,textView55Persen,textView65Persen,textView75Persen;
     private void initLayout() {
         try {
             final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(
@@ -80,6 +83,142 @@ public class RibbonInputActivity extends AppCompatActivity {
             editTextModal           = findViewById(R.id.editTextModal);
             editTextHargaModal      = findViewById(R.id.editTextHargaModal);
             spinner_bahan           = findViewById(R.id.spinner_bahan);
+
+            textView10Persen = findViewById(R.id.textView10Persen);
+            textView15Persen = findViewById(R.id.textView15Persen);
+            textView25Persen = findViewById(R.id.textView25Persen);
+            textView35Persen = findViewById(R.id.textView35Persen);
+            textView45Persen = findViewById(R.id.textView45Persen);
+            textView55Persen = findViewById(R.id.textView55Persen);
+            textView65Persen = findViewById(R.id.textView65Persen);
+            textView75Persen = findViewById(R.id.textView75Persen);
+
+            editTextQty = findViewById(R.id.editTextQty);
+            editTextJualRoll = findViewById(R.id.editTextJualRoll);
+            editTextJumlahProfitKotor = findViewById(R.id.editTextJumlahProfitKotor);
+            editTextTransport = findViewById(R.id.editTextTransport);
+            editTextKomisiSalesProsen = findViewById(R.id.editTextKomisiSalesProsen);
+            editTextKomisiSalesNominal = findViewById(R.id.editTextKomisiSalesNominal);
+            editTextNetProfit = findViewById(R.id.editTextNetProfit);
+
+            editTextQty.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+                @Override
+                public void onFocusChange(View v, boolean hasFocus) {
+                    try {
+                        TextInputEditText ed = editTextQty;
+                        if (!hasFocus) {
+                            if (ed.getText().toString().isEmpty()) {
+                                ed.setText(df.format(0.0));
+                            } else {
+                                ed.setText(df.format(Double.valueOf(ed.getText().toString())));
+                            }
+                            Hitung();
+                        } else {
+                            ed.setText(String.valueOf(df.parse(ed.getText().toString()).longValue()));
+                            ed.setSelection(0, ed.getText().toString().length());
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
+            editTextJualRoll.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+                @Override
+                public void onFocusChange(View v, boolean hasFocus) {
+                    try {
+                        TextInputEditText ed = editTextJualRoll;
+                        if (!hasFocus) {
+                            if (ed.getText().toString().isEmpty()) {
+                                ed.setText(df.format(0.0));
+                            } else {
+                                ed.setText(df.format(Double.valueOf(ed.getText().toString())));
+                            }
+                            Hitung();
+                        } else {
+                            ed.setText(String.valueOf(df.parse(ed.getText().toString()).longValue()));
+                            ed.setSelection(0, ed.getText().toString().length());
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
+            editTextTransport.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+                @Override
+                public void onFocusChange(View v, boolean hasFocus) {
+                    try {
+                        TextInputEditText ed = editTextTransport;
+                        if (!hasFocus) {
+                            if (ed.getText().toString().isEmpty()) {
+                                ed.setText(df.format(0.0));
+                            } else {
+                                ed.setText(df.format(Double.valueOf(ed.getText().toString())));
+                            }
+                            Hitung();
+                        } else {
+                            ed.setText(String.valueOf(df.parse(ed.getText().toString()).longValue()));
+                            ed.setSelection(0, ed.getText().toString().length());
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
+            editTextKomisiSalesProsen.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+                @Override
+                public void onFocusChange(View v, boolean hasFocus) {
+                    try {
+                        TextInputEditText ed = editTextKomisiSalesProsen;
+                        if (!hasFocus) {
+                            Hitung();
+//                            double KomisiSalesNominal = 0.0;
+                            if (ed.getText().toString().isEmpty()) {
+                                ed.setText(df2.format(0.0));
+//                                KomisiSalesNominal = 0.0;
+//                                editTextKomisiSalesNominal.setText(df.format(Double.valueOf(KomisiSalesNominal)));
+                            } else {
+                                ed.setText(df2.format(Double.valueOf(ed.getText().toString())));
+//                                KomisiSalesNominal = df.parse(editTextJumlahProfitKotor.getText().toString()).doubleValue() * df2.parse(ed.getText().toString()).doubleValue() /100;
+//                                editTextKomisiSalesNominal.setText(df.format(Double.valueOf(KomisiSalesNominal)));
+                            }
+                            Hitung();
+                        } else {
+                            ed.setText(String.valueOf(df2.parse(ed.getText().toString()).doubleValue()));
+                            ed.setSelection(0, ed.getText().toString().length());
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
+//            editTextKomisiSalesNominal.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+//                @Override
+//                public void onFocusChange(View v, boolean hasFocus) {
+//                    try {
+//                        TextInputEditText ed = editTextKomisiSalesNominal;
+//                        if (!hasFocus) {
+//                            Hitung();
+//                            double KomisiSalesProsen = 0.0;
+//                            if (ed.getText().toString().isEmpty()) {
+//                                ed.setText(df.format(0.0));
+//                                editTextKomisiSalesNominal.setText(df2.format(Double.valueOf(0.0)));
+//                            } else {
+//                                ed.setText(df.format(Double.valueOf(ed.getText().toString())));
+//                                KomisiSalesProsen = df2.parse(ed.getText().toString()).doubleValue()  * 100/ df.parse(editTextJumlahProfitKotor.getText().toString()).doubleValue() ;
+//                                editTextKomisiSalesNominal.setText(df2.format(Double.valueOf(KomisiSalesProsen)));
+//                            }
+//                            Hitung();
+//                        } else {
+//                            ed.setText(String.valueOf(df.parse(ed.getText().toString()).longValue()));
+//                            ed.setSelection(0, ed.getText().toString().length());
+//                        }
+//                    } catch (Exception e) {
+//                        e.printStackTrace();
+//                    }
+//                }
+//            });
+
+
             spinner_bahan.setAdapter(arrayAdapter);
             spinner_bahan.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -226,13 +365,29 @@ public class RibbonInputActivity extends AppCompatActivity {
     }
 
     private void Hitung() {
-        double modalperroll = 0.0;
+        double modalperroll = 0.0, profitkotor= 0.0, netprofit = 0.0,KomisiSalesNominal=0.0;
         try {
             modalperroll = (df.parse(editTextLebar.getText().toString()).doubleValue()/1000) *
                     df.parse(editTextPanjang.getText().toString()).doubleValue() *
                     df.parse(editTextHargaModal.getText().toString()).doubleValue();
             editTextModal.setText(df.format(modalperroll));
 
+            textView10Persen.setText(df.format(modalperroll*1.1));
+            textView15Persen.setText(df.format(modalperroll*1.15));
+            textView25Persen.setText(df.format(modalperroll*1.25));
+            textView35Persen.setText(df.format(modalperroll*1.35));
+            textView45Persen.setText(df.format(modalperroll*1.45));
+            textView55Persen.setText(df.format(modalperroll*1.55));
+            textView65Persen.setText(df.format(modalperroll*1.65));
+            textView75Persen.setText(df.format(modalperroll*1.75));
+
+            profitkotor =  (df.parse(editTextJualRoll.getText().toString()).doubleValue()-modalperroll) * df.parse(editTextQty.getText().toString()).doubleValue();
+            editTextJumlahProfitKotor.setText(df.format(profitkotor));
+
+            KomisiSalesNominal = df.parse(editTextJumlahProfitKotor.getText().toString()).doubleValue() * df2.parse(editTextKomisiSalesProsen.getText().toString()).doubleValue() /100;
+            editTextKomisiSalesNominal.setText(df.format(KomisiSalesNominal));
+            netprofit = profitkotor - df.parse(editTextTransport.getText().toString()).doubleValue() - df.parse(editTextKomisiSalesNominal.getText().toString()).doubleValue();
+            editTextNetProfit.setText(df.format(netprofit));
 
         } catch (Exception e) {
             Log.e("hitung", e.getMessage(), e);
