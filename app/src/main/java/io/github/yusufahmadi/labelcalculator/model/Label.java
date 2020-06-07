@@ -40,5 +40,8 @@ public class Label implements Serializable {
     public double biaya_toyobo;
     public double biaya_operator;
     public double biaya_kirim;
-    public double biaya_total;
+
+    public double getBiaya_total() {
+        return biaya_pisau + biaya_tinta + biaya_toyobo + biaya_operator + biaya_kirim;
+    }
 }

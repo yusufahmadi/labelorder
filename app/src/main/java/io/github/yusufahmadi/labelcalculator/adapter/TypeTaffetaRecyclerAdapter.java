@@ -22,13 +22,13 @@ import java.util.Locale;
 import io.github.yusufahmadi.labelcalculator.R;
 import io.github.yusufahmadi.labelcalculator.model.Bahan;
 
-public class BahanRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class TypeTaffetaRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private final int VIEW_ITEM = 1;
     private final int VIEW_PROG = 0;
     private int VIEW_REC = 0;
 
     public static List<Bahan> items = new ArrayList<>();
-    private DecimalFormat df = new DecimalFormat("###,###,###", new DecimalFormatSymbols(Locale.US));
+    private DecimalFormat df = new DecimalFormat("###,###,###.###", new DecimalFormatSymbols(Locale.US));
     private Context context;
     private OnLoadMoreListener onLoadMoreListener;
     private boolean loading;
@@ -46,7 +46,7 @@ public class BahanRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.View
         return items.get(position);
     }
 
-    public BahanRecyclerAdapter(Context context, RecyclerView view, List<Bahan> items, int item_limit) {
+    public TypeTaffetaRecyclerAdapter(Context context, RecyclerView view, List<Bahan> items, int item_limit) {
         this.context = context;
         this.items = items;
         this.item_limit = item_limit;
@@ -89,6 +89,8 @@ public class BahanRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.View
 
                 holder.Desc.setText(m.nama);
                 holder.Harga.setText("Rp. " + df.format(m.harga));
+                holder.Code.setText(m.code);
+                holder.Code.setVisibility(View.VISIBLE);
             } catch (Exception ex) {
                 Toast.makeText(context, "Error : " + ex.getMessage(), Toast.LENGTH_SHORT).show();
             }
@@ -104,12 +106,13 @@ public class BahanRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.View
 
     public static class OriginalViewHolder extends RecyclerView.ViewHolder {
         // Layouting item
-        public TextView Desc, Harga;
+        public TextView Desc, Code, Harga;
 
         public OriginalViewHolder(@NonNull View v) {
             super(v);
             Desc        = v.findViewById(R.id.tvNama);
             Harga       = v.findViewById(R.id.tvHarga);
+            Code        = v.findViewById(R.id.tvCode);
         }
     }
 

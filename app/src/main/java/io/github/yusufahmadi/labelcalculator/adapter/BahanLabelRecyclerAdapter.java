@@ -88,7 +88,7 @@ public class BahanLabelRecyclerAdapter extends RecyclerView.Adapter<RecyclerView
                 OriginalViewHolder holder = (OriginalViewHolder) viewHolder;
 
                 holder.Desc.setText(m.nama);
-                holder.Harga.setText("Rp." + df.format(m.harga));
+                holder.Harga.setText("Rp. " + df.format(m.harga));
                 holder.Code.setText(m.code);
                 holder.Code.setVisibility(View.VISIBLE);
             } catch (Exception ex) {

@@ -27,7 +27,7 @@ public class DataAccess {
             }
             selectQuery = selectQuery + " ORDER BY [no] ";
             if (page>=1 && limit>=1) {
-                selectQuery = selectQuery + " LIMIT " + String.valueOf((page-1)*limit)+1 + ", " + String.valueOf(limit);
+                selectQuery = selectQuery + " LIMIT " + String.valueOf((page-1)*limit) + ", " + String.valueOf(limit);
             }
             Cursor cursor = db.rawQuery(selectQuery, null);
 
@@ -136,7 +136,7 @@ public class DataAccess {
             }
             selectQuery = selectQuery + " ORDER BY [no] ";
             if (page>=1 && limit>=1) {
-                selectQuery = selectQuery + " LIMIT " + String.valueOf((page-1)*limit)+1 + ", " + String.valueOf(limit);
+                selectQuery = selectQuery + " LIMIT " + String.valueOf((page-1)*limit) + ", " + String.valueOf(limit);
             }
             Cursor cursor = db.rawQuery(selectQuery, null);
 
@@ -235,6 +235,118 @@ public class DataAccess {
         return hasil;
     }
 
+    public static List<Bahan> getListTypeTaffeta(Context ctx, String Filter, int page, int limit) {
+        DataHelper dbcenter = new DataHelper(ctx);
+        SQLiteDatabase db = dbcenter.getReadableDatabase();
+        List<Bahan> iList = new ArrayList<>();
+        try {
+            String selectQuery = "SELECT * FROM type_taffeta";
+            if (!Filter.isEmpty()) {
+                selectQuery = selectQuery + " WHERE " +
+                        "nama like '%"+ Filter.replace("'", "''") +"%' OR " +
+                        "code like '%"+ Filter.replace("'", "''") +"%'";
+            }
+            selectQuery = selectQuery + " ORDER BY [no] ";
+            if (page>=1 && limit>=1) {
+                selectQuery = selectQuery + " LIMIT " + String.valueOf((page-1)*limit) + ", " + String.valueOf(limit);
+            }
+            Cursor cursor = db.rawQuery(selectQuery, null);
+
+            cursor.moveToFirst();
+            for (int cc=0; cc < cursor.getCount(); cc++) {
+                cursor.moveToPosition(cc);
+
+                Bahan obj = new Bahan();
+                obj.id = cursor.getInt(0);
+                obj.nama = cursor.getString(1);
+                obj.code = cursor.getString(2);
+                obj.harga = cursor.getDouble(3);
+
+                iList.add(obj);
+            }
+            cursor.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+            Log.e("getListTypeTaffeta", e.getMessage(), e);
+            iList.clear();
+        } finally {
+            if (db.isOpen()) {
+                db.close();
+            }
+            dbcenter.close();
+        }
+        return iList;
+    }
+
+    public static boolean cekValidasiTypeTaffeta(Context ctx, String Nama, int PK) {
+        DataHelper dbcenter = new DataHelper(ctx);
+        SQLiteDatabase db = dbcenter.getReadableDatabase();
+        boolean hasil = false;
+        try {
+            String selectQuery = "SELECT * FROM type_taffeta WHERE nama='"+ Nama.replace("'", "''") +"' AND [no]<>" + PK;
+            Cursor cursor = db.rawQuery(selectQuery, null);
+
+            if (cursor.getCount()>=1) {
+                hasil = false;
+            } else {
+                hasil = true;
+            }
+            cursor.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+            Log.e("cekValidasiTypeTaffeta", e.getMessage(), e);
+            hasil = false;
+        } finally {
+            if (db.isOpen()) {
+                db.close();
+            }
+            dbcenter.close();
+        }
+        return hasil;
+    }
+
+    public static boolean saveTypeTaffeta(Context ctx, Bahan obj) {
+        DataHelper dbcenter = new DataHelper(ctx);
+        SQLiteDatabase db = dbcenter.getWritableDatabase();
+        boolean hasil = false;
+        String SQL = "";
+        try {
+            if (obj.id>=1) {
+                SQL = "UPDATE type_taffeta SET " +
+                        "nama='"+ obj.nama.replace("'", "''") +"', " +
+                        "code='"+ obj.code.replace("'", "''") +"', " +
+                        "harga=" + String.valueOf(obj.harga).replace(",", ".") +
+                        " WHERE [no]=" + obj.id;
+            } else {
+                SQL = "SELECT max([no]) as nomax FROM type_taffeta";
+                Cursor cursor = db.rawQuery(SQL, null);
+                if (cursor.getCount()>=1) {
+                    obj.id = cursor.getInt(0) + 1;
+                } else {
+                    obj.id = 1;
+                }
+                cursor.close();
+
+                SQL = "INSERT INTO type_taffeta ([no], nama, code, harga) values ("+ obj.id +", " +
+                        "'"+ obj.nama.replace("'", "''") +"', " +
+                        "'"+ obj.code.replace("'", "''") +"', " +
+                        String.valueOf(obj.harga).replace(",", ".") +")";
+            }
+            db.execSQL(SQL);
+            hasil = true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            Log.e("getListBahan", e.getMessage(), e);
+            hasil = false;
+        } finally {
+            if (db.isOpen()) {
+                db.close();
+            }
+            dbcenter.close();
+        }
+        return hasil;
+    }
+
     public static List<Label> getListLabel(Context ctx, String Filter, int page, int limit) {
         DataHelper dbcenter = new DataHelper(ctx);
         SQLiteDatabase db = dbcenter.getReadableDatabase();
@@ -293,7 +405,6 @@ public class DataAccess {
                 obj.biaya_tinta     = cursor.getDouble(13);
                 obj.biaya_toyobo    = cursor.getDouble(13);
                 obj.biaya_operator  = cursor.getDouble(13);
-                obj.biaya_total     = obj.biaya_pisau + obj.biaya_tinta + obj.biaya_toyobo + obj.biaya_operator;
 
                 iList.add(obj);
             }

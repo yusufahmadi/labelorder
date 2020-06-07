@@ -96,7 +96,7 @@
                                 android:id="@+id/txtHargaModal"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:inputType="number"
+                                android:inputType="numberDecimal"
                                 android:minHeight="48dp"
                                 android:text="0.0"
                                 android:textAlignment="textEnd" />

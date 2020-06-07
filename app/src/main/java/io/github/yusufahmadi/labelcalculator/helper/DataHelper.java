@@ -11,7 +11,7 @@ import io.github.yusufahmadi.labelcalculator.model.Bahan;
 
 public class DataHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "labelcalculator.db";
-    private static final int DATABASE_VERSION = 3;
+    private static final int DATABASE_VERSION = 4;
     public DataHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
         // TODO Auto-generated constructor stub
@@ -27,6 +27,7 @@ public class DataHelper extends SQLiteOpenHelper {
 
         dbUpgrade2(db);
         dbUpgrade3(db);
+        dbUpgrade4(db);
     }
 
     @Override
@@ -39,6 +40,10 @@ public class DataHelper extends SQLiteOpenHelper {
 
         if (oldVersion<3) {
             dbUpgrade3(db);
+        }
+
+        if (oldVersion<4) {
+            dbUpgrade4(db);
         }
     }
 
@@ -82,6 +87,17 @@ public class DataHelper extends SQLiteOpenHelper {
                 "biaya_operator real," +
                 "biaya_kirim real," +
                 "biaya_total real);";
+        db.execSQL(sql);
+    }
+
+    private void dbUpgrade4(SQLiteDatabase db) {
+        Log.d("On Upgrade", "DB Struktur 2");
+        String sql = "create table type_taffeta([no] integer primary key, nama text, code text, harga real);";
+        db.execSQL(sql);
+        sql = "INSERT INTO type_taffeta ([no], nama, code, harga) VALUES " +
+                "('1', '3500', '', 0.1)," +
+                "('2', '37BT', '', 0.112)," +
+                "('3', '661', 'Rp. 2000', 0.157);";
         db.execSQL(sql);
     }
 }
