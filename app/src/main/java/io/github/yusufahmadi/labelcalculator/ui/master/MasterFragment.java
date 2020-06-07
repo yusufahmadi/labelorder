@@ -1,15 +1,20 @@
 package io.github.yusufahmadi.labelcalculator.ui.master;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 
+import io.github.yusufahmadi.labelcalculator.BahanActivity;
 import io.github.yusufahmadi.labelcalculator.R;
+import io.github.yusufahmadi.labelcalculator.repository.mdlPublic;
+import io.github.yusufahmadi.labelcalculator.ui.ribbon.RibbonInputActivity;
 
 public class MasterFragment extends Fragment {
 
@@ -20,6 +25,15 @@ public class MasterFragment extends Fragment {
         masterViewModel =
                 ViewModelProviders.of(this).get(MasterViewModel.class);
         View root = inflater.inflate(R.layout.fragment_master, container, false);
+
+        CardView cvBahan = root.findViewById(R.id.cvBahanRibbon);
+        cvBahan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), BahanActivity.class);
+                startActivityForResult(intent, mdlPublic.Activity_MasterBahanRibbon);
+            }
+        });
 
         return root;
     }

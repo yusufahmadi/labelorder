@@ -5,6 +5,10 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import java.util.List;
+
+import io.github.yusufahmadi.labelcalculator.model.Bahan;
+
 public class DataHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "labelcalculator.db";
     private static final int DATABASE_VERSION = 1;
@@ -21,9 +25,10 @@ public class DataHelper extends SQLiteOpenHelper {
         sql = "INSERT INTO bahan (no, nama, harga) VALUES ('1', 'Wax',1650),('2', 'Wax Resin',3410),('3', 'Resin / CL',5500),('4', 'Resin Frosen',6380);";
         db.execSQL(sql);
     }
+
     @Override
     public void onUpgrade(SQLiteDatabase arg0, int arg1, int arg2) {
         // TODO Auto-generated method stub
-    }
 
+    }
 }

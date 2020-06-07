@@ -27,36 +27,53 @@ import com.google.android.material.textfield.TextInputEditText;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 
 import io.github.yusufahmadi.labelcalculator.R;
 import io.github.yusufahmadi.labelcalculator.helper.DataHelper;
 import io.github.yusufahmadi.labelcalculator.model.Bahan;
+import io.github.yusufahmadi.labelcalculator.repository.DataAccess;
 import io.github.yusufahmadi.labelcalculator.repository.mdlPublic;
 
 public class RibbonInputActivity extends AppCompatActivity {
-    private DataHelper dbcenter;
     private DecimalFormat df = new DecimalFormat("###,###,###", new DecimalFormatSymbols(Locale.US));
     private DecimalFormat df2 = new DecimalFormat("###,###,###.##", new DecimalFormatSymbols(Locale.US));
+
+    private List<Bahan> ListBahan = new ArrayList<>();
+    private List<String> ListStrBahan = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_input_ribbon);
-        dbcenter = new DataHelper(this);
 
         initToolbar();
         initLayout();
+    }
+
+    private void InitData() {
+        ListBahan = DataAccess.getListBahan(this, "", -1, -1);
+        if (ListBahan.size()>=1) {
+            for (int cc=0; cc < ListBahan.size(); cc++) {
+                ListStrBahan.add(ListBahan.get(cc).nama);
+            }
+        } else {
+            ListStrBahan.clear();
+        }
+        final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(
+                getApplicationContext(), android.R.layout.simple_dropdown_item_1line,
+                ListStrBahan);
+        spinner_bahan.setAdapter(arrayAdapter);
     }
 
     private TextInputEditText editTextHargaModal, editTextLebar, editTextPanjang, editTextModal;
     private AutoCompleteTextView spinner_bahan;
     private void initLayout() {
         try {
-            refreshBahan();
             final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(
                     getApplicationContext(), android.R.layout.simple_dropdown_item_1line,
-                    mdlPublic.ListStrBahan);
+                    ListStrBahan);
 
             editTextLebar           = findViewById(R.id.editTextLebar);
             editTextPanjang         = findViewById(R.id.editTextPanjang);
@@ -73,14 +90,14 @@ public class RibbonInputActivity extends AppCompatActivity {
             spinner_bahan.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    editTextHargaModal.setText(df.format(mdlPublic.ListBahan.get(position).harga));
+                    editTextHargaModal.setText(df.format(ListBahan.get(position).harga));
                     Hitung();
                 }
             });
             spinner_bahan.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                    editTextHargaModal.setText(df.format(mdlPublic.ListBahan.get(position).harga));
+                    editTextHargaModal.setText(df.format(ListBahan.get(position).harga));
                 }
 
                 @Override
@@ -169,6 +186,7 @@ public class RibbonInputActivity extends AppCompatActivity {
                 }
             });
 
+            InitData();
             DefaultValue();
         } catch (Exception e) {
             Log.e("initLayout", e.getMessage(), e);
@@ -282,38 +300,5 @@ public class RibbonInputActivity extends AppCompatActivity {
                 ((InputMethodManager) this.getSystemService(Context.INPUT_METHOD_SERVICE)).hideSoftInputFromWindow((this.getWindow().getDecorView().getApplicationWindowToken()), 0);
         }
         return super.dispatchTouchEvent(ev);
-    }
-
-
-    private void refreshBahan(){
-        SQLiteDatabase db = dbcenter.getReadableDatabase();
-        try {
-            mdlPublic.ListStrBahan = new ArrayList<>();
-            mdlPublic.ListBahan = new ArrayList<>();
-
-            String selectQuery = "SELECT * FROM bahan";
-            Cursor cursor = db.rawQuery(selectQuery, null);
-
-            cursor.moveToFirst();
-            for (int cc=0; cc < cursor.getCount(); cc++) {
-                cursor.moveToPosition(cc);
-
-                Bahan obj = new Bahan();
-                obj.id = cursor.getInt(0);
-                obj.nama = cursor.getString(1);
-                obj.harga = cursor.getDouble(2);
-
-                mdlPublic.ListBahan.add(obj);
-                mdlPublic.ListStrBahan.add(obj.nama);
-            }
-            cursor.close();
-
-        } catch (Exception e) {
-            Log.e("DBHelper", e.getMessage(), e);
-        } finally {
-            if (db.isOpen()) {
-                db.close();
-            }
-        }
     }
 }

@@ -21,10 +21,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginVertical="@dimen/small_padding"
-            app:contentPadding="@dimen/medium_padding"
             android:clickable="true"
             android:focusable="true"
-            android:focusableInTouchMode="true">
+            android:focusableInTouchMode="false"
+            app:contentPadding="@dimen/medium_padding">
 
             <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="match_parent"
@@ -36,7 +36,7 @@
                     android:layout_height="24dp"
                     android:layout_gravity="center_vertical"
                     android:src="@drawable/ic_home"
-                    android:tint="@color/colorGreen"/>
+                    android:tint="@color/colorGreen" />
 
                 <TextView
                     android:layout_width="match_parent"
@@ -53,10 +53,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginVertical="@dimen/small_padding"
-            app:contentPadding="@dimen/medium_padding"
             android:clickable="true"
             android:focusable="true"
-            android:focusableInTouchMode="true">
+            android:focusableInTouchMode="false"
+            app:contentPadding="@dimen/medium_padding">
 
             <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="match_parent"
@@ -68,7 +68,7 @@
                     android:layout_height="24dp"
                     android:layout_gravity="center_vertical"
                     android:src="@drawable/ic_home"
-                    android:tint="@color/colorGreen"/>
+                    android:tint="@color/colorGreen" />
 
                 <TextView
                     android:layout_width="match_parent"
