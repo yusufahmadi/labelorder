@@ -93,13 +93,13 @@ public class RibbonInputActivity extends AppCompatActivity {
             textView65Persen = findViewById(R.id.textView65Persen);
             textView75Persen = findViewById(R.id.textView75Persen);
 
-            editTextQty = findViewById(R.id.editTextQty);
-            editTextJualRoll = findViewById(R.id.editTextJualRoll);
-            editTextJumlahProfitKotor = findViewById(R.id.editTextJumlahProfitKotor);
-            editTextTransport = findViewById(R.id.editTextTransport);
-            editTextKomisiSalesProsen = findViewById(R.id.editTextKomisiSalesProsen);
-            editTextKomisiSalesNominal = findViewById(R.id.editTextKomisiSalesNominal);
-            editTextNetProfit = findViewById(R.id.editTextNetProfit);
+            editTextQty                             = findViewById(R.id.editTextQty);
+            editTextJualRoll                       = findViewById(R.id.editTextJualRoll);
+            editTextJumlahProfitKotor       = findViewById(R.id.editTextJumlahProfitKotor);
+            editTextTransport                  = findViewById(R.id.editTextTransport);
+            editTextKomisiSalesProsen    = findViewById(R.id.editTextKomisiSalesProsen);
+            editTextKomisiSalesNominal   = findViewById(R.id.editTextKomisiSalesNominal);
+            editTextNetProfit                    = findViewById(R.id.editTextNetProfit);
 
             editTextQty.setOnFocusChangeListener(new View.OnFocusChangeListener() {
                 @Override
@@ -191,33 +191,6 @@ public class RibbonInputActivity extends AppCompatActivity {
                     }
                 }
             });
-//            editTextKomisiSalesNominal.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-//                @Override
-//                public void onFocusChange(View v, boolean hasFocus) {
-//                    try {
-//                        TextInputEditText ed = editTextKomisiSalesNominal;
-//                        if (!hasFocus) {
-//                            Hitung();
-//                            double KomisiSalesProsen = 0.0;
-//                            if (ed.getText().toString().isEmpty()) {
-//                                ed.setText(df.format(0.0));
-//                                editTextKomisiSalesNominal.setText(df2.format(Double.valueOf(0.0)));
-//                            } else {
-//                                ed.setText(df.format(Double.valueOf(ed.getText().toString())));
-//                                KomisiSalesProsen = df2.parse(ed.getText().toString()).doubleValue()  * 100/ df.parse(editTextJumlahProfitKotor.getText().toString()).doubleValue() ;
-//                                editTextKomisiSalesNominal.setText(df2.format(Double.valueOf(KomisiSalesProsen)));
-//                            }
-//                            Hitung();
-//                        } else {
-//                            ed.setText(String.valueOf(df.parse(ed.getText().toString()).longValue()));
-//                            ed.setSelection(0, ed.getText().toString().length());
-//                        }
-//                    } catch (Exception e) {
-//                        e.printStackTrace();
-//                    }
-//                }
-//            });
-
 
             spinner_bahan.setAdapter(arrayAdapter);
             spinner_bahan.setOnClickListener(new View.OnClickListener() {
@@ -362,6 +335,32 @@ public class RibbonInputActivity extends AppCompatActivity {
         editTextModal.setText(df.format(0.0));
         editTextHargaModal.setText(df.format(0.0));
         spinner_bahan.setText("");
+
+        textView10Persen.setText(df.format(0));
+        textView15Persen.setText(df.format(0));
+        textView25Persen.setText(df.format(0));
+        textView35Persen.setText(df.format(0));
+        textView45Persen.setText(df.format(0));
+        textView55Persen.setText(df.format(0));
+        textView65Persen.setText(df.format(0));
+        textView75Persen.setText(df.format(0));
+
+        editTextJualRoll.setText(df.format(0));
+        editTextQty.setText(df.format(0));
+        editTextJumlahProfitKotor.setText(df.format(0));
+        editTextTransport.setText(df.format(0));
+        editTextKomisiSalesProsen.setText(df2.format(0.0));
+        editTextKomisiSalesNominal.setText(df.format(0));
+        editTextNetProfit.setText(df.format(0));
+    }
+
+    private void Simpan() {
+        try {
+            //
+            DefaultValue();
+        } catch (Exception e) {
+            Log.e("save", e.getMessage(), e);
+        }
     }
 
     private void Hitung() {
