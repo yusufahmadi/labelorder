@@ -183,7 +183,6 @@ public class TypeTaffetaActivity extends AppCompatActivity {
 //                } else {
 //                    myList.getAdapter().getFilter().filter(newText);
 //                }
-
                 return false;
             }
         });

@@ -15,6 +15,7 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -25,12 +26,17 @@ import com.google.android.material.textfield.TextInputEditText;
 
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
 import io.github.yusufahmadi.labelcalculator.R;
 import io.github.yusufahmadi.labelcalculator.model.Bahan;
+import io.github.yusufahmadi.labelcalculator.model.Label;
 import io.github.yusufahmadi.labelcalculator.repository.DataAccess;
 
 public class LabelInputActivity extends AppCompatActivity {
@@ -43,7 +49,7 @@ public class LabelInputActivity extends AppCompatActivity {
         setContentView(R.layout.activity_input_label);
 
         initToolbar();
-        initLayout();
+        initLayout(null);
     }
 
     private void initToolbar() {
@@ -69,6 +75,7 @@ public class LabelInputActivity extends AppCompatActivity {
         spinner_bahan.setAdapter(arrayAdapter);
     }
 
+    private int idbahan =0;
     private List<Bahan> ListBahan = new ArrayList<>();
     private List<String> ListStrBahan = new ArrayList<>();
     private TextInputEditText editTextHargaModal, editTextLebar, editTextTinggi, editTextGap,editTextPisau,
@@ -76,7 +83,7 @@ public class LabelInputActivity extends AppCompatActivity {
     private AutoCompleteTextView spinner_bahan;
     private TextInputEditText  editTextCatatan, editTextModalBahanUtuh ,editTextModalPerPcs ,editTextJualSesuaiOrder ,editTextProfit1 ,editTextJualSesuaiSaran ,editTextProfit2;
     private TextView textView30Persen,textView50Persen,textView100Persen,textView125Persen,textView150Persen,textView175Persen,textView200Persen,textView75Persen;
-    private void initLayout() {
+    private void initLayout(final Label obj) {
         try {
             final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(
                     getApplicationContext(), android.R.layout.simple_dropdown_item_1line,
@@ -133,7 +140,24 @@ public class LabelInputActivity extends AppCompatActivity {
             spinner_bahan.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    editTextHargaModal.setText(df.format(ListBahan.get(position).harga));
+                    if (obj != null)
+                    {
+                        if (obj.id_bahan > 0)
+                        {
+                            spinner_bahan.setSelection(ListBahan.indexOf(obj.id_bahan));
+                            idbahan = obj.id_bahan;
+                            editTextHargaModal.setText(df.format(obj.harga_modal));
+                        }
+                        else
+                        {
+                            idbahan = ListBahan.get(position).id;
+                            editTextHargaModal.setText(df.format(ListBahan.get(position).harga));
+                        }
+                     }else
+                    {
+                        idbahan = ListBahan.get(position).id;
+                        editTextHargaModal.setText(df.format(ListBahan.get(position).harga));
+                    }
                     Hitung();
                 }
             });
@@ -234,49 +258,6 @@ public class LabelInputActivity extends AppCompatActivity {
                 }
             });
 
-//            editTextLebarBahanBelanja.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-//                @Override
-//                public void onFocusChange(View v, boolean hasFocus) {
-//                    try {
-//                        TextInputEditText ed = editTextLebarBahanBelanja;
-//                        if (!hasFocus) {
-//                            if (ed.getText().toString().isEmpty()) {
-//                                ed.setText(df2.format(0.0));
-//                            } else {
-//                                ed.setText(df2.format(Double.valueOf(ed.getText().toString())));
-//                            }
-//                            Hitung();
-//                        } else {
-//                            ed.setText(String.valueOf(df2.parse(ed.getText().toString()).doubleValue()));
-//                            ed.setSelection(0, ed.getText().toString().length());
-//                        }
-//                    } catch (Exception e) {
-//                        e.printStackTrace();
-//                    }
-//                }
-//            });
-
-//            editText1RollPcs.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-//                @Override
-//                public void onFocusChange(View v, boolean hasFocus) {
-//                    try {
-//                        TextInputEditText ed = editText1RollPcs;
-//                        if (!hasFocus) {
-//                            if (ed.getText().toString().isEmpty()) {
-//                                ed.setText(df2.format(0.0));
-//                            } else {
-//                                ed.setText(df2.format(Double.valueOf(ed.getText().toString())));
-//                            }
-//                            Hitung();
-//                        } else {
-//                            ed.setText(String.valueOf(df2.parse(ed.getText().toString()).doubleValue()));
-//                            ed.setSelection(0, ed.getText().toString().length());
-//                        }
-//                    } catch (Exception e) {
-//                        e.printStackTrace();
-//                    }
-//                }
-//            });
             editTextQtyOrderPcs.setOnFocusChangeListener(new View.OnFocusChangeListener() {
                 @Override
                 public void onFocusChange(View v, boolean hasFocus) {
@@ -319,27 +300,6 @@ public class LabelInputActivity extends AppCompatActivity {
                     }
                 }
             });
-//            editTextKebutuhanRoll.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-//                @Override
-//                public void onFocusChange(View v, boolean hasFocus) {
-//                    try {
-//                        TextInputEditText ed = editTextKebutuhanRoll;
-//                        if (!hasFocus) {
-//                            if (ed.getText().toString().isEmpty()) {
-//                                ed.setText(df2.format(0.0));
-//                            } else {
-//                                ed.setText(df2.format(Double.valueOf(ed.getText().toString())));
-//                            }
-//                            Hitung();
-//                        } else {
-//                            ed.setText(String.valueOf(df2.parse(ed.getText().toString()).doubleValue()));
-//                            ed.setSelection(0, ed.getText().toString().length());
-//                        }
-//                    } catch (Exception e) {
-//                        e.printStackTrace();
-//                    }
-//                }
-//            });
             editTextBiayaPisau.setOnFocusChangeListener(new View.OnFocusChangeListener() {
                 @Override
                 public void onFocusChange(View v, boolean hasFocus) {
@@ -522,9 +482,62 @@ public class LabelInputActivity extends AppCompatActivity {
             btnSave.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Snackbar.make(findViewById(R.id.coordinator),
-                            "Menu belum siap",
-                            Snackbar.LENGTH_SHORT).show();
+                    boolean isValidasi = true;
+                    try {
+                        if (isValidasi && editTextCatatan.getText().length()==0) {
+                            Toast.makeText(getApplicationContext(),
+                                    "Catatan / No Dokumen harus diisi.",
+                                    Toast.LENGTH_SHORT).show();
+                            isValidasi = false;
+                        }
+                        if (isValidasi && idbahan < 0) {
+                            Toast.makeText(getApplicationContext(),
+                                    "Bahan harus diisi.",
+                                    Toast.LENGTH_SHORT).show();
+                            isValidasi = false;
+                        }
+                        if (isValidasi &&
+                                !DataAccess.cekValidasiLabel(getApplication(), editTextCatatan.getText().toString(), (obj != null ? obj.no : -1))) {
+                            Toast.makeText(getApplicationContext(),
+                                    "Catatan/ No Dokumen sudah dipakai.",
+                                    Toast.LENGTH_SHORT).show();
+                            isValidasi = false;
+                        }
+
+                        if (isValidasi) {
+                            Label obj           = new Label();
+                            if (obj != null) {
+                            } else {
+                                obj.no = -1;
+                            }
+
+                            obj.dokumen = editTextCatatan.getText().toString();
+                            Date c = Calendar.getInstance().getTime();
+                            obj.tgl             = c;
+                            obj.id_bahan = idbahan;
+                            obj.harga_modal     =  df.parse(editTextHargaModal.getText().toString()).doubleValue();
+                            obj.lebar           =  df.parse(editTextLebar.getText().toString()).doubleValue();
+                            obj.tinggi          = df.parse(editTextTinggi.getText().toString()).doubleValue();
+                            obj.gap             = df.parse(editTextGap.getText().toString()).doubleValue();
+                            obj.pisau           = df.parse(editTextPisau.getText().toString()).doubleValue();
+                            obj.pembulatan      = df.parse(editTextPembulatanRoll.getText().toString()).doubleValue();
+                            obj.qty_order       = df.parse(editTextQtyOrderPcs.getText().toString()).doubleValue();
+                            obj.jual_sesuai_order        = df.parse(editTextJualSesuaiOrder.getText().toString()).doubleValue();
+                            obj.biaya_pisau     = df.parse(editTextBiayaPisau.getText().toString()).doubleValue();
+                            obj.biaya_tinta     = df.parse(editTextBiayaTinta.getText().toString()).doubleValue();
+                            obj.biaya_toyobo    = df.parse(editTextBiayaToyobo.getText().toString()).doubleValue();
+                            obj.biaya_operator  = df.parse(editTextBiayaOperator.getText().toString()).doubleValue();
+                            obj.biaya_kirim  = df.parse(editTextBiayaKirim.getText().toString()).doubleValue();
+
+                            if (DataAccess.saveLabel(getApplication(),obj)) {
+//                                refreshList("", 1, item_limit);
+//                                dialog.dismiss();
+                            }
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        Log.e("Save", e.getMessage(), e);
+                    }
                 }
             });
 

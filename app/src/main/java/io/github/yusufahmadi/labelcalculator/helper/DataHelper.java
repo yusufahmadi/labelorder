@@ -80,13 +80,13 @@ public class DataHelper extends SQLiteOpenHelper {
                 "pisau real," +
                 "pembulatan real," +
                 "qty_order real," +
-                "qty_jual real," +
+                "jual_sesuai_order real," +
                 "biaya_pisau real," +
                 "biaya_tinta real," +
                 "biaya_toyobo real," +
                 "biaya_operator real," +
                 "biaya_kirim real," +
-                "biaya_total real);";
+                "jual_sesuai_order real);";
         db.execSQL(sql);
     }
 

@@ -393,18 +393,19 @@ public class DataAccess {
                 obj.dokumen         = cursor.getString(1);
                 obj.tgl             = df.parse(cursor.getString(2));
                 obj.id_bahan        = cursor.getInt(3);
-                obj.harga_bahan     = cursor.getDouble(4);
+                obj.harga_modal     = cursor.getDouble(4);
                 obj.lebar           = cursor.getDouble(5);
                 obj.tinggi          = cursor.getDouble(6);
                 obj.gap             = cursor.getDouble(7);
                 obj.pisau           = cursor.getDouble(8);
                 obj.pembulatan      = cursor.getDouble(9);
                 obj.qty_order       = cursor.getDouble(10);
-                obj.qty_jual        = cursor.getDouble(11);
+                obj.jual_sesuai_order        = cursor.getDouble(11);
                 obj.biaya_pisau     = cursor.getDouble(12);
                 obj.biaya_tinta     = cursor.getDouble(13);
-                obj.biaya_toyobo    = cursor.getDouble(13);
-                obj.biaya_operator  = cursor.getDouble(13);
+                obj.biaya_toyobo    = cursor.getDouble(14);
+                obj.biaya_operator  = cursor.getDouble(15);
+                obj.biaya_kirim  = cursor.getDouble(16);
 
                 iList.add(obj);
             }
@@ -455,27 +456,62 @@ public class DataAccess {
         boolean hasil = false;
         String SQL = "";
         try {
-//            if (obj.no>=1) {
+            if (obj.no>=1) {
 //                SQL = "UPDATE label SET " +
 //                        "dokumen='"+ obj.nama.replace("'", "''") +"', " +
 //                        "tgl='"+ obj.tgl.replace("'", "''") +"', " +
 //                        "harga=" + String.valueOf(obj.harga).replace(",", ".") +
 //                        " WHERE no=" + obj.id;
-//            } else {
-//                SQL = "SELECT max([no]) as nomax FROM bahan_label";
-//                Cursor cursor = db.rawQuery(SQL, null);
-//                if (cursor.getCount()>=1) {
-//                    obj.id = cursor.getInt(0) + 1;
-//                } else {
-//                    obj.id = 1;
-//                }
-//                cursor.close();
-//
-//                SQL = "INSERT INTO bahan_label (no, nama, code, harga) values ("+ obj.id +", " +
-//                        "'"+ obj.nama.replace("'", "''") +"', " +
-//                        "'"+ obj.code.replace("'", "''") +"', " +
-//                        String.valueOf(obj.harga).replace(",", ".") +")";
-//            }
+            } else {
+                SQL = "SELECT max([no]) as nomax FROM label";
+                Cursor cursor = db.rawQuery(SQL, null);
+                if (cursor != null) {
+                    if (cursor.getCount()>=1) {
+                        //error pas kosong belum ada data
+                            obj.no = cursor.getInt(0) + 1;
+                    } else {
+                        obj.no = 1;
+                    }
+                } else {
+                    obj.no = 1;
+                }
+                cursor.close();
+
+                SQL = "INSERT INTO label ([no],dokumen,tgl,id_bahan,harga_modal,lebar,tinggi,gap ,pisau,pembulatan,qty_order,jual_sesuai_order,biaya_pisau,biaya_tinta ,biaya_toyobo ,biaya_operator,biaya_kirim) values ("+ obj.no +", " +
+                        "'"+ obj.dokumen.replace("'", "''") +"', " +
+                        "'"+ obj.tgl +"', " +
+                        String.valueOf(obj.id_bahan).replace(",", ".") +
+                        String.valueOf(obj.harga_modal).replace(",", ".") +
+                        String.valueOf(obj.lebar).replace(",", ".") +
+                        String.valueOf(obj.tinggi).replace(",", ".") +
+                        String.valueOf(obj.gap).replace(",", ".") +
+                        String.valueOf(obj.pisau).replace(",", ".") +
+                        String.valueOf(obj.pembulatan).replace(",", ".") +
+                        String.valueOf(obj.qty_order).replace(",", ".") +
+                        String.valueOf(obj.jual_sesuai_order).replace(",", ".") +
+                        String.valueOf(obj.biaya_pisau).replace(",", ".") +
+                        String.valueOf(obj.biaya_tinta).replace(",", ".") +
+                        String.valueOf(obj.biaya_toyobo).replace(",", ".") +
+                        String.valueOf(obj.biaya_operator).replace(",", ".") +
+                        String.valueOf(obj.biaya_kirim).replace(",", ".") +")";
+//                obj.no
+//                obj.dokumen
+//                obj.tgl
+//                obj.id_bahan
+//                obj.harga_modal
+//                obj.lebar
+//                obj.tinggi
+//                obj.gap
+//                obj.pisau
+//                obj.pembulatan
+//                obj.qty_order
+//                obj.jual_sesuai_order
+//                obj.biaya_pisau
+//                obj.biaya_tinta
+//                obj.biaya_toyobo
+//                obj.biaya_operator
+//                obj.biaya_kirim
+            }
             db.execSQL(SQL);
             hasil = true;
         } catch (Exception e) {

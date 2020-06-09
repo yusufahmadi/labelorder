@@ -110,7 +110,7 @@ public class LabelRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.View
                     holder.Tanggal.setText(dt3.format(m.tgl));
                 }
                 holder.Bahan.setText(m.bahan);
-                holder.HargaBahan.setText("Rp. " + df.format(m.harga_bahan));
+                holder.HargaBahan.setText("Rp. " + df.format(m.harga_modal));
                 holder.Lebar.setText(df.format(m.lebar));
                 holder.Tinggi.setText(df.format(m.tinggi));
                 holder.Gap.setText(df.format(m.gap));
