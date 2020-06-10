@@ -25,4 +25,8 @@ public class mdlPublic {
             return 0;
         }
     }
+
+    public static String PREFS_PASSCODE = "Key.Passcode";
+    public static String PWD_RESET_PASSCODE = "P@a5sC0t";
+    public static String PWD_DEFAULT_PASSCODE = "000000";
 }
