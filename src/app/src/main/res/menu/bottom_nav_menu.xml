@@ -17,6 +17,11 @@
         android:title="Calc Taffeta" />
 
     <item
+        android:id="@+id/navigation_paket"
+        android:icon="@drawable/ic_paket"
+        android:title="Calc Paket" />
+
+    <item
         android:id="@+id/navigation_master"
         android:icon="@drawable/ic_home"
         android:title="Master Data" />

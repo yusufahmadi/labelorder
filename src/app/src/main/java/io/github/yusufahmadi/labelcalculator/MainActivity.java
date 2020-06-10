@@ -22,6 +22,7 @@ import androidx.fragment.app.FragmentTransaction;
 import io.github.yusufahmadi.labelcalculator.ui.label.LabelFragment;
 import io.github.yusufahmadi.labelcalculator.ui.master.MasterFragment;
 import io.github.yusufahmadi.labelcalculator.ui.ribbon.RibbonFragment;
+import io.github.yusufahmadi.labelcalculator.ui.paket.PaketFragment;
 
 import io.github.yusufahmadi.labelcalculator.repository.mdlPublic;
 import io.github.yusufahmadi.labelcalculator.ui.taffeta.TaffetaFragment;
@@ -44,6 +45,9 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case "key.master":
                 bottomNavigationView.setSelectedItemId(R.id.navigation_master);
+                break;
+            case "key.paket":
+                bottomNavigationView.setSelectedItemId(R.id.navigation_paket);
                 break;
             default:
                 break;
@@ -72,6 +76,9 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     case R.id.navigation_master:
                         fragment = new MasterFragment();
+                        break;
+                    case R.id.navigation_paket:
+                        fragment = new PaketFragment();
                         break;
                     default:
                         fragment = null;
