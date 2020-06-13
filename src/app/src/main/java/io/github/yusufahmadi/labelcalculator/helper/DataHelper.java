@@ -11,7 +11,7 @@ import io.github.yusufahmadi.labelcalculator.model.Bahan;
 
 public class DataHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "labelcalculator.db";
-    private static final int DATABASE_VERSION = 4;
+    private static final int DATABASE_VERSION = 5;
     public DataHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
         // TODO Auto-generated constructor stub
@@ -28,6 +28,7 @@ public class DataHelper extends SQLiteOpenHelper {
         dbUpgrade2(db);
         dbUpgrade3(db);
         dbUpgrade4(db);
+        dbUpgrade5(db);
     }
 
     @Override
@@ -44,6 +45,10 @@ public class DataHelper extends SQLiteOpenHelper {
 
         if (oldVersion<4) {
             dbUpgrade4(db);
+        }
+
+        if (oldVersion<5) {
+            dbUpgrade5(db);
         }
     }
 
@@ -85,8 +90,7 @@ public class DataHelper extends SQLiteOpenHelper {
                 "biaya_tinta real," +
                 "biaya_toyobo real," +
                 "biaya_operator real," +
-                "biaya_kirim real," +
-                "jual_sesuai_order real);";
+                "biaya_kirim real);";
         db.execSQL(sql);
     }
 
@@ -98,6 +102,32 @@ public class DataHelper extends SQLiteOpenHelper {
                 "('1', '3500', '', 0.1)," +
                 "('2', '37BT', '', 0.112)," +
                 "('3', '661', 'Rp. 2000', 0.157);";
+        db.execSQL(sql);
+    }
+
+    private void dbUpgrade5(SQLiteDatabase db) {
+        Log.d("On Upgrade", "DB Struktur 5");
+        String sql;
+        sql = "drop table label;";
+        db.execSQL(sql);
+
+        sql = "create table label([no] integer primary key, " +
+                "dokumen text, " +
+                "tgl datetime default current_timestamp," +
+                "id_bahan int," +
+                "harga_bahan real," +
+                "lebar real," +
+                "tinggi real," +
+                "gap real," +
+                "pisau real," +
+                "pembulatan real," +
+                "qty_order real," +
+                "jual_sesuai_order real," +
+                "biaya_pisau real," +
+                "biaya_tinta real," +
+                "biaya_toyobo real," +
+                "biaya_operator real," +
+                "biaya_kirim real);";
         db.execSQL(sql);
     }
 }

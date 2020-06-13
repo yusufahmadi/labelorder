@@ -21,13 +21,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import com.google.android.material.button.MaterialButton;
-import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
 
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -40,16 +37,30 @@ import io.github.yusufahmadi.labelcalculator.model.Label;
 import io.github.yusufahmadi.labelcalculator.repository.DataAccess;
 
 public class LabelInputActivity extends AppCompatActivity {
+    private Label Obj;
 
     private DecimalFormat df = new DecimalFormat("###,###,###", new DecimalFormatSymbols(Locale.US));
     private DecimalFormat df2 = new DecimalFormat("###,###,###.##", new DecimalFormatSymbols(Locale.US));
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_input_label);
 
         initToolbar();
-        initLayout(null);
+        try {
+            Bundle extras = getIntent().getExtras();
+            if (extras != null) {
+                Obj = (Label) extras.get("key.Label");
+            } else {
+                Obj = null;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            initLayout();
+            InitValue(Obj);
+        }
     }
 
     private void initToolbar() {
@@ -83,52 +94,53 @@ public class LabelInputActivity extends AppCompatActivity {
     private AutoCompleteTextView spinner_bahan;
     private TextInputEditText  editTextCatatan, editTextModalBahanUtuh ,editTextModalPerPcs ,editTextJualSesuaiOrder ,editTextProfit1 ,editTextJualSesuaiSaran ,editTextProfit2;
     private TextView textView30Persen,textView50Persen,textView100Persen,textView125Persen,textView150Persen,textView175Persen,textView200Persen,textView75Persen;
-    private void initLayout(final Label obj) {
+
+    private void initLayout() {
         try {
             final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(
                     getApplicationContext(), android.R.layout.simple_dropdown_item_1line,
                     ListStrBahan);
 
-            spinner_bahan                        = findViewById(R.id.spinner_bahan);
-            editTextHargaModal                = findViewById(R.id.editTextHargaModal);
-            editTextLebar                          = findViewById(R.id.editTextLebar);
-            editTextTinggi                          = findViewById(R.id.editTextTinggi);
-            editTextGap                             = findViewById(R.id.editTextGap);
-            editTextPisau                           = findViewById(R.id.editTextPisau);
+            spinner_bahan           = findViewById(R.id.spinner_bahan);
+            editTextHargaModal      = findViewById(R.id.editTextHargaModal);
+            editTextLebar           = findViewById(R.id.editTextLebar);
+            editTextTinggi          = findViewById(R.id.editTextTinggi);
+            editTextGap             = findViewById(R.id.editTextGap);
+            editTextPisau           = findViewById(R.id.editTextPisau);
 
             editTextLebarBahanBelanja   = findViewById(R.id.editTextLebarBahanBelanja);
-            editText1RollPcs                     = findViewById(R.id.editText1RollPcs);
+            editText1RollPcs            = findViewById(R.id.editText1RollPcs);
 
-            editTextSaranOrderPcs = findViewById(R.id.editTextSaranOrderPcs);
+            editTextSaranOrderPcs   = findViewById(R.id.editTextSaranOrderPcs);
             editTextQtyOrderPcs     = findViewById(R.id.editTextQtyOrderPcs);
 
-            editTextPembulatanRoll = findViewById(R.id.editTextPembulatanRoll);
+            editTextPembulatanRoll  = findViewById(R.id.editTextPembulatanRoll);
             editTextKebutuhanRoll   = findViewById(R.id.editTextKebutuhanRoll);
 
             editTextBiayaPisau      = findViewById(R.id.editTextBiayaPisau);
-            editTextBiayaTinta       = findViewById(R.id.editTextBiayaTinta);
-            editTextBiayaToyobo   = findViewById(R.id.editTextBiayaToyobo);
-            editTextBiayaOperator = findViewById(R.id.editTextBiayaOperator);
-            editTextBiayaKirim        = findViewById(R.id.editTextBiayaKirim);
-            editTextBiayaTotal     = findViewById(R.id.editTextBiayaTotal);
+            editTextBiayaTinta      = findViewById(R.id.editTextBiayaTinta);
+            editTextBiayaToyobo     = findViewById(R.id.editTextBiayaToyobo);
+            editTextBiayaOperator   = findViewById(R.id.editTextBiayaOperator);
+            editTextBiayaKirim      = findViewById(R.id.editTextBiayaKirim);
+            editTextBiayaTotal      = findViewById(R.id.editTextBiayaTotal);
 
-            textView30Persen     = findViewById(R.id.textView30Persen);
-            textView50Persen     = findViewById(R.id.textView50Persen);
-            textView75Persen     = findViewById(R.id.textView75Persen);
-            textView100Persen   = findViewById(R.id.textView100Persen);
-            textView125Persen   = findViewById(R.id.textView125Persen);
-            textView150Persen   = findViewById(R.id.textView150Persen);
-            textView175Persen   = findViewById(R.id.textView175Persen);
-            textView200Persen   = findViewById(R.id.textView200Persen);
+            textView30Persen        = findViewById(R.id.textView30Persen);
+            textView50Persen        = findViewById(R.id.textView50Persen);
+            textView75Persen        = findViewById(R.id.textView75Persen);
+            textView100Persen       = findViewById(R.id.textView100Persen);
+            textView125Persen       = findViewById(R.id.textView125Persen);
+            textView150Persen       = findViewById(R.id.textView150Persen);
+            textView175Persen       = findViewById(R.id.textView175Persen);
+            textView200Persen       = findViewById(R.id.textView200Persen);
 
-            editTextCatatan = findViewById(R.id.editTextCatatan);
+            editTextCatatan         = findViewById(R.id.editTextCatatan);
 
-            editTextModalBahanUtuh = findViewById(R.id.editTextModalBahanUtuh);
-            editTextModalPerPcs = findViewById(R.id.editTextModalPerPcs);
+            editTextModalBahanUtuh  = findViewById(R.id.editTextModalBahanUtuh);
+            editTextModalPerPcs     = findViewById(R.id.editTextModalPerPcs);
             editTextJualSesuaiOrder = findViewById(R.id.editTextJualSesuaiOrder);
-            editTextProfit1 = findViewById(R.id.editTextProfit1);
-            editTextJualSesuaiSaran  = findViewById(R.id.editTextJualSesuaiSaran);
-            editTextProfit2= findViewById(R.id.editTextProfit2);
+            editTextProfit1         = findViewById(R.id.editTextProfit1);
+            editTextJualSesuaiSaran = findViewById(R.id.editTextJualSesuaiSaran);
+            editTextProfit2         = findViewById(R.id.editTextProfit2);
 
             spinner_bahan.setAdapter(arrayAdapter);
             spinner_bahan.setOnClickListener(new View.OnClickListener() {
@@ -140,24 +152,8 @@ public class LabelInputActivity extends AppCompatActivity {
             spinner_bahan.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    if (obj != null)
-                    {
-                        if (obj.id_bahan > 0)
-                        {
-                            spinner_bahan.setSelection(ListBahan.indexOf(obj.id_bahan));
-                            idbahan = obj.id_bahan;
-                            editTextHargaModal.setText(df.format(obj.harga_modal));
-                        }
-                        else
-                        {
-                            idbahan = ListBahan.get(position).id;
-                            editTextHargaModal.setText(df.format(ListBahan.get(position).harga));
-                        }
-                     }else
-                    {
-                        idbahan = ListBahan.get(position).id;
-                        editTextHargaModal.setText(df.format(ListBahan.get(position).harga));
-                    }
+                    idbahan = ListBahan.get(position).id;
+                    editTextHargaModal.setText(df.format(ListBahan.get(position).harga));
                     Hitung();
                 }
             });
@@ -476,7 +472,7 @@ public class LabelInputActivity extends AppCompatActivity {
             btnClear.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    DefaultValue();
+                    InitValue(null);
                 }
             });
             btnSave.setOnClickListener(new View.OnClickListener() {
@@ -497,41 +493,46 @@ public class LabelInputActivity extends AppCompatActivity {
                             isValidasi = false;
                         }
                         if (isValidasi &&
-                                !DataAccess.cekValidasiLabel(getApplication(), editTextCatatan.getText().toString(), (obj != null ? obj.no : -1))) {
+                                !DataAccess.cekValidasiLabel(getApplication(), editTextCatatan.getText().toString(), (Obj != null ? Obj.no : -1))) {
                             Toast.makeText(getApplicationContext(),
                                     "Catatan/ No Dokumen sudah dipakai.",
                                     Toast.LENGTH_SHORT).show();
                             isValidasi = false;
                         }
+                        if (isValidasi && df.parse(editTextJualSesuaiOrder.getText().toString()).doubleValue() <= 0) {
+                            Toast.makeText(getApplicationContext(),
+                                    "Isi jual sesuai saran.",
+                                    Toast.LENGTH_SHORT).show();
+                            isValidasi = false;
+                        }
 
                         if (isValidasi) {
-                            Label obj           = new Label();
-                            if (obj != null) {
+                            if (Obj != null) {
                             } else {
-                                obj.no = -1;
+                                Obj = new Label();
+                                Obj.no = -1;
                             }
 
-                            obj.dokumen = editTextCatatan.getText().toString();
+                            Obj.dokumen = editTextCatatan.getText().toString();
                             Date c = Calendar.getInstance().getTime();
-                            obj.tgl             = c;
-                            obj.id_bahan = idbahan;
-                            obj.harga_modal     =  df.parse(editTextHargaModal.getText().toString()).doubleValue();
-                            obj.lebar           =  df.parse(editTextLebar.getText().toString()).doubleValue();
-                            obj.tinggi          = df.parse(editTextTinggi.getText().toString()).doubleValue();
-                            obj.gap             = df.parse(editTextGap.getText().toString()).doubleValue();
-                            obj.pisau           = df.parse(editTextPisau.getText().toString()).doubleValue();
-                            obj.pembulatan      = df.parse(editTextPembulatanRoll.getText().toString()).doubleValue();
-                            obj.qty_order       = df.parse(editTextQtyOrderPcs.getText().toString()).doubleValue();
-                            obj.jual_sesuai_order        = df.parse(editTextJualSesuaiOrder.getText().toString()).doubleValue();
-                            obj.biaya_pisau     = df.parse(editTextBiayaPisau.getText().toString()).doubleValue();
-                            obj.biaya_tinta     = df.parse(editTextBiayaTinta.getText().toString()).doubleValue();
-                            obj.biaya_toyobo    = df.parse(editTextBiayaToyobo.getText().toString()).doubleValue();
-                            obj.biaya_operator  = df.parse(editTextBiayaOperator.getText().toString()).doubleValue();
-                            obj.biaya_kirim  = df.parse(editTextBiayaKirim.getText().toString()).doubleValue();
+                            Obj.tgl             = c;
+                            Obj.id_bahan = idbahan;
+                            Obj.harga_modal     =  df.parse(editTextHargaModal.getText().toString()).doubleValue();
+                            Obj.lebar           =  df.parse(editTextLebar.getText().toString()).doubleValue();
+                            Obj.tinggi          = df.parse(editTextTinggi.getText().toString()).doubleValue();
+                            Obj.gap             = df.parse(editTextGap.getText().toString()).doubleValue();
+                            Obj.pisau           = df.parse(editTextPisau.getText().toString()).doubleValue();
+                            Obj.pembulatan      = df.parse(editTextPembulatanRoll.getText().toString()).doubleValue();
+                            Obj.qty_order       = df.parse(editTextQtyOrderPcs.getText().toString()).doubleValue();
+                            Obj.jual_sesuai_order        = df.parse(editTextJualSesuaiOrder.getText().toString()).doubleValue();
+                            Obj.biaya_pisau     = df.parse(editTextBiayaPisau.getText().toString()).doubleValue();
+                            Obj.biaya_tinta     = df.parse(editTextBiayaTinta.getText().toString()).doubleValue();
+                            Obj.biaya_toyobo    = df.parse(editTextBiayaToyobo.getText().toString()).doubleValue();
+                            Obj.biaya_operator  = df.parse(editTextBiayaOperator.getText().toString()).doubleValue();
+                            Obj.biaya_kirim  = df.parse(editTextBiayaKirim.getText().toString()).doubleValue();
 
-                            if (DataAccess.saveLabel(getApplication(),obj)) {
-//                                refreshList("", 1, item_limit);
-//                                dialog.dismiss();
+                            if (DataAccess.saveLabel(getApplicationContext(), Obj)) {
+                                GoBackMenu(RESULT_OK, null);
                             }
                         }
                     } catch (Exception e) {
@@ -542,7 +543,6 @@ public class LabelInputActivity extends AppCompatActivity {
             });
 
             InitData();
-            DefaultValue();
         } catch (Exception e) {
             Log.e("initLayout", e.getMessage(), e);
         }
@@ -602,24 +602,67 @@ public class LabelInputActivity extends AppCompatActivity {
         return false;
     }
 
-    private void DefaultValue() {
-
+    private void InitValue(Label Obj) {
+        try {
+            if (Obj == null) {
+                spinner_bahan.setText("");
+                idbahan = -1;
+                editTextHargaModal.setText(df.format(0.0));
+                editTextPisau.setText(df.format(0.0));
+                editTextTinggi.setText(df.format(0.0));
+                editTextLebar.setText(df.format(0.0));
+                editTextGap.setText(df.format(0.0));
+                editTextPembulatanRoll.setText(df2.format(0.0));
+                editTextBiayaPisau.setText(df.format(0.0));
+                editTextBiayaTinta.setText(df.format(0.0));
+                editTextBiayaToyobo.setText(df.format(0.0));
+                editTextBiayaOperator.setText(df.format(0.0));
+                editTextQtyOrderPcs.setText(df.format(0.0));
+                editTextJualSesuaiOrder.setText(df.format(0.0));
+                editTextCatatan.setText("");
+            } else {
+                for (int i=0; i < ListBahan.size(); i++) {
+                    if (ListBahan.get(i).id == Obj.id_bahan) {
+                        idbahan = ListBahan.get(i).id;
+                        spinner_bahan.setText(ListBahan.get(i).nama);
+                        break;
+                    }
+                }
+                editTextHargaModal.setText(df.format(Obj.harga_modal));
+                editTextPisau.setText(df.format(Obj.pisau));
+                editTextTinggi.setText(df.format(Obj.tinggi));
+                editTextLebar.setText(df.format(Obj.lebar));
+                editTextGap.setText(df.format(Obj.gap));
+                editTextPembulatanRoll.setText(df2.format(Obj.pembulatan));
+                editTextBiayaPisau.setText(df.format(Obj.biaya_pisau));
+                editTextBiayaTinta.setText(df.format(Obj.biaya_tinta));
+                editTextBiayaToyobo.setText(df.format(Obj.biaya_toyobo));
+                editTextBiayaOperator.setText(df.format(Obj.biaya_operator));
+                editTextQtyOrderPcs.setText(df.format(Obj.qty_order));
+                editTextJualSesuaiOrder.setText(df.format(Obj.jual_sesuai_order));
+                editTextCatatan.setText(Obj.dokumen);
+            }
+            Hitung();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private void Hitung() {
+        double Pembulatan=0,RollBahan=0.0 ,Kebutuhannya = 0.0,SaranPcs =0.0,LebarBahanBelanjanya =0.0, ModalBahanUtuh =0.0,ModalperPcs =0.0,TotalBiaya=0.0 ,NetProfit1=0.0 ,NetProfit2=0.0;
         try {
-                double Pembulatan=0,RollBahan=0.0 ,Kebutuhannya = 0.0,SaranPcs =0.0,LebarBahanBelanjanya =0.0, ModalBahanUtuh =0.0,ModalperPcs =0.0,TotalBiaya=0.0 ,NetProfit1=0.0 ,NetProfit2=0.0;
 //            LebarBahanBelanjanya = SUM(Lebar*Pisau)+(8)+((Pisau-1)*Gap)
             LebarBahanBelanjanya = (df2.parse(editTextLebar.getText().toString()).doubleValue()*df2.parse(editTextPisau.getText().toString()).doubleValue()) + 8 +
                     ((df2.parse(editTextPisau.getText().toString()).doubleValue()-1)*df2.parse(editTextGap.getText().toString()).doubleValue());
             editTextLebarBahanBelanja.setText(df.format(LebarBahanBelanjanya));
 
                 //            1 Roll Bah    = 975000/(Tinggi+Gap)*Mata Pisau
-                RollBahan =  975000/(df2.parse(editTextTinggi.getText().toString()).doubleValue()+df2.parse(editTextGap.getText().toString()).doubleValue())*df2.parse(editTextPisau.getText().toString()).doubleValue();
+                RollBahan = ((df2.parse(editTextTinggi.getText().toString()).doubleValue()+df2.parse(editTextGap.getText().toString()).doubleValue()) == 0.0 ? 0 : 975000.0 /
+                        (df2.parse(editTextTinggi.getText().toString()).doubleValue()+df2.parse(editTextGap.getText().toString()).doubleValue())*df2.parse(editTextPisau.getText().toString()).doubleValue());
             editText1RollPcs.setText(df.format(RollBahan));
 
 //            Kebutuhannya = Order brp Pcs/ 1 Roll Bah
-            Kebutuhannya = df2.parse(editTextQtyOrderPcs.getText().toString()).doubleValue() / RollBahan;
+            Kebutuhannya = (RollBahan==0 ? 0.0 : df2.parse(editTextQtyOrderPcs.getText().toString()).doubleValue()/RollBahan);
             editTextKebutuhanRoll.setText(df2.format(Kebutuhannya));
 
             Pembulatan = df2.parse(editTextPembulatanRoll.getText().toString()).doubleValue();
@@ -632,14 +675,15 @@ public class LabelInputActivity extends AppCompatActivity {
             ModalBahanUtuh = df2.parse(editTextHargaModal.getText().toString()).doubleValue() * LebarBahanBelanjanya * Pembulatan;
             editTextModalBahanUtuh.setText(df.format(ModalBahanUtuh));
             //            Modal per Pcs =  Modal Bahan Utuh / Order brp Pcs
-            ModalperPcs =  ModalBahanUtuh /  df2.parse(editTextQtyOrderPcs.getText().toString()).doubleValue();
+            ModalperPcs = df2.parse(editTextQtyOrderPcs.getText().toString()).doubleValue();
+            ModalperPcs =  (ModalperPcs==0 ? 0 : ModalBahanUtuh / ModalperPcs);
             editTextModalPerPcs.setText(df2.format(ModalperPcs));
 
             //Profit Kotor
             textView30Persen.setText(df.format(ModalperPcs*(1+0.3)));
             textView50Persen.setText(df.format(ModalperPcs*(1+0.5)));
             textView75Persen.setText(df.format(ModalperPcs*(1+0.75)));
-            textView100Persen.setText(df.format(ModalperPcs*(1+1)));
+            textView100Persen.setText(df.format(ModalperPcs*(1+1.0)));
             textView125Persen.setText(df.format(ModalperPcs*(1+1.25)));
             textView150Persen.setText(df.format(ModalperPcs*(1+1.5)));
             textView175Persen.setText(df.format(ModalperPcs*(1+1.75)));
@@ -661,8 +705,8 @@ public class LabelInputActivity extends AppCompatActivity {
             editTextProfit1.setText(df.format(NetProfit1));
             editTextProfit2.setText(df.format(NetProfit2));
         } catch (Exception e) {
-        Log.e("hitung", e.getMessage(), e);
-    }
+            Log.e("hitung", e.getMessage(), e);
+        }
     }
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {

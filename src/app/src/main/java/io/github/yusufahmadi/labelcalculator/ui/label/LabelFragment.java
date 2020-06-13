@@ -4,6 +4,7 @@ import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,6 +19,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
@@ -31,6 +33,8 @@ import io.github.yusufahmadi.labelcalculator.model.Label;
 import io.github.yusufahmadi.labelcalculator.repository.DataAccess;
 import io.github.yusufahmadi.labelcalculator.repository.RecyclerItemClickListener;
 import io.github.yusufahmadi.labelcalculator.repository.mdlPublic;
+
+import static android.app.Activity.RESULT_OK;
 
 public class LabelFragment extends Fragment {
     private SearchView menuSearch = null;
@@ -133,6 +137,26 @@ public class LabelFragment extends Fragment {
             }
         });
 
+        final SwipeRefreshLayout swipeRefreshLayout = root.findViewById(R.id.swipe_layout);
+        swipeRefreshLayout.setColorSchemeResources(R.color.refresh,R.color.refresh1,R.color.refresh2);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                swipeRefreshLayout.setRefreshing(true);
+                (new Handler()).postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        swipeRefreshLayout.setRefreshing(false);
+                        if (menuSearch != null) {
+                            menuSearch.setQuery("", true);
+                        }
+                        refreshList("", 1, item_limit);
+                    }
+                },3000);
+            }
+        });
+
+        refreshList("", 1, item_limit);
         return root;
     }
 
@@ -182,5 +206,14 @@ public class LabelFragment extends Fragment {
         Intent intent = new Intent(getActivity(), LabelInputActivity.class);
         intent.putExtra("key.Label", obj);
         startActivityForResult(intent, mdlPublic.Activity_LabelInput);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == mdlPublic.Activity_LabelInput) {
+            if (resultCode == RESULT_OK) {
+                refreshList("", 1, item_limit);
+            }
+        }
     }
 }

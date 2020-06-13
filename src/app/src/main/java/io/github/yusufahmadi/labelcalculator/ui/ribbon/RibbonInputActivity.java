@@ -2,8 +2,6 @@ package io.github.yusufahmadi.labelcalculator.ui.ribbon;
 
 import android.content.Context;
 import android.content.Intent;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -32,10 +30,8 @@ import java.util.List;
 import java.util.Locale;
 
 import io.github.yusufahmadi.labelcalculator.R;
-import io.github.yusufahmadi.labelcalculator.helper.DataHelper;
 import io.github.yusufahmadi.labelcalculator.model.Bahan;
 import io.github.yusufahmadi.labelcalculator.repository.DataAccess;
-import io.github.yusufahmadi.labelcalculator.repository.mdlPublic;
 
 public class RibbonInputActivity extends AppCompatActivity {
     private DecimalFormat df = new DecimalFormat("###,###,###", new DecimalFormatSymbols(Locale.US));
