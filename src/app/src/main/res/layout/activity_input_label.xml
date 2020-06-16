@@ -169,6 +169,7 @@
                             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layout_marginBottom="@dimen/small_padding"
                             android:hint="Banyak Mata Pisau">
 
                             <com.google.android.material.textfield.TextInputEditText
@@ -462,7 +463,7 @@
                                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
-                                android:layout_marginEnd="@dimen/keyline_1"
+                                android:layout_marginHorizontal="@dimen/keyline_1"
                                 android:layout_weight="0.5"
                                 android:hint="Biaya Kirim">
 
