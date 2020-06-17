@@ -15,31 +15,35 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import com.google.android.material.button.MaterialButton;
-import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
 
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
 import io.github.yusufahmadi.labelcalculator.R;
 import io.github.yusufahmadi.labelcalculator.model.Bahan;
+import io.github.yusufahmadi.labelcalculator.model.Ribbon;
 import io.github.yusufahmadi.labelcalculator.repository.DataAccess;
 
 public class RibbonInputActivity extends AppCompatActivity {
     private DecimalFormat df = new DecimalFormat("###,###,###", new DecimalFormatSymbols(Locale.US));
     private DecimalFormat df2 = new DecimalFormat("###,###,###.##", new DecimalFormatSymbols(Locale.US));
-
+    private Ribbon Obj;
     private List<Bahan> ListBahan = new ArrayList<>();
     private List<String> ListStrBahan = new ArrayList<>();
 
+    private int idbahan =0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,7 +68,7 @@ public class RibbonInputActivity extends AppCompatActivity {
         spinner_bahan.setAdapter(arrayAdapter);
     }
 
-    private TextInputEditText editTextHargaModal, editTextLebar, editTextPanjang, editTextModal;
+    private TextInputEditText editTextHargaModal, editTextLebar, editTextPanjang, editTextModal,editTextCatatan;
     private AutoCompleteTextView spinner_bahan;
     private TextInputEditText  editTextQty, editTextJualRoll, editTextJumlahProfitKotor , editTextTransport, editTextKomisiSalesProsen,editTextKomisiSalesNominal, editTextNetProfit;
     private TextView textView10Persen,textView15Persen,textView25Persen,textView35Persen,textView45Persen,textView55Persen,textView65Persen,textView75Persen;
@@ -89,6 +93,7 @@ public class RibbonInputActivity extends AppCompatActivity {
             textView65Persen = findViewById(R.id.textView65Persen);
             textView75Persen = findViewById(R.id.textView75Persen);
 
+            editTextCatatan                      = findViewById(R.id.editTextCatatan);
             editTextQty                             = findViewById(R.id.editTextQty);
             editTextJualRoll                       = findViewById(R.id.editTextJualRoll);
             editTextJumlahProfitKotor       = findViewById(R.id.editTextJumlahProfitKotor);
@@ -288,9 +293,69 @@ public class RibbonInputActivity extends AppCompatActivity {
             btnSave.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Snackbar.make(findViewById(R.id.coordinator),
-                            "Menu belum siap",
-                            Snackbar.LENGTH_SHORT).show();
+                    boolean isValidasi = true;
+                    try {
+                        if (isValidasi && editTextCatatan.getText().length()==0) {
+                            Toast.makeText(getApplicationContext(),
+                                    "Catatan / No Dokumen harus diisi.",
+                                    Toast.LENGTH_SHORT).show();
+                            isValidasi = false;
+                        }
+                        if (isValidasi && idbahan < 0) {
+                            Toast.makeText(getApplicationContext(),
+                                    "Bahan harus diisi.",
+                                    Toast.LENGTH_SHORT).show();
+                            isValidasi = false;
+                        }
+                        if (isValidasi &&
+                                !DataAccess.cekValidasiRibbon(getApplication(), editTextCatatan.getText().toString(), (Obj != null ? Obj.no : -1))) {
+                            Toast.makeText(getApplicationContext(),
+                                    "Catatan/ No Dokumen sudah dipakai.",
+                                    Toast.LENGTH_SHORT).show();
+                            isValidasi = false;
+                        }
+                        if (isValidasi && df.parse(editTextLebar.getText().toString()).doubleValue() <= 0) {
+                            Toast.makeText(getApplicationContext(),
+                                    "Isi Lebar (mm).",
+                                    Toast.LENGTH_SHORT).show();
+                            isValidasi = false;
+                        }
+                        if (isValidasi && df.parse(editTextPanjang.getText().toString()).doubleValue() <= 0) {
+                            Toast.makeText(getApplicationContext(),
+                                    "Isi Panjang (M).",
+                                    Toast.LENGTH_SHORT).show();
+                            isValidasi = false;
+                        }
+                        if (isValidasi) {
+                            if (Obj != null) {
+                            } else {
+                                Obj = new Ribbon();
+                                Obj.no = -1;
+                            }
+
+                            Obj.dokumen = editTextCatatan.getText().toString();
+                            Date c = Calendar.getInstance().getTime();
+                            Obj.tgl             = c;
+                            Obj.id_bahan = idbahan;
+                            Obj.harga_modal =  df.parse(editTextHargaModal.getText().toString()).doubleValue();
+                            Obj.lebar =  df.parse(editTextLebar.getText().toString()).doubleValue();
+                            Obj.panjang = df.parse(editTextPanjang.getText().toString()).doubleValue();
+                            Obj.modal = df.parse(editTextModal.getText().toString()).doubleValue();
+                            Obj.qty = df.parse(editTextQty.getText().toString()).doubleValue();
+                            Obj.jual_roll = df.parse(editTextJualRoll.getText().toString()).doubleValue();
+                            Obj.jumlah_profit_kotor = df.parse(editTextJumlahProfitKotor.getText().toString()).doubleValue();
+                            Obj.transport = df.parse(editTextTransport.getText().toString()).doubleValue();
+                            Obj.komisisalesprosen = df.parse(editTextKomisiSalesProsen.getText().toString()).doubleValue();
+                            Obj.netprofit = df.parse(editTextNetProfit.getText().toString()).doubleValue();
+
+                            if (DataAccess.saveRibbon(getApplicationContext(), Obj)) {
+                                GoBackMenu(RESULT_OK, null);
+                            }
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        Log.e("Save", e.getMessage(), e);
+                    }
                 }
             });
 

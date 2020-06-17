@@ -16,6 +16,7 @@ import java.util.Locale;
 import io.github.yusufahmadi.labelcalculator.helper.DataHelper;
 import io.github.yusufahmadi.labelcalculator.model.Bahan;
 import io.github.yusufahmadi.labelcalculator.model.Label;
+import io.github.yusufahmadi.labelcalculator.model.Ribbon;
 
 public class DataAccess {
     private static SimpleDateFormat dt = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", new DateFormatSymbols(Locale.US));
@@ -354,6 +355,7 @@ public class DataAccess {
         return hasil;
     }
 
+    //Transaksi Label
     public static List<Label> getListLabel(Context ctx, String Filter, int page, int limit) {
         DataHelper dbcenter = new DataHelper(ctx);
         SQLiteDatabase db = dbcenter.getReadableDatabase();
@@ -500,7 +502,158 @@ public class DataAccess {
             hasil = true;
         } catch (Exception e) {
             e.printStackTrace();
-            Log.e("getListBahan", e.getMessage(), e);
+            Log.e("saveLabel", e.getMessage(), e);
+            hasil = false;
+        } finally {
+            if (db.isOpen()) {
+                db.close();
+            }
+            dbcenter.close();
+        }
+        return hasil;
+    }
+
+
+    //Transaksi Ribbon
+
+    public static List<Ribbon> getListRibbon(Context ctx, String Filter, int page, int limit) {
+        DataHelper dbcenter = new DataHelper(ctx);
+        SQLiteDatabase db = dbcenter.getReadableDatabase();
+        List<Ribbon> iList = new ArrayList<>();
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", new DateFormatSymbols(Locale.US));
+        try {
+            String selectQuery = "SELECT ribbon.*, bahan.nama as bahan FROM ribbon left join bahan on bahan.[no]=ribbon.id_bahan";
+            if (!Filter.isEmpty()) {
+                selectQuery = selectQuery + " WHERE " +
+                        " ribbon.dokumen like '%"+ Filter.replace("'", "''") +"%' OR " +
+                        " bahan.nama like '%"+ Filter.replace("'", "''") +"%'";
+            }
+            selectQuery = selectQuery + " ORDER BY ribbon.tgl desc, ribbon.dokumen desc";
+            if (page>=1 && limit>=1) {
+                selectQuery = selectQuery + " LIMIT " + String.valueOf((page-1)*limit) + ", " + String.valueOf(limit);
+            }
+            Cursor cursor = db.rawQuery(selectQuery, null);
+
+            cursor.moveToFirst();
+            for (int cc=0; cc < cursor.getCount(); cc++) {
+                cursor.moveToPosition(cc);
+                Ribbon obj           = new Ribbon();
+                obj.no              = cursor.getInt(0);
+                obj.dokumen         = cursor.getString(1);
+                obj.tgl             = df.parse(cursor.getString(2));
+                obj.id_bahan        = cursor.getInt(3);
+                obj.harga_modal     = cursor.getDouble(4);
+                obj.lebar           = cursor.getDouble(5);
+                obj.panjang          = cursor.getDouble(6);
+                obj.modal             = cursor.getDouble(7);
+                obj.qty           = cursor.getDouble(8);
+                obj.jual_roll      = cursor.getDouble(9);
+                obj.jumlah_profit_kotor       = cursor.getDouble(10);
+                obj.transport = cursor.getDouble(11);
+                obj.komisisalesprosen     = cursor.getDouble(12);
+                obj.netprofit     = cursor.getDouble(13);
+                obj.bahan           = cursor.getString(14);
+                iList.add(obj);
+            }
+            cursor.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+            Log.e("getListRibbon", e.getMessage(), e);
+            iList.clear();
+        } finally {
+            if (db.isOpen()) {
+                db.close();
+            }
+            dbcenter.close();
+        }
+        return iList;
+    }
+
+    public static boolean cekValidasiRibbon(Context ctx, String Dokumen, int PK) {
+        DataHelper dbcenter = new DataHelper(ctx);
+        SQLiteDatabase db = dbcenter.getReadableDatabase();
+        boolean hasil = false;
+        try {
+            String selectQuery = "SELECT * FROM ribbon WHERE dokumen='"+ Dokumen.replace("'", "''") +"' AND [no]<>" + PK;
+            Cursor cursor = db.rawQuery(selectQuery, null);
+
+            if (cursor.getCount()>=1) {
+                hasil = false;
+            } else {
+                hasil = true;
+            }
+            cursor.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+            Log.e("cekValidasiRibbon", e.getMessage(), e);
+            hasil = false;
+        } finally {
+            if (db.isOpen()) {
+                db.close();
+            }
+            dbcenter.close();
+        }
+        return hasil;
+    }
+
+    public static boolean saveRibbon(Context ctx, Ribbon obj) {
+        DataHelper dbcenter = new DataHelper(ctx);
+        SQLiteDatabase db = dbcenter.getWritableDatabase();
+        boolean hasil = false;
+        String SQL = "";
+        try {
+            if (obj.no>=1) {
+                SQL = "UPDATE ribbon SET " +
+                        "dokumen='"+ obj.dokumen.replace("'", "''") +"', " +
+                        "tgl='"+ dt.format(obj.tgl).replace("'", "''") +"', " +
+                        "id_bahan=" + String.valueOf(obj.id_bahan).replace(",", ".") + "," +
+                        "harga_bahan=" + String.valueOf(obj.harga_modal).replace(",", ".") + "," +
+                        "lebar=" + String.valueOf(obj.lebar).replace(",", ".") + "," +
+                        "panjang=" + String.valueOf(obj.panjang).replace(",", ".") + "," +
+                        "modal=" + String.valueOf(obj.modal).replace(",", ".") + "," +
+                        "qty=" + String.valueOf(obj.qty).replace(",", ".") + "," +
+                        "jual_roll=" + String.valueOf(obj.jual_roll).replace(",", ".") + "," +
+                        "jumlah_profit_kotor=" + String.valueOf(obj.jumlah_profit_kotor).replace(",", ".") + "," +
+                        "transport=" + String.valueOf(obj.transport).replace(",", ".") + "," +
+                        "komisisalesprosen=" + String.valueOf(obj.komisisalesprosen).replace(",", ".") + "," +
+                        "netprofit=" + String.valueOf(obj.netprofit).replace(",", ".") +
+                        " WHERE [no]=" + obj.no;
+            } else {
+                SQL = "SELECT max([no]) as nomax FROM ribbon";
+                Cursor cursor = db.rawQuery(SQL, null);
+                if (cursor != null) {
+                    if (cursor.getCount()>=1) {
+                        //error pas kosong belum ada data
+                        cursor.moveToFirst();
+                        obj.no = cursor.getInt(0) + 1;
+                    } else {
+                        obj.no = 1;
+                    }
+                } else {
+                    obj.no = 1;
+                }
+                cursor.close();
+
+                SQL = "INSERT INTO ribbon ([no],dokumen,tgl,id_bahan,harga_bahan,lebar,panjang,modal,qty ,jual_roll ,jumlah_profit_kotor,transport ,komisisalesprosen,netprofit) values ("+ obj.no +", " +
+                        "'"+ obj.dokumen.replace("'", "''") +"', " +
+                        "'"+ dt.format(obj.tgl).replace("'", "''") +"', " +
+                        String.valueOf(obj.id_bahan).replace(",", ".") + "," +
+                        String.valueOf(obj.harga_modal).replace(",", ".") + "," +
+                        String.valueOf(obj.lebar).replace(",", ".") + "," +
+                        String.valueOf(obj.panjang).replace(",", ".") + "," +
+                        String.valueOf(obj.modal).replace(",", ".") + "," +
+                        String.valueOf(obj.qty).replace(",", ".") + "," +
+                        String.valueOf(obj.jual_roll).replace(",", ".") + "," +
+                        String.valueOf(obj.jumlah_profit_kotor).replace(",", ".") + "," +
+                        String.valueOf(obj.transport).replace(",", ".") + "," +
+                        String.valueOf(obj.komisisalesprosen).replace(",", ".") + "," +
+                        String.valueOf(obj.netprofit).replace(",", ".") + ")";
+            }
+            db.execSQL(SQL);
+            hasil = true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            Log.e("saveRibbon", e.getMessage(), e);
             hasil = false;
         } finally {
             if (db.isOpen()) {

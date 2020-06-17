@@ -11,7 +11,7 @@ import io.github.yusufahmadi.labelcalculator.model.Bahan;
 
 public class DataHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "labelcalculator.db";
-    private static final int DATABASE_VERSION = 5;
+    private static final int DATABASE_VERSION = 6;
     public DataHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
         // TODO Auto-generated constructor stub
@@ -29,6 +29,7 @@ public class DataHelper extends SQLiteOpenHelper {
         dbUpgrade3(db);
         dbUpgrade4(db);
         dbUpgrade5(db);
+        dbUpgrade6(db);
     }
 
     @Override
@@ -49,6 +50,10 @@ public class DataHelper extends SQLiteOpenHelper {
 
         if (oldVersion<5) {
             dbUpgrade5(db);
+        }
+
+        if (oldVersion<6) {
+            dbUpgrade6(db);
         }
     }
 
@@ -128,6 +133,26 @@ public class DataHelper extends SQLiteOpenHelper {
                 "biaya_toyobo real," +
                 "biaya_operator real," +
                 "biaya_kirim real);";
+        db.execSQL(sql);
+    }
+
+    private void dbUpgrade6(SQLiteDatabase db) {
+        Log.d("On Upgrade", "DB Struktur 6");
+        String sql;
+        sql = "create table ribbon([no] integer primary key, " +
+                "dokumen text, " +
+                "tgl datetime default current_timestamp," +
+                "id_bahan int," +
+                "harga_bahan real," +
+                "lebar real," +
+                "panjang real," +
+                "modal real," +
+                "qty real," +
+                "jual_roll real," +
+                "jumlah_profit_kotor real," +
+                "transport real," +
+                "komisisalesprosen real," +
+                "netprofit real);";
         db.execSQL(sql);
     }
 }
