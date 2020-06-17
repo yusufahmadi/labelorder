@@ -23,19 +23,21 @@ import java.util.List;
 import java.util.Locale;
 
 import io.github.yusufahmadi.labelcalculator.R;
-import io.github.yusufahmadi.labelcalculator.model.Ribbon;
+import io.github.yusufahmadi.labelcalculator.model.Taffeta;
 import io.github.yusufahmadi.labelcalculator.repository.mdlPublic;
 
-public class RibbonRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class TaffetaRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private final int VIEW_ITEM = 1;
     private final int VIEW_PROG = 0;
     private int VIEW_REC = 0;
 
-    public static List<Ribbon> items = new ArrayList<>();
+    public static List<Taffeta> items = new ArrayList<>();
     private DecimalFormat df    = new DecimalFormat("###,###,###", new DecimalFormatSymbols(Locale.US));
+    private DecimalFormat df2    = new DecimalFormat("###,###,###.##", new DecimalFormatSymbols(Locale.US));
+    private DecimalFormat df3    = new DecimalFormat("###,###,###.###", new DecimalFormatSymbols(Locale.US));
     private SimpleDateFormat dt = new SimpleDateFormat("yyyy-MM-dd", new DateFormatSymbols(Locale.US));
     private Context context;
-    private RibbonRecyclerAdapter.OnLoadMoreListener onLoadMoreListener;
+    private TaffetaRecyclerAdapter.OnLoadMoreListener onLoadMoreListener;
     private boolean loading;
     private int item_limit;
 
@@ -43,15 +45,15 @@ public class RibbonRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         void onLoadMore(int current_page);
     }
 
-    public void setOnLoadMoreListener(RibbonRecyclerAdapter.OnLoadMoreListener onLoadMoreListener){
+    public void setOnLoadMoreListener(TaffetaRecyclerAdapter.OnLoadMoreListener onLoadMoreListener){
         this.onLoadMoreListener = onLoadMoreListener;
     }
 
-    public Ribbon getItem(int position) {
+    public Taffeta getItem(int position) {
         return items.get(position);
     }
 
-    public RibbonRecyclerAdapter(Context context, RecyclerView view, List<Ribbon> items, int item_limit) {
+    public TaffetaRecyclerAdapter(Context context, RecyclerView view, List<Taffeta> items, int item_limit) {
         this.context = context;
         this.items = items;
         this.item_limit = item_limit;
@@ -74,25 +76,25 @@ public class RibbonRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.Vie
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         RecyclerView.ViewHolder vh;
         if(viewType == VIEW_ITEM){
-            View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.listviewribbon, parent, false);
-            vh = new RibbonRecyclerAdapter.OriginalViewHolder(v);
+            View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.listview_taffeta, parent, false);
+            vh = new TaffetaRecyclerAdapter.OriginalViewHolder(v);
         } else {
             View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_loading, parent, false);
-            vh = new RibbonRecyclerAdapter.ProgressViewHolder(v);
+            vh = new TaffetaRecyclerAdapter.ProgressViewHolder(v);
         }
         return vh;
     }
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, final int position) {
-        if(viewHolder instanceof RibbonRecyclerAdapter.OriginalViewHolder){
+        if(viewHolder instanceof TaffetaRecyclerAdapter.OriginalViewHolder){
             SimpleDateFormat dt3 = new SimpleDateFormat("dd MMMM yyyy", new DateFormatSymbols(Locale.US));
             long dateDiff = 0;
             try {
                 double Harga = 0.0;
                 // getting movie data for the row
-                final Ribbon m = items.get(position);
-                RibbonRecyclerAdapter.OriginalViewHolder holder = (RibbonRecyclerAdapter.OriginalViewHolder) viewHolder;
+                final Taffeta m = items.get(position);
+                TaffetaRecyclerAdapter.OriginalViewHolder holder = (TaffetaRecyclerAdapter.OriginalViewHolder) viewHolder;
 
                 holder.Document.setText(m.dokumen);
                 Date TanggalNow = new Date();
@@ -110,7 +112,8 @@ public class RibbonRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.Vie
                     holder.Tanggal.setText(dt3.format(m.tgl));
                 }
                 holder.Bahan.setText(m.bahan);
-                holder.HargaBahan.setText("Rp. " + df.format(m.harga_modal));
+                holder.Kurs.setText(df2.format(m.kurs));
+                holder.HargaBahan.setText(df3.format(m.harga_modal));
                 holder.Lebar.setText(df.format(m.lebar));
                 holder.Panjang.setText(df.format(m.panjang));
                 holder.Modal.setText(df.format(m.modal));
@@ -118,7 +121,7 @@ public class RibbonRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.Vie
                 Toast.makeText(context, "Error : " + ex.getMessage(), Toast.LENGTH_SHORT).show();
             }
         } else {
-            ((RibbonRecyclerAdapter.ProgressViewHolder) viewHolder).progressBar.setIndeterminate(true);
+            ((TaffetaRecyclerAdapter.ProgressViewHolder) viewHolder).progressBar.setIndeterminate(true);
         }
     }
 
@@ -129,13 +132,14 @@ public class RibbonRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 
     public static class OriginalViewHolder extends RecyclerView.ViewHolder {
         // Layouting item
-        public TextView Document, Tanggal, Bahan, HargaBahan, Panjang, Lebar, Modal;
+        public TextView Document, Tanggal, Kurs, Bahan, HargaBahan, Panjang, Lebar, Modal;
 
         public OriginalViewHolder(@NonNull View v) {
             super(v);
             Document    = v.findViewById(R.id.tvDocument);
             Tanggal     = v.findViewById(R.id.tvTgl);
             Bahan       = v.findViewById(R.id.tvBahan);
+            Kurs            = v.findViewById(R.id.tvKurs);
             HargaBahan  = v.findViewById(R.id.tvHargaBahan);
             Panjang      = v.findViewById(R.id.tvPanjangi);
             Lebar       = v.findViewById(R.id.tvLebar);
@@ -156,7 +160,7 @@ public class RibbonRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         return this.items.get(position) != null ? VIEW_ITEM : VIEW_PROG;
     }
 
-    public void insertData(List<Ribbon> items){
+    public void insertData(List<Taffeta> items){
         setLoaded();
         int positionStart = getItemCount();
         int itemCount = items.size();

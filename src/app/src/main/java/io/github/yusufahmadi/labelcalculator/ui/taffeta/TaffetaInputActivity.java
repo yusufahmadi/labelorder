@@ -1,4 +1,4 @@
-package io.github.yusufahmadi.labelcalculator.ui.ribbon;
+package io.github.yusufahmadi.labelcalculator.ui.taffeta;
 
 import android.content.Context;
 import android.content.Intent;
@@ -33,13 +33,14 @@ import java.util.Locale;
 
 import io.github.yusufahmadi.labelcalculator.R;
 import io.github.yusufahmadi.labelcalculator.model.Bahan;
-import io.github.yusufahmadi.labelcalculator.model.Ribbon;
+import io.github.yusufahmadi.labelcalculator.model.Taffeta;
 import io.github.yusufahmadi.labelcalculator.repository.DataAccess;
 
-public class RibbonInputActivity extends AppCompatActivity {
+public class TaffetaInputActivity extends AppCompatActivity {
     private DecimalFormat df = new DecimalFormat("###,###,###", new DecimalFormatSymbols(Locale.US));
     private DecimalFormat df2 = new DecimalFormat("###,###,###.##", new DecimalFormatSymbols(Locale.US));
-    private Ribbon Obj;
+    private DecimalFormat df3 = new DecimalFormat("###,###,###.###", new DecimalFormatSymbols(Locale.US));
+    private Taffeta Obj;
     private List<Bahan> ListBahan = new ArrayList<>();
     private List<String> ListStrBahan = new ArrayList<>();
 
@@ -47,13 +48,13 @@ public class RibbonInputActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_input_ribbon);
+        setContentView(R.layout.activity_input_taffeta);
 
         initToolbar();
         try {
             Bundle extras = getIntent().getExtras();
             if (extras != null) {
-                Obj = (Ribbon) extras.get("key.Ribbon");
+                Obj = (Taffeta) extras.get("key.Taffeta");
             } else {
                 Obj = null;
             }
@@ -66,7 +67,7 @@ public class RibbonInputActivity extends AppCompatActivity {
     }
 
     private void InitData() {
-        ListBahan = DataAccess.getListBahan(this, "", -1, -1);
+        ListBahan = DataAccess.getListTypeTaffeta(this, "", -1, -1);
         if (ListBahan.size()>=1) {
             for (int cc=0; cc < ListBahan.size(); cc++) {
                 ListStrBahan.add(ListBahan.get(cc).nama);
@@ -80,33 +81,30 @@ public class RibbonInputActivity extends AppCompatActivity {
         spinner_bahan.setAdapter(arrayAdapter);
     }
 
-    private TextInputEditText editTextHargaModal, editTextLebar, editTextPanjang, editTextModal,editTextCatatan;
+    private TextInputEditText editTextHargaModal, editTextKurs, editTextLebar, editTextPanjang, editTextModal,editTextCatatan;
     private AutoCompleteTextView spinner_bahan;
     private TextInputEditText  editTextQty, editTextJualRoll, editTextJumlahProfitKotor , editTextTransport, editTextKomisiSalesProsen,editTextKomisiSalesNominal, editTextNetProfit;
-    private TextView textView10Persen,textView15Persen,textView25Persen,textView35Persen,textView45Persen,textView55Persen,textView65Persen,textView75Persen;
+    private TextView textView30Persen,textView50Persen,textView100Persen,textView75Persen;
     private void initLayout() {
         try {
             final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(
                     getApplicationContext(), android.R.layout.simple_dropdown_item_1line,
                     ListStrBahan);
 
+            spinner_bahan           = findViewById(R.id.spinner_bahan);
+            editTextHargaModal      = findViewById(R.id.editTextHargaModal);
+            editTextKurs          = findViewById(R.id.editTextKurs);
             editTextLebar           = findViewById(R.id.editTextLebar);
             editTextPanjang         = findViewById(R.id.editTextPanjang);
-            editTextModal           = findViewById(R.id.editTextModal);
-            editTextHargaModal      = findViewById(R.id.editTextHargaModal);
-            spinner_bahan           = findViewById(R.id.spinner_bahan);
+            editTextModal           = findViewById(R.id.editTextHargaModalPerRoll);
 
-            textView10Persen = findViewById(R.id.textView10Persen);
-            textView15Persen = findViewById(R.id.textView15Persen);
-            textView25Persen = findViewById(R.id.textView25Persen);
-            textView35Persen = findViewById(R.id.textView35Persen);
-            textView45Persen = findViewById(R.id.textView45Persen);
-            textView55Persen = findViewById(R.id.textView55Persen);
-            textView65Persen = findViewById(R.id.textView65Persen);
+            textView30Persen = findViewById(R.id.textView30Persen);
+            textView50Persen = findViewById(R.id.textView50Persen);
             textView75Persen = findViewById(R.id.textView75Persen);
+            textView100Persen = findViewById(R.id.textView100Persen);
 
             editTextCatatan                      = findViewById(R.id.editTextCatatan);
-            editTextQty                             = findViewById(R.id.editTextQty);
+            editTextQty                             = findViewById(R.id.editTextQtyOrderPcs);
             editTextJualRoll                       = findViewById(R.id.editTextJualRoll);
             editTextJumlahProfitKotor       = findViewById(R.id.editTextJumlahProfitKotor);
             editTextTransport                  = findViewById(R.id.editTextTransport);
@@ -114,6 +112,27 @@ public class RibbonInputActivity extends AppCompatActivity {
             editTextKomisiSalesNominal   = findViewById(R.id.editTextKomisiSalesNominal);
             editTextNetProfit                    = findViewById(R.id.editTextNetProfit);
 
+            editTextKurs.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+                @Override
+                public void onFocusChange(View v, boolean hasFocus) {
+                    try {
+                        TextInputEditText ed = editTextKurs;
+                        if (!hasFocus) {
+                            if (ed.getText().toString().isEmpty()) {
+                                ed.setText(df2.format(0));
+                            } else {
+                                ed.setText(df2.format(Double.valueOf(ed.getText().toString())));
+                            }
+                            Hitung();
+                        } else {
+                            ed.setText(String.valueOf(df2.parse(ed.getText().toString()).doubleValue()));
+                            ed.setSelection(0, ed.getText().toString().length());
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
             editTextQty.setOnFocusChangeListener(new View.OnFocusChangeListener() {
                 @Override
                 public void onFocusChange(View v, boolean hasFocus) {
@@ -216,7 +235,7 @@ public class RibbonInputActivity extends AppCompatActivity {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                     idbahan = ListBahan.get(position).id;
-                    editTextHargaModal.setText(df.format(ListBahan.get(position).harga));
+                    editTextHargaModal.setText(df3.format(ListBahan.get(position).harga));
                     Hitung();
                 }
             });
@@ -280,13 +299,13 @@ public class RibbonInputActivity extends AppCompatActivity {
                         TextInputEditText ed = editTextHargaModal;
                         if (!hasFocus) {
                             if (ed.getText().toString().isEmpty()) {
-                                ed.setText(df.format(0.0));
+                                ed.setText(df3.format(0.0));
                             } else {
-                                ed.setText(df.format(Double.valueOf(ed.getText().toString())));
+                                ed.setText(df3.format(Double.valueOf(ed.getText().toString())));
                             }
                             Hitung();
                         } else {
-                            ed.setText(String.valueOf(df.parse(ed.getText().toString()).longValue()));
+                            ed.setText(String.valueOf(df3.parse(ed.getText().toString()).doubleValue()));
                             ed.setSelection(0, ed.getText().toString().length());
                         }
                     } catch (Exception e) {
@@ -321,7 +340,7 @@ public class RibbonInputActivity extends AppCompatActivity {
                             isValidasi = false;
                         }
                         if (isValidasi &&
-                                !DataAccess.cekValidasiRibbon(getApplication(), editTextCatatan.getText().toString(), (Obj != null ? Obj.no : -1))) {
+                                !DataAccess.cekValidasiTaffeta(getApplication(), editTextCatatan.getText().toString(), (Obj != null ? Obj.no : -1))) {
                             Toast.makeText(getApplicationContext(),
                                     "Catatan/ No Dokumen sudah dipakai.",
                                     Toast.LENGTH_SHORT).show();
@@ -342,7 +361,7 @@ public class RibbonInputActivity extends AppCompatActivity {
                         if (isValidasi) {
                             if (Obj != null) {
                             } else {
-                                Obj = new Ribbon();
+                                Obj = new Taffeta();
                                 Obj.no = -1;
                             }
 
@@ -350,7 +369,8 @@ public class RibbonInputActivity extends AppCompatActivity {
                             Date c = Calendar.getInstance().getTime();
                             Obj.tgl             = c;
                             Obj.id_bahan = idbahan;
-                            Obj.harga_modal =  df.parse(editTextHargaModal.getText().toString()).doubleValue();
+                            Obj.kurs = df2.parse(editTextKurs.getText().toString()).doubleValue();
+                            Obj.harga_modal =  df3.parse(editTextHargaModal.getText().toString()).doubleValue();
                             Obj.lebar =  df.parse(editTextLebar.getText().toString()).doubleValue();
                             Obj.panjang = df.parse(editTextPanjang.getText().toString()).doubleValue();
                             Obj.modal = df.parse(editTextModal.getText().toString()).doubleValue();
@@ -361,7 +381,7 @@ public class RibbonInputActivity extends AppCompatActivity {
                             Obj.komisisalesprosen = df.parse(editTextKomisiSalesProsen.getText().toString()).doubleValue();
                             Obj.netprofit = df.parse(editTextNetProfit.getText().toString()).doubleValue();
 
-                            if (DataAccess.saveRibbon(getApplicationContext(), Obj)) {
+                            if (DataAccess.saveTaffeta(getApplicationContext(), Obj)) {
                                 GoBackMenu(RESULT_OK, null);
                             }
                         }
@@ -407,17 +427,14 @@ public class RibbonInputActivity extends AppCompatActivity {
         editTextLebar.setText(df.format(0.0));
         editTextPanjang.setText(df.format(0.0));
         editTextModal.setText(df.format(0.0));
-        editTextHargaModal.setText(df.format(0.0));
+        editTextHargaModal.setText(df3.format(0.0));
         spinner_bahan.setText("");
+        editTextKurs.setText(df2.format(0.0));
 
-        textView10Persen.setText(df.format(0));
-        textView15Persen.setText(df.format(0));
-        textView25Persen.setText(df.format(0));
-        textView35Persen.setText(df.format(0));
-        textView45Persen.setText(df.format(0));
-        textView55Persen.setText(df.format(0));
-        textView65Persen.setText(df.format(0));
+        textView30Persen.setText(df.format(0));
+        textView50Persen.setText(df.format(0));
         textView75Persen.setText(df.format(0));
+        textView100Persen.setText(df.format(0));
 
         editTextCatatan.setText("");
         editTextJualRoll.setText(df.format(0));
@@ -441,19 +458,15 @@ public class RibbonInputActivity extends AppCompatActivity {
     private void Hitung() {
         double modalperroll = 0.0, profitkotor= 0.0, netprofit = 0.0,KomisiSalesNominal=0.0;
         try {
-            modalperroll = (df.parse(editTextLebar.getText().toString()).doubleValue()/1000) *
-                    df.parse(editTextPanjang.getText().toString()).doubleValue() *
-                    df.parse(editTextHargaModal.getText().toString()).doubleValue();
+            //HargaModal*Kurs*Lebar
+            modalperroll = df3.parse(editTextHargaModal.getText().toString()).doubleValue()  * df2.parse(editTextKurs.getText().toString()).doubleValue()
+                                    * df2.parse(editTextLebar.getText().toString()).doubleValue();
             editTextModal.setText(df.format(modalperroll));
 
-            textView10Persen.setText(df.format(modalperroll*1.1));
-            textView15Persen.setText(df.format(modalperroll*1.15));
-            textView25Persen.setText(df.format(modalperroll*1.25));
-            textView35Persen.setText(df.format(modalperroll*1.35));
-            textView45Persen.setText(df.format(modalperroll*1.45));
-            textView55Persen.setText(df.format(modalperroll*1.55));
-            textView65Persen.setText(df.format(modalperroll*1.65));
+            textView30Persen.setText(df.format(modalperroll*1.30));
+            textView50Persen.setText(df.format(modalperroll*1.50));
             textView75Persen.setText(df.format(modalperroll*1.75));
+            textView100Persen.setText(df.format(modalperroll*2.0));
 
             profitkotor =  (df.parse(editTextJualRoll.getText().toString()).doubleValue()-modalperroll) * df.parse(editTextQty.getText().toString()).doubleValue();
             editTextJumlahProfitKotor.setText(df.format(profitkotor));
@@ -473,7 +486,7 @@ public class RibbonInputActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        setTitle("Input Ribbon");
+        setTitle("Input Taffeta");
     }
 
     @Override
@@ -531,26 +544,24 @@ public class RibbonInputActivity extends AppCompatActivity {
         return super.dispatchTouchEvent(ev);
     }
 
-    private void InitValue(Ribbon Obj) {
+    private void InitValue(Taffeta Obj) {
         try {
             if (Obj == null) {
                 spinner_bahan.setText("");
                 idbahan = -1;
+                spinner_bahan.setText("");
+                editTextKurs.setText(df2.format(0.0));
+                editTextHargaModal.setText(df3.format(0.0));
                 editTextHargaModal.setText(df.format(0.0));
                 editTextLebar.setText(df.format(0.0));
                 editTextPanjang.setText(df.format(0.0));
                 editTextModal.setText(df.format(0.0));
-                editTextHargaModal.setText(df.format(0.0));
-                spinner_bahan.setText("");
 
-                textView10Persen.setText(df.format(0));
-                textView15Persen.setText(df.format(0));
-                textView25Persen.setText(df.format(0));
-                textView35Persen.setText(df.format(0));
-                textView45Persen.setText(df.format(0));
-                textView55Persen.setText(df.format(0));
-                textView65Persen.setText(df.format(0));
+
+                textView30Persen.setText(df.format(0));
+                textView50Persen.setText(df.format(0));
                 textView75Persen.setText(df.format(0));
+                textView100Persen.setText(df.format(0));
 
                 editTextJualRoll.setText(df.format(0));
                 editTextQty.setText(df.format(0));
@@ -568,7 +579,8 @@ public class RibbonInputActivity extends AppCompatActivity {
                         break;
                     }
                 }
-                editTextHargaModal.setText(df.format(Obj.harga_modal));
+                editTextHargaModal.setText(df3.format(Obj.harga_modal));
+                editTextKurs.setText(df2.format(Obj.kurs));
                 editTextLebar.setText(df.format(Obj.lebar));
                 editTextPanjang.setText(df.format(Obj.panjang));
                 editTextModal.setText(df.format(Obj.modal));

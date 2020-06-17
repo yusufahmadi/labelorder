@@ -88,7 +88,7 @@ public class TypeTaffetaRecyclerAdapter extends RecyclerView.Adapter<RecyclerVie
                 OriginalViewHolder holder = (OriginalViewHolder) viewHolder;
 
                 holder.Desc.setText(m.nama);
-                holder.Harga.setText("Rp. " + df.format(m.harga));
+                holder.Harga.setText(df.format(m.harga));
                 holder.Code.setText(m.code);
                 holder.Code.setVisibility(View.VISIBLE);
             } catch (Exception ex) {
