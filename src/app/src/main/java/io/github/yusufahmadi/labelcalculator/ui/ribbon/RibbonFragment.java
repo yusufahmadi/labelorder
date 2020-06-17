@@ -27,26 +27,27 @@ import com.google.android.material.snackbar.Snackbar;
 import java.util.ArrayList;
 import java.util.List;
 
+import static android.app.Activity.RESULT_OK;
 import io.github.yusufahmadi.labelcalculator.R;
 import io.github.yusufahmadi.labelcalculator.adapter.RibbonRecyclerAdapter;
+import io.github.yusufahmadi.labelcalculator.model.Label;
 import io.github.yusufahmadi.labelcalculator.model.Ribbon;
 import io.github.yusufahmadi.labelcalculator.repository.DataAccess;
 import io.github.yusufahmadi.labelcalculator.repository.RecyclerItemClickListener;
 import io.github.yusufahmadi.labelcalculator.repository.mdlPublic;
-
-import static android.app.Activity.RESULT_OK;
+import io.github.yusufahmadi.labelcalculator.ui.label.LabelInputActivity;
 
 public class RibbonFragment extends Fragment {
+    private RibbonViewModel ribbonViewModel;
     private SearchView menuSearch = null;
+    private Context context;
+
     private RecyclerView recyclerView = null;
     private RibbonRecyclerAdapter recyclerAdapter;
     private int item_limit = 10, last_item_count =0;
     private static String TAG = "RibbonActivity";
     private ImageView imgNotFound;
     private TextView tvNotFound;
-
-    private RibbonViewModel ribbonViewModel;
-    private Context context;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -133,10 +134,10 @@ public class RibbonFragment extends Fragment {
         fabAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ShowDetail(null);
+                Intent intent = new Intent(getActivity(), RibbonInputActivity.class);
+                startActivityForResult(intent, mdlPublic.Activity_RibbonInput);
             }
         });
-
         final SwipeRefreshLayout swipeRefreshLayout = root.findViewById(R.id.swipe_layout);
         swipeRefreshLayout.setColorSchemeResources(R.color.refresh,R.color.refresh1,R.color.refresh2);
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -159,8 +160,6 @@ public class RibbonFragment extends Fragment {
         refreshList("", 1, item_limit);
         return root;
     }
-
-
 
     private int Page = 0;
     private String Cari = "";
@@ -207,12 +206,12 @@ public class RibbonFragment extends Fragment {
     private void ShowDetail(Ribbon obj) {
         Intent intent = new Intent(getActivity(), RibbonInputActivity.class);
         intent.putExtra("key.Ribbon", obj);
-        startActivityForResult(intent, mdlPublic.Activity_LabelInput);
+        startActivityForResult(intent, mdlPublic.Activity_RibbonInput);
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == mdlPublic.Activity_LabelInput) {
+        if (requestCode == mdlPublic.Activity_RibbonInput) {
             if (resultCode == RESULT_OK) {
                 refreshList("", 1, item_limit);
             }

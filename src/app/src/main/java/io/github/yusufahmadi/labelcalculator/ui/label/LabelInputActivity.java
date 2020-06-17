@@ -303,13 +303,13 @@ public class LabelInputActivity extends AppCompatActivity {
                         TextInputEditText ed = editTextBiayaPisau;
                         if (!hasFocus) {
                             if (ed.getText().toString().isEmpty()) {
-                                ed.setText(df2.format(0.0));
+                                ed.setText(df.format(0));
                             } else {
-                                ed.setText(df2.format(Double.valueOf(ed.getText().toString())));
+                                ed.setText(df.format(Long.valueOf(ed.getText().toString())));
                             }
                             Hitung();
                         } else {
-                            ed.setText(String.valueOf(df2.parse(ed.getText().toString()).doubleValue()));
+                            ed.setText(String.valueOf(df.parse(ed.getText().toString()).longValue()));
                             ed.setSelection(0, ed.getText().toString().length());
                         }
                     } catch (Exception e) {
@@ -324,13 +324,13 @@ public class LabelInputActivity extends AppCompatActivity {
                         TextInputEditText ed = editTextBiayaTinta;
                         if (!hasFocus) {
                             if (ed.getText().toString().isEmpty()) {
-                                ed.setText(df2.format(0.0));
+                                ed.setText(df.format(0));
                             } else {
-                                ed.setText(df2.format(Double.valueOf(ed.getText().toString())));
+                                ed.setText(df.format(Long.valueOf(ed.getText().toString())));
                             }
                             Hitung();
                         } else {
-                            ed.setText(String.valueOf(df2.parse(ed.getText().toString()).doubleValue()));
+                            ed.setText(String.valueOf(df.parse(ed.getText().toString()).longValue()));
                             ed.setSelection(0, ed.getText().toString().length());
                         }
                     } catch (Exception e) {
@@ -345,13 +345,13 @@ public class LabelInputActivity extends AppCompatActivity {
                         TextInputEditText ed = editTextBiayaToyobo;
                         if (!hasFocus) {
                             if (ed.getText().toString().isEmpty()) {
-                                ed.setText(df2.format(0.0));
+                                ed.setText(df.format(0));
                             } else {
-                                ed.setText(df2.format(Double.valueOf(ed.getText().toString())));
+                                ed.setText(df.format(Long.valueOf(ed.getText().toString())));
                             }
                             Hitung();
                         } else {
-                            ed.setText(String.valueOf(df2.parse(ed.getText().toString()).doubleValue()));
+                            ed.setText(String.valueOf(df.parse(ed.getText().toString()).longValue()));
                             ed.setSelection(0, ed.getText().toString().length());
                         }
                     } catch (Exception e) {
@@ -366,13 +366,13 @@ public class LabelInputActivity extends AppCompatActivity {
                         TextInputEditText ed = editTextBiayaOperator;
                         if (!hasFocus) {
                             if (ed.getText().toString().isEmpty()) {
-                                ed.setText(df2.format(0.0));
+                                ed.setText(df.format(0));
                             } else {
-                                ed.setText(df2.format(Double.valueOf(ed.getText().toString())));
+                                ed.setText(df.format(Long.valueOf(ed.getText().toString())));
                             }
                             Hitung();
                         } else {
-                            ed.setText(String.valueOf(df2.parse(ed.getText().toString()).doubleValue()));
+                            ed.setText(String.valueOf(df.parse(ed.getText().toString()).longValue()));
                             ed.setSelection(0, ed.getText().toString().length());
                         }
                     } catch (Exception e) {
@@ -387,13 +387,13 @@ public class LabelInputActivity extends AppCompatActivity {
                         TextInputEditText ed = editTextBiayaKirim;
                         if (!hasFocus) {
                             if (ed.getText().toString().isEmpty()) {
-                                ed.setText(df2.format(0.0));
+                                ed.setText(df.format(0));
                             } else {
-                                ed.setText(df2.format(Double.valueOf(ed.getText().toString())));
+                                ed.setText(df.format(Long.valueOf(ed.getText().toString())));
                             }
                             Hitung();
                         } else {
-                            ed.setText(String.valueOf(df2.parse(ed.getText().toString()).doubleValue()));
+                            ed.setText(String.valueOf(df.parse(ed.getText().toString()).longValue()));
                             ed.setSelection(0, ed.getText().toString().length());
                         }
                     } catch (Exception e) {
@@ -408,13 +408,13 @@ public class LabelInputActivity extends AppCompatActivity {
                         TextInputEditText ed = editTextBiayaTotal;
                         if (!hasFocus) {
                             if (ed.getText().toString().isEmpty()) {
-                                ed.setText(df2.format(0.0));
+                                ed.setText(df.format(0));
                             } else {
-                                ed.setText(df2.format(Double.valueOf(ed.getText().toString())));
+                                ed.setText(df.format(Long.valueOf(ed.getText().toString())));
                             }
                             Hitung();
                         } else {
-                            ed.setText(String.valueOf(df2.parse(ed.getText().toString()).doubleValue()));
+                            ed.setText(String.valueOf(df.parse(ed.getText().toString()).longValue()));
                             ed.setSelection(0, ed.getText().toString().length());
                         }
                     } catch (Exception e) {
@@ -613,10 +613,11 @@ public class LabelInputActivity extends AppCompatActivity {
                 editTextLebar.setText(df.format(0.0));
                 editTextGap.setText(df.format(0.0));
                 editTextPembulatanRoll.setText(df2.format(0.0));
-                editTextBiayaPisau.setText(df.format(0.0));
-                editTextBiayaTinta.setText(df.format(0.0));
-                editTextBiayaToyobo.setText(df.format(0.0));
-                editTextBiayaOperator.setText(df.format(0.0));
+                editTextBiayaPisau.setText(df.format(0));
+                editTextBiayaTinta.setText(df.format(0));
+                editTextBiayaToyobo.setText(df.format(0));
+                editTextBiayaOperator.setText(df.format(0));
+                editTextBiayaKirim.setText(df.format(0));
                 editTextQtyOrderPcs.setText(df.format(0.0));
                 editTextJualSesuaiOrder.setText(df.format(0.0));
                 editTextCatatan.setText("");
@@ -638,6 +639,7 @@ public class LabelInputActivity extends AppCompatActivity {
                 editTextBiayaTinta.setText(df.format(Obj.biaya_tinta));
                 editTextBiayaToyobo.setText(df.format(Obj.biaya_toyobo));
                 editTextBiayaOperator.setText(df.format(Obj.biaya_operator));
+                editTextBiayaKirim.setText(df.format(Obj.biaya_kirim));
                 editTextQtyOrderPcs.setText(df.format(Obj.qty_order));
                 editTextJualSesuaiOrder.setText(df.format(Obj.jual_sesuai_order));
                 editTextCatatan.setText(Obj.dokumen);

@@ -35,7 +35,7 @@ public class RibbonRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.Vie
     private DecimalFormat df    = new DecimalFormat("###,###,###", new DecimalFormatSymbols(Locale.US));
     private SimpleDateFormat dt = new SimpleDateFormat("yyyy-MM-dd", new DateFormatSymbols(Locale.US));
     private Context context;
-    private OnLoadMoreListener onLoadMoreListener;
+    private RibbonRecyclerAdapter.OnLoadMoreListener onLoadMoreListener;
     private boolean loading;
     private int item_limit;
 
@@ -43,7 +43,7 @@ public class RibbonRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         void onLoadMore(int current_page);
     }
 
-    public void setOnLoadMoreListener(OnLoadMoreListener onLoadMoreListener){
+    public void setOnLoadMoreListener(RibbonRecyclerAdapter.OnLoadMoreListener onLoadMoreListener){
         this.onLoadMoreListener = onLoadMoreListener;
     }
 
@@ -74,25 +74,25 @@ public class RibbonRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.Vie
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         RecyclerView.ViewHolder vh;
         if(viewType == VIEW_ITEM){
-            View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.listview_ribbon, parent, false);
-            vh = new OriginalViewHolder(v);
+            View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.listviewribbon, parent, false);
+            vh = new RibbonRecyclerAdapter.OriginalViewHolder(v);
         } else {
             View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_loading, parent, false);
-            vh = new ProgressViewHolder(v);
+            vh = new RibbonRecyclerAdapter.ProgressViewHolder(v);
         }
         return vh;
     }
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, final int position) {
-        if(viewHolder instanceof OriginalViewHolder){
+        if(viewHolder instanceof RibbonRecyclerAdapter.OriginalViewHolder){
             SimpleDateFormat dt3 = new SimpleDateFormat("dd MMMM yyyy", new DateFormatSymbols(Locale.US));
             long dateDiff = 0;
             try {
                 double Harga = 0.0;
                 // getting movie data for the row
                 final Ribbon m = items.get(position);
-                OriginalViewHolder holder = (OriginalViewHolder) viewHolder;
+                RibbonRecyclerAdapter.OriginalViewHolder holder = (RibbonRecyclerAdapter.OriginalViewHolder) viewHolder;
 
                 holder.Document.setText(m.dokumen);
                 Date TanggalNow = new Date();
@@ -112,12 +112,13 @@ public class RibbonRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.Vie
                 holder.Bahan.setText(m.bahan);
                 holder.HargaBahan.setText("Rp. " + df.format(m.harga_modal));
                 holder.Lebar.setText(df.format(m.lebar));
-                holder.Panjang.setText(df.format(m.panjang));
+                holder.Tinggi.setText(df.format(m.panjang));
+                holder.Gap.setText(df.format(m.modal));
             } catch (Exception ex) {
                 Toast.makeText(context, "Error : " + ex.getMessage(), Toast.LENGTH_SHORT).show();
             }
         } else {
-            ((ProgressViewHolder) viewHolder).progressBar.setIndeterminate(true);
+            ((RibbonRecyclerAdapter.ProgressViewHolder) viewHolder).progressBar.setIndeterminate(true);
         }
     }
 
@@ -128,7 +129,7 @@ public class RibbonRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 
     public static class OriginalViewHolder extends RecyclerView.ViewHolder {
         // Layouting item
-        public TextView Document, Tanggal, Bahan, HargaBahan, Panjang, Lebar;
+        public TextView Document, Tanggal, Bahan, HargaBahan, Tinggi, Lebar, Gap;
 
         public OriginalViewHolder(@NonNull View v) {
             super(v);
@@ -136,8 +137,9 @@ public class RibbonRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.Vie
             Tanggal     = v.findViewById(R.id.tvTgl);
             Bahan       = v.findViewById(R.id.tvBahan);
             HargaBahan  = v.findViewById(R.id.tvHargaBahan);
-            Panjang     = v.findViewById(R.id.tvPanjang);
+            Tinggi      = v.findViewById(R.id.tvTinggi);
             Lebar       = v.findViewById(R.id.tvLebar);
+            Gap         = v.findViewById(R.id.tvGap);
         }
     }
 

@@ -146,10 +146,13 @@ public class DataHelper extends SQLiteOpenHelper {
                 "harga_bahan real," +
                 "lebar real," +
                 "panjang real," +
-                "qty_order real," +
+                "modal real," +
+                "qty real," +
                 "jual_roll real," +
-                "biaya_transport real," +
-                "komisi_sales_prosen real);";
+                "jumlah_profit_kotor real," +
+                "transport real," +
+                "komisisalesprosen real," +
+                "netprofit real);";
         db.execSQL(sql);
     }
 }
