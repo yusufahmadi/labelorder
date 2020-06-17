@@ -47,7 +47,7 @@ public class Label implements Serializable {
     public double lebar;
     public double tinggi;
     public double gap;
-    public double pisau;;
+    public double pisau;
     public double pembulatan;
     public double qty_order;
     public double jual_sesuai_order;

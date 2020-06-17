@@ -664,6 +664,7 @@ public class DataAccess {
         return hasil;
     }
 
+
     //Transaksi Taffeta
     public static List<Taffeta> getListTaffeta(Context ctx, String Filter, int page, int limit) {
         DataHelper dbcenter = new DataHelper(ctx);
@@ -678,6 +679,7 @@ public class DataAccess {
                         " type_taffeta.nama like '%"+ Filter.replace("'", "''") +"%'";
             }
             selectQuery = selectQuery + " ORDER BY taffeta.tgl desc, taffeta.dokumen desc";
+
             if (page>=1 && limit>=1) {
                 selectQuery = selectQuery + " LIMIT " + String.valueOf((page-1)*limit) + ", " + String.valueOf(limit);
             }
@@ -686,6 +688,7 @@ public class DataAccess {
             cursor.moveToFirst();
             for (int cc=0; cc < cursor.getCount(); cc++) {
                 cursor.moveToPosition(cc);
+
                 Taffeta obj           = new Taffeta();
                 obj.no              = cursor.getInt(0);
                 obj.dokumen         = cursor.getString(1);
@@ -703,11 +706,13 @@ public class DataAccess {
                 obj.netprofit     = cursor.getDouble(13);
                 obj.kurs           = cursor.getDouble(14);
                 obj.bahan           = cursor.getString(15);
+
                 iList.add(obj);
             }
             cursor.close();
         } catch (Exception e) {
             e.printStackTrace();
+
             Log.e("getListTaffeta", e.getMessage(), e);
             iList.clear();
         } finally {
@@ -718,6 +723,7 @@ public class DataAccess {
         }
         return iList;
     }
+
 
     public static boolean cekValidasiTaffeta(Context ctx, String Dokumen, int PK) {
         DataHelper dbcenter = new DataHelper(ctx);
@@ -771,6 +777,7 @@ public class DataAccess {
                         " WHERE [no]=" + obj.no;
             } else {
                 SQL = "SELECT max([no]) as nomax FROM taffeta";
+
                 Cursor cursor = db.rawQuery(SQL, null);
                 if (cursor != null) {
                     if (cursor.getCount()>=1) {
@@ -786,6 +793,7 @@ public class DataAccess {
                 cursor.close();
 
                 SQL = "INSERT INTO taffeta ([no],dokumen,tgl,id_bahan,harga_bahan,lebar,panjang,modal,qty ,jual_roll ,jumlah_profit_kotor,transport ,komisisalesprosen,kurs,netprofit) values ("+ obj.no +", " +
+
                         "'"+ obj.dokumen.replace("'", "''") +"', " +
                         "'"+ dt.format(obj.tgl).replace("'", "''") +"', " +
                         String.valueOf(obj.id_bahan).replace(",", ".") + "," +
