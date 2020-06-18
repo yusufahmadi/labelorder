@@ -38,7 +38,7 @@ import io.github.yusufahmadi.labelcalculator.repository.DataAccess;
 
 public class RibbonInputActivity extends AppCompatActivity {
     private DecimalFormat df = new DecimalFormat("###,###,###", new DecimalFormatSymbols(Locale.US));
-    private DecimalFormat df2 = new DecimalFormat("###,###,###.##", new DecimalFormatSymbols(Locale.US));
+    //private DecimalFormat df2 = new DecimalFormat("###,###,###.##", new DecimalFormatSymbols(Locale.US));
     private Ribbon Obj;
     private List<Bahan> ListBahan = new ArrayList<>();
     private List<String> ListStrBahan = new ArrayList<>();
@@ -96,6 +96,11 @@ public class RibbonInputActivity extends AppCompatActivity {
             editTextHargaModal      = findViewById(R.id.editTextHargaModal);
             spinner_bahan           = findViewById(R.id.spinner_bahan);
 
+            editTextLebar.setSelectAllOnFocus(true);
+            editTextPanjang.setSelectAllOnFocus(true);
+            editTextModal.setSelectAllOnFocus(true);
+            editTextHargaModal.setSelectAllOnFocus(true);
+
             textView10Persen = findViewById(R.id.textView10Persen);
             textView15Persen = findViewById(R.id.textView15Persen);
             textView25Persen = findViewById(R.id.textView25Persen);
@@ -113,6 +118,15 @@ public class RibbonInputActivity extends AppCompatActivity {
             editTextKomisiSalesProsen    = findViewById(R.id.editTextKomisiSalesProsen);
             editTextKomisiSalesNominal   = findViewById(R.id.editTextKomisiSalesNominal);
             editTextNetProfit                    = findViewById(R.id.editTextNetProfit);
+
+            editTextCatatan.setSelectAllOnFocus(true);
+            editTextQty.setSelectAllOnFocus(true);
+            editTextJualRoll.setSelectAllOnFocus(true);
+            editTextJumlahProfitKotor.setSelectAllOnFocus(true);
+            editTextTransport.setSelectAllOnFocus(true);
+            editTextKomisiSalesProsen.setSelectAllOnFocus(true);
+            editTextKomisiSalesNominal.setSelectAllOnFocus(true);
+            editTextNetProfit.setSelectAllOnFocus(true);
 
             editTextQty.setOnFocusChangeListener(new View.OnFocusChangeListener() {
                 @Override
@@ -186,17 +200,17 @@ public class RibbonInputActivity extends AppCompatActivity {
                             Hitung();
 //                            double KomisiSalesNominal = 0.0;
                             if (ed.getText().toString().isEmpty()) {
-                                ed.setText(df2.format(0.0));
+                                ed.setText(df.format(0.0));
 //                                KomisiSalesNominal = 0.0;
 //                                editTextKomisiSalesNominal.setText(df.format(Double.valueOf(KomisiSalesNominal)));
                             } else {
-                                ed.setText(df2.format(Double.valueOf(ed.getText().toString())));
-//                                KomisiSalesNominal = df.parse(editTextJumlahProfitKotor.getText().toString()).doubleValue() * df2.parse(ed.getText().toString()).doubleValue() /100;
+                                ed.setText(df.format(Double.valueOf(ed.getText().toString())));
+//                                KomisiSalesNominal = df.parse(editTextJumlahProfitKotor.getText().toString()).longValue() * df.parse(ed.getText().toString()).longValue() /100;
 //                                editTextKomisiSalesNominal.setText(df.format(Double.valueOf(KomisiSalesNominal)));
                             }
                             Hitung();
                         } else {
-                            ed.setText(String.valueOf(df2.parse(ed.getText().toString()).doubleValue()));
+                            ed.setText(String.valueOf(df.parse(ed.getText().toString()).longValue()));
                             ed.setSelection(0, ed.getText().toString().length());
                         }
                     } catch (Exception e) {
@@ -327,13 +341,13 @@ public class RibbonInputActivity extends AppCompatActivity {
                                     Toast.LENGTH_SHORT).show();
                             isValidasi = false;
                         }
-                        if (isValidasi && df.parse(editTextLebar.getText().toString()).doubleValue() <= 0) {
+                        if (isValidasi && df.parse(editTextLebar.getText().toString()).longValue() <= 0) {
                             Toast.makeText(getApplicationContext(),
                                     "Isi Lebar (mm).",
                                     Toast.LENGTH_SHORT).show();
                             isValidasi = false;
                         }
-                        if (isValidasi && df.parse(editTextPanjang.getText().toString()).doubleValue() <= 0) {
+                        if (isValidasi && df.parse(editTextPanjang.getText().toString()).longValue() <= 0) {
                             Toast.makeText(getApplicationContext(),
                                     "Isi Panjang (M).",
                                     Toast.LENGTH_SHORT).show();
@@ -424,7 +438,7 @@ public class RibbonInputActivity extends AppCompatActivity {
         editTextQty.setText(df.format(0));
         editTextJumlahProfitKotor.setText(df.format(0));
         editTextTransport.setText(df.format(0));
-        editTextKomisiSalesProsen.setText(df2.format(0.0));
+        editTextKomisiSalesProsen.setText(df.format(0.0));
         editTextKomisiSalesNominal.setText(df.format(0));
         editTextNetProfit.setText(df.format(0));
     }
@@ -458,7 +472,7 @@ public class RibbonInputActivity extends AppCompatActivity {
             profitkotor =  (df.parse(editTextJualRoll.getText().toString()).doubleValue()-modalperroll) * df.parse(editTextQty.getText().toString()).doubleValue();
             editTextJumlahProfitKotor.setText(df.format(profitkotor));
 
-            KomisiSalesNominal = df.parse(editTextJumlahProfitKotor.getText().toString()).doubleValue() * df2.parse(editTextKomisiSalesProsen.getText().toString()).doubleValue() /100;
+            KomisiSalesNominal = df.parse(editTextJumlahProfitKotor.getText().toString()).doubleValue() * df.parse(editTextKomisiSalesProsen.getText().toString()).doubleValue() /100;
             editTextKomisiSalesNominal.setText(df.format(KomisiSalesNominal));
             netprofit = profitkotor - df.parse(editTextTransport.getText().toString()).doubleValue() - df.parse(editTextKomisiSalesNominal.getText().toString()).doubleValue();
             editTextNetProfit.setText(df.format(netprofit));
@@ -556,7 +570,7 @@ public class RibbonInputActivity extends AppCompatActivity {
                 editTextQty.setText(df.format(0));
                 editTextJumlahProfitKotor.setText(df.format(0));
                 editTextTransport.setText(df.format(0));
-                editTextKomisiSalesProsen.setText(df2.format(0.0));
+                editTextKomisiSalesProsen.setText(df.format(0.0));
                 editTextKomisiSalesNominal.setText(df.format(0));
                 editTextNetProfit.setText(df.format(0));
                 editTextCatatan.setText("");
@@ -573,7 +587,7 @@ public class RibbonInputActivity extends AppCompatActivity {
                 editTextPanjang.setText(df.format(Obj.panjang));
                 editTextModal.setText(df.format(Obj.modal));
                 editTextQty.setText(df.format(Obj.qty));
-                editTextJualRoll.setText(df2.format(Obj.jual_roll));
+                editTextJualRoll.setText(df.format(Obj.jual_roll));
                 editTextJumlahProfitKotor.setText(df.format(Obj.jumlah_profit_kotor));
                 editTextTransport.setText(df.format(Obj.transport));
                 editTextKomisiSalesProsen.setText(df.format(Obj.komisisalesprosen));

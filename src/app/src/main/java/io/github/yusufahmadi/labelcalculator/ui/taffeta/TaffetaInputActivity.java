@@ -38,7 +38,7 @@ import io.github.yusufahmadi.labelcalculator.repository.DataAccess;
 
 public class TaffetaInputActivity extends AppCompatActivity {
     private DecimalFormat df = new DecimalFormat("###,###,###", new DecimalFormatSymbols(Locale.US));
-    private DecimalFormat df2 = new DecimalFormat("###,###,###.##", new DecimalFormatSymbols(Locale.US));
+    //private DecimalFormat df2 = new DecimalFormat("###,###,###.##", new DecimalFormatSymbols(Locale.US));
     private DecimalFormat df3 = new DecimalFormat("###,###,###.###", new DecimalFormatSymbols(Locale.US));
     private Taffeta Obj;
     private List<Bahan> ListBahan = new ArrayList<>();
@@ -98,6 +98,12 @@ public class TaffetaInputActivity extends AppCompatActivity {
             editTextPanjang         = findViewById(R.id.editTextPanjang);
             editTextModal           = findViewById(R.id.editTextHargaModalPerRoll);
 
+            editTextHargaModal.setSelectAllOnFocus(true);
+            editTextKurs.setSelectAllOnFocus(true);
+            editTextLebar.setSelectAllOnFocus(true);
+            editTextPanjang.setSelectAllOnFocus(true);
+            editTextModal.setSelectAllOnFocus(true);
+
             textView30Persen = findViewById(R.id.textView30Persen);
             textView50Persen = findViewById(R.id.textView50Persen);
             textView75Persen = findViewById(R.id.textView75Persen);
@@ -112,6 +118,15 @@ public class TaffetaInputActivity extends AppCompatActivity {
             editTextKomisiSalesNominal   = findViewById(R.id.editTextKomisiSalesNominal);
             editTextNetProfit                    = findViewById(R.id.editTextNetProfit);
 
+            editTextCatatan.setSelectAllOnFocus(true);
+            editTextQty.setSelectAllOnFocus(true);
+            editTextJualRoll.setSelectAllOnFocus(true);
+            editTextJumlahProfitKotor.setSelectAllOnFocus(true);
+            editTextTransport.setSelectAllOnFocus(true);
+            editTextKomisiSalesProsen.setSelectAllOnFocus(true);
+            editTextKomisiSalesNominal.setSelectAllOnFocus(true);
+            editTextNetProfit.setSelectAllOnFocus(true);
+
             editTextKurs.setOnFocusChangeListener(new View.OnFocusChangeListener() {
                 @Override
                 public void onFocusChange(View v, boolean hasFocus) {
@@ -119,13 +134,13 @@ public class TaffetaInputActivity extends AppCompatActivity {
                         TextInputEditText ed = editTextKurs;
                         if (!hasFocus) {
                             if (ed.getText().toString().isEmpty()) {
-                                ed.setText(df2.format(0));
+                                ed.setText(df.format(0));
                             } else {
-                                ed.setText(df2.format(Double.valueOf(ed.getText().toString())));
+                                ed.setText(df.format(Double.valueOf(ed.getText().toString())));
                             }
                             Hitung();
                         } else {
-                            ed.setText(String.valueOf(df2.parse(ed.getText().toString()).doubleValue()));
+                            ed.setText(String.valueOf(df.parse(ed.getText().toString()).longValue()));
                             ed.setSelection(0, ed.getText().toString().length());
                         }
                     } catch (Exception e) {
@@ -205,17 +220,17 @@ public class TaffetaInputActivity extends AppCompatActivity {
                             Hitung();
 //                            double KomisiSalesNominal = 0.0;
                             if (ed.getText().toString().isEmpty()) {
-                                ed.setText(df2.format(0.0));
+                                ed.setText(df.format(0.0));
 //                                KomisiSalesNominal = 0.0;
 //                                editTextKomisiSalesNominal.setText(df.format(Double.valueOf(KomisiSalesNominal)));
                             } else {
-                                ed.setText(df2.format(Double.valueOf(ed.getText().toString())));
-//                                KomisiSalesNominal = df.parse(editTextJumlahProfitKotor.getText().toString()).doubleValue() * df2.parse(ed.getText().toString()).doubleValue() /100;
+                                ed.setText(df.format(Double.valueOf(ed.getText().toString())));
+//                                KomisiSalesNominal = df.parse(editTextJumlahProfitKotor.getText().toString()).longValue() * df.parse(ed.getText().toString()).longValue() /100;
 //                                editTextKomisiSalesNominal.setText(df.format(Double.valueOf(KomisiSalesNominal)));
                             }
                             Hitung();
                         } else {
-                            ed.setText(String.valueOf(df2.parse(ed.getText().toString()).doubleValue()));
+                            ed.setText(String.valueOf(df.parse(ed.getText().toString()).longValue()));
                             ed.setSelection(0, ed.getText().toString().length());
                         }
                     } catch (Exception e) {
@@ -369,7 +384,7 @@ public class TaffetaInputActivity extends AppCompatActivity {
                             Date c = Calendar.getInstance().getTime();
                             Obj.tgl             = c;
                             Obj.id_bahan = idbahan;
-                            Obj.kurs = df2.parse(editTextKurs.getText().toString()).doubleValue();
+                            Obj.kurs = df.parse(editTextKurs.getText().toString()).doubleValue();
                             Obj.harga_modal =  df3.parse(editTextHargaModal.getText().toString()).doubleValue();
                             Obj.lebar =  df.parse(editTextLebar.getText().toString()).doubleValue();
                             Obj.panjang = df.parse(editTextPanjang.getText().toString()).doubleValue();
@@ -429,7 +444,7 @@ public class TaffetaInputActivity extends AppCompatActivity {
         editTextModal.setText(df.format(0.0));
         editTextHargaModal.setText(df3.format(0.0));
         spinner_bahan.setText("");
-        editTextKurs.setText(df2.format(0.0));
+        editTextKurs.setText(df.format(0.0));
 
         textView30Persen.setText(df.format(0));
         textView50Persen.setText(df.format(0));
@@ -441,7 +456,7 @@ public class TaffetaInputActivity extends AppCompatActivity {
         editTextQty.setText(df.format(0));
         editTextJumlahProfitKotor.setText(df.format(0));
         editTextTransport.setText(df.format(0));
-        editTextKomisiSalesProsen.setText(df2.format(0.0));
+        editTextKomisiSalesProsen.setText(df.format(0.0));
         editTextKomisiSalesNominal.setText(df.format(0));
         editTextNetProfit.setText(df.format(0));
     }
@@ -459,8 +474,8 @@ public class TaffetaInputActivity extends AppCompatActivity {
         double modalperroll = 0.0, profitkotor= 0.0, netprofit = 0.0,KomisiSalesNominal=0.0;
         try {
             //HargaModal*Kurs*Lebar
-            modalperroll = df3.parse(editTextHargaModal.getText().toString()).doubleValue()  * df2.parse(editTextKurs.getText().toString()).doubleValue()
-                                    * df2.parse(editTextLebar.getText().toString()).doubleValue();
+            modalperroll = df3.parse(editTextHargaModal.getText().toString()).doubleValue()  * df.parse(editTextKurs.getText().toString()).doubleValue()
+                                    * df.parse(editTextLebar.getText().toString()).doubleValue();
             editTextModal.setText(df.format(modalperroll));
 
             textView30Persen.setText(df.format(modalperroll*1.30));
@@ -471,7 +486,7 @@ public class TaffetaInputActivity extends AppCompatActivity {
             profitkotor =  (df.parse(editTextJualRoll.getText().toString()).doubleValue()-modalperroll) * df.parse(editTextQty.getText().toString()).doubleValue();
             editTextJumlahProfitKotor.setText(df.format(profitkotor));
 
-            KomisiSalesNominal = df.parse(editTextJumlahProfitKotor.getText().toString()).doubleValue() * df2.parse(editTextKomisiSalesProsen.getText().toString()).doubleValue() /100;
+            KomisiSalesNominal = df.parse(editTextJumlahProfitKotor.getText().toString()).doubleValue() * df.parse(editTextKomisiSalesProsen.getText().toString()).doubleValue() /100;
             editTextKomisiSalesNominal.setText(df.format(KomisiSalesNominal));
             netprofit = profitkotor - df.parse(editTextTransport.getText().toString()).doubleValue() - df.parse(editTextKomisiSalesNominal.getText().toString()).doubleValue();
             editTextNetProfit.setText(df.format(netprofit));
@@ -550,7 +565,7 @@ public class TaffetaInputActivity extends AppCompatActivity {
                 spinner_bahan.setText("");
                 idbahan = -1;
                 spinner_bahan.setText("");
-                editTextKurs.setText(df2.format(0.0));
+                editTextKurs.setText(df.format(0.0));
                 editTextHargaModal.setText(df3.format(0.0));
                 editTextHargaModal.setText(df.format(0.0));
                 editTextLebar.setText(df.format(0.0));
@@ -567,7 +582,7 @@ public class TaffetaInputActivity extends AppCompatActivity {
                 editTextQty.setText(df.format(0));
                 editTextJumlahProfitKotor.setText(df.format(0));
                 editTextTransport.setText(df.format(0));
-                editTextKomisiSalesProsen.setText(df2.format(0.0));
+                editTextKomisiSalesProsen.setText(df.format(0.0));
                 editTextKomisiSalesNominal.setText(df.format(0));
                 editTextNetProfit.setText(df.format(0));
                 editTextCatatan.setText("");
@@ -580,12 +595,12 @@ public class TaffetaInputActivity extends AppCompatActivity {
                     }
                 }
                 editTextHargaModal.setText(df3.format(Obj.harga_modal));
-                editTextKurs.setText(df2.format(Obj.kurs));
+                editTextKurs.setText(df.format(Obj.kurs));
                 editTextLebar.setText(df.format(Obj.lebar));
                 editTextPanjang.setText(df.format(Obj.panjang));
                 editTextModal.setText(df.format(Obj.modal));
                 editTextQty.setText(df.format(Obj.qty));
-                editTextJualRoll.setText(df2.format(Obj.jual_roll));
+                editTextJualRoll.setText(df.format(Obj.jual_roll));
                 editTextJumlahProfitKotor.setText(df.format(Obj.jumlah_profit_kotor));
                 editTextTransport.setText(df.format(Obj.transport));
                 editTextKomisiSalesProsen.setText(df.format(Obj.komisisalesprosen));

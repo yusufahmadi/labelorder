@@ -51,7 +51,7 @@
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"/>
 
             <TextView
-                android:id="@+id/tvHargaBahan"
+                android:id="@+id/tvNetProfit"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.5"

@@ -110,7 +110,7 @@ public class LabelRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.View
                     holder.Tanggal.setText(dt3.format(m.tgl));
                 }
                 holder.Bahan.setText(m.bahan);
-                holder.HargaBahan.setText("Rp. " + df.format(m.harga_modal));
+                holder.NetProfit.setText("Rp. " + df.format(m.net_profit_sesuai_order()));
                 holder.Lebar.setText(df.format(m.lebar));
                 holder.Tinggi.setText(df.format(m.tinggi));
                 holder.Gap.setText(df.format(m.gap));
@@ -129,14 +129,14 @@ public class LabelRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.View
 
     public static class OriginalViewHolder extends RecyclerView.ViewHolder {
         // Layouting item
-        public TextView Document, Tanggal, Bahan, HargaBahan, Tinggi, Lebar, Gap;
+        public TextView Document, Tanggal, Bahan, NetProfit, Tinggi, Lebar, Gap;
 
         public OriginalViewHolder(@NonNull View v) {
             super(v);
             Document    = v.findViewById(R.id.tvDocument);
             Tanggal     = v.findViewById(R.id.tvTgl);
             Bahan       = v.findViewById(R.id.tvBahan);
-            HargaBahan  = v.findViewById(R.id.tvHargaBahan);
+            NetProfit   = v.findViewById(R.id.tvNetProfit);
             Tinggi      = v.findViewById(R.id.tvTinggi);
             Lebar       = v.findViewById(R.id.tvLebar);
             Gap         = v.findViewById(R.id.tvGap);

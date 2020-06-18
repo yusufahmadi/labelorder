@@ -51,7 +51,7 @@
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"/>
 
             <TextView
-                android:id="@+id/tvHargaBahan"
+                android:id="@+id/tvNetProfit"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.5"
@@ -79,6 +79,13 @@
                 android:layout_weight="0.5"
                 android:text="Panjang (meter)"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:text="Harga Bahan (Rp)"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Caption" />
         </androidx.appcompat.widget.LinearLayoutCompat>
 
         <androidx.appcompat.widget.LinearLayoutCompat
@@ -96,6 +103,14 @@
 
             <TextView
                 android:id="@+id/tvPanjang"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:text="0.0"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"/>
+
+            <TextView
+                android:id="@+id/tvHargaBahan"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.5"

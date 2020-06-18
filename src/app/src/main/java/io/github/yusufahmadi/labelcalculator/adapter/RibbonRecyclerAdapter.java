@@ -74,7 +74,7 @@ public class RibbonRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.Vie
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         RecyclerView.ViewHolder vh;
         if(viewType == VIEW_ITEM){
-            View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.listviewribbon, parent, false);
+            View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.listview_ribbon, parent, false);
             vh = new RibbonRecyclerAdapter.OriginalViewHolder(v);
         } else {
             View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_loading, parent, false);
@@ -110,10 +110,10 @@ public class RibbonRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.Vie
                     holder.Tanggal.setText(dt3.format(m.tgl));
                 }
                 holder.Bahan.setText(m.bahan);
-                holder.HargaBahan.setText("Rp. " + df.format(m.harga_modal));
+                holder.HargaBahan.setText(df.format(m.harga_modal));
                 holder.Lebar.setText(df.format(m.lebar));
                 holder.Panjang.setText(df.format(m.panjang));
-                holder.Modal.setText(df.format(m.modal));
+                holder.NetProfit.setText("Rp. " + df.format(m.netprofit));
             } catch (Exception ex) {
                 Toast.makeText(context, "Error : " + ex.getMessage(), Toast.LENGTH_SHORT).show();
             }
@@ -129,7 +129,7 @@ public class RibbonRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 
     public static class OriginalViewHolder extends RecyclerView.ViewHolder {
         // Layouting item
-        public TextView Document, Tanggal, Bahan, HargaBahan, Panjang, Lebar, Modal;
+        public TextView Document, Tanggal, Bahan, HargaBahan, Panjang, Lebar, NetProfit;
 
         public OriginalViewHolder(@NonNull View v) {
             super(v);
@@ -137,9 +137,9 @@ public class RibbonRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.Vie
             Tanggal     = v.findViewById(R.id.tvTgl);
             Bahan       = v.findViewById(R.id.tvBahan);
             HargaBahan  = v.findViewById(R.id.tvHargaBahan);
-            Panjang      = v.findViewById(R.id.tvPanjangi);
+            Panjang     = v.findViewById(R.id.tvPanjang);
             Lebar       = v.findViewById(R.id.tvLebar);
-            Modal         = v.findViewById(R.id.tvModal);
+            NetProfit   = v.findViewById(R.id.tvNetProfit);
         }
     }
 
