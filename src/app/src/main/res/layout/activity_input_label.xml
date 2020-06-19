@@ -268,7 +268,7 @@
                                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
-                                android:layout_marginStart="@dimen/keyline_1"
+                                android:layout_marginEnd="@dimen/keyline_1"
                                 android:layout_weight="0.5"
                                 android:hint="Qty Order (Pcs)">
 
@@ -285,7 +285,7 @@
                                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
-                                android:layout_marginEnd="@dimen/keyline_1"
+                                android:layout_marginStart="@dimen/keyline_1"
                                 android:layout_weight="0.5"
                                 android:hint="Pembulatan (Roll)">
 

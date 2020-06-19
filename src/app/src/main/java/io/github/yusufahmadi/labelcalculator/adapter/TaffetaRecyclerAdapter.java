@@ -33,8 +33,8 @@ public class TaffetaRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 
     public static List<Taffeta> items = new ArrayList<>();
     private DecimalFormat df    = new DecimalFormat("###,###,###", new DecimalFormatSymbols(Locale.US));
-    private DecimalFormat df2    = new DecimalFormat("###,###,###.##", new DecimalFormatSymbols(Locale.US));
-    private DecimalFormat df3    = new DecimalFormat("###,###,###.###", new DecimalFormatSymbols(Locale.US));
+//    private DecimalFormat df2    = new DecimalFormat("###,###,###.##", new DecimalFormatSymbols(Locale.US));
+//    private DecimalFormat df3    = new DecimalFormat("###,###,###.###", new DecimalFormatSymbols(Locale.US));
     private SimpleDateFormat dt = new SimpleDateFormat("yyyy-MM-dd", new DateFormatSymbols(Locale.US));
     private Context context;
     private TaffetaRecyclerAdapter.OnLoadMoreListener onLoadMoreListener;
@@ -112,11 +112,10 @@ public class TaffetaRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.Vi
                     holder.Tanggal.setText(dt3.format(m.tgl));
                 }
                 holder.Bahan.setText(m.bahan);
-                holder.Kurs.setText(df2.format(m.kurs));
-                holder.HargaBahan.setText(df3.format(m.harga_modal));
+                holder.Kurs.setText(df.format(m.kurs));
                 holder.Lebar.setText(df.format(m.lebar));
                 holder.Panjang.setText(df.format(m.panjang));
-                holder.Modal.setText(df.format(m.modal));
+                holder.NetProfit.setText("Rp. " + df.format(m.netprofit));
             } catch (Exception ex) {
                 Toast.makeText(context, "Error : " + ex.getMessage(), Toast.LENGTH_SHORT).show();
             }
@@ -132,7 +131,7 @@ public class TaffetaRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 
     public static class OriginalViewHolder extends RecyclerView.ViewHolder {
         // Layouting item
-        public TextView Document, Tanggal, Kurs, Bahan, HargaBahan, Panjang, Lebar, Modal;
+        public TextView Document, Tanggal, Kurs, Bahan, Panjang, Lebar, NetProfit;
 
         public OriginalViewHolder(@NonNull View v) {
             super(v);
@@ -140,10 +139,9 @@ public class TaffetaRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.Vi
             Tanggal     = v.findViewById(R.id.tvTgl);
             Bahan       = v.findViewById(R.id.tvBahan);
             Kurs            = v.findViewById(R.id.tvKurs);
-            HargaBahan  = v.findViewById(R.id.tvHargaBahan);
-            Panjang      = v.findViewById(R.id.tvPanjangi);
+            Panjang      = v.findViewById(R.id.tvPanjang);
             Lebar       = v.findViewById(R.id.tvLebar);
-            Modal         = v.findViewById(R.id.tvModal);
+            NetProfit       = v.findViewById(R.id.tvNetProfit);
         }
     }
 

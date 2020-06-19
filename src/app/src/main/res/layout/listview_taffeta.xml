@@ -51,19 +51,11 @@
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"/>
 
             <TextView
-                android:id="@+id/tvHargaBahan"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.4"
-                android:text="0.0"
-                android:textAlignment="textEnd"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"/>
-            <TextView
-                android:id="@+id/tvKurs"
+                android:id="@+id/tvNetProfit"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.5"
-                android:text="0.0"
+                android:text="Rp. 0.0"
                 android:textAlignment="textEnd"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"/>
         </androidx.appcompat.widget.LinearLayoutCompat>
@@ -92,7 +84,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.5"
-                android:text="Modal"
+                android:text="Kurs ($)"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"/>
         </androidx.appcompat.widget.LinearLayoutCompat>
 
@@ -110,7 +102,7 @@
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"/>
 
             <TextView
-                android:id="@+id/tvPanjangi"
+                android:id="@+id/tvPanjang"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.5"
@@ -118,7 +110,7 @@
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"/>
 
             <TextView
-                android:id="@+id/tvModal"
+                android:id="@+id/tvKurs"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.5"

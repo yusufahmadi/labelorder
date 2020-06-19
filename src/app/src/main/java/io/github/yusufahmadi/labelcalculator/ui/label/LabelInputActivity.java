@@ -108,14 +108,29 @@ public class LabelInputActivity extends AppCompatActivity {
             editTextGap             = findViewById(R.id.editTextGap);
             editTextPisau           = findViewById(R.id.editTextPisau);
 
+            editTextHargaModal.setSelectAllOnFocus(true);
+            editTextLebar.setSelectAllOnFocus(true);
+            editTextTinggi.setSelectAllOnFocus(true);
+            editTextGap.setSelectAllOnFocus(true);
+            editTextPisau.setSelectAllOnFocus(true);
+
             editTextLebarBahanBelanja   = findViewById(R.id.editTextLebarBahanBelanja);
             editText1RollPcs            = findViewById(R.id.editText1RollPcs);
+
+            editTextLebarBahanBelanja.setSelectAllOnFocus(true);
+            editText1RollPcs.setSelectAllOnFocus(true);
 
             editTextSaranOrderPcs   = findViewById(R.id.editTextSaranOrderPcs);
             editTextQtyOrderPcs     = findViewById(R.id.editTextQtyOrderPcs);
 
+            editTextSaranOrderPcs.setSelectAllOnFocus(true);
+            editTextQtyOrderPcs.setSelectAllOnFocus(true);
+
             editTextPembulatanRoll  = findViewById(R.id.editTextPembulatanRoll);
             editTextKebutuhanRoll   = findViewById(R.id.editTextKebutuhanRoll);
+
+            editTextPembulatanRoll.setSelectAllOnFocus(true);
+            editTextKebutuhanRoll.setSelectAllOnFocus(true);
 
             editTextBiayaPisau      = findViewById(R.id.editTextBiayaPisau);
             editTextBiayaTinta      = findViewById(R.id.editTextBiayaTinta);
@@ -123,6 +138,13 @@ public class LabelInputActivity extends AppCompatActivity {
             editTextBiayaOperator   = findViewById(R.id.editTextBiayaOperator);
             editTextBiayaKirim      = findViewById(R.id.editTextBiayaKirim);
             editTextBiayaTotal      = findViewById(R.id.editTextBiayaTotal);
+
+            editTextBiayaPisau.setSelectAllOnFocus(true);
+            editTextBiayaTinta.setSelectAllOnFocus(true);
+            editTextBiayaToyobo.setSelectAllOnFocus(true);
+            editTextBiayaOperator.setSelectAllOnFocus(true);
+            editTextBiayaKirim.setSelectAllOnFocus(true);
+            editTextBiayaTotal.setSelectAllOnFocus(true);
 
             textView30Persen        = findViewById(R.id.textView30Persen);
             textView50Persen        = findViewById(R.id.textView50Persen);
@@ -135,12 +157,21 @@ public class LabelInputActivity extends AppCompatActivity {
 
             editTextCatatan         = findViewById(R.id.editTextCatatan);
 
+            editTextCatatan.setSelectAllOnFocus(true);
+
             editTextModalBahanUtuh  = findViewById(R.id.editTextModalBahanUtuh);
             editTextModalPerPcs     = findViewById(R.id.editTextModalPerPcs);
             editTextJualSesuaiOrder = findViewById(R.id.editTextJualSesuaiOrder);
             editTextProfit1         = findViewById(R.id.editTextProfit1);
             editTextJualSesuaiSaran = findViewById(R.id.editTextJualSesuaiSaran);
             editTextProfit2         = findViewById(R.id.editTextProfit2);
+
+            editTextModalBahanUtuh.setSelectAllOnFocus(true);
+            editTextModalPerPcs.setSelectAllOnFocus(true);
+            editTextJualSesuaiOrder.setSelectAllOnFocus(true);
+            editTextProfit1.setSelectAllOnFocus(true);
+            editTextJualSesuaiSaran.setSelectAllOnFocus(true);
+            editTextProfit2.setSelectAllOnFocus(true);
 
             spinner_bahan.setAdapter(arrayAdapter);
             spinner_bahan.setOnClickListener(new View.OnClickListener() {
@@ -175,13 +206,13 @@ public class LabelInputActivity extends AppCompatActivity {
                         TextInputEditText ed = editTextLebar;
                         if (!hasFocus) {
                             if (ed.getText().toString().isEmpty()) {
-                                ed.setText(df2.format(0.0));
+                                ed.setText(df.format(0.0));
                             } else {
-                                ed.setText(df2.format(Double.valueOf(ed.getText().toString())));
+                                ed.setText(df.format(Double.valueOf(ed.getText().toString())));
                             }
                             Hitung();
                         } else {
-                            ed.setText(String.valueOf(df2.parse(ed.getText().toString()).doubleValue()));
+                            ed.setText(String.valueOf(df.parse(ed.getText().toString()).longValue()));
                             ed.setSelection(0, ed.getText().toString().length());
                         }
                     } catch (Exception e) {
@@ -196,13 +227,13 @@ public class LabelInputActivity extends AppCompatActivity {
                         TextInputEditText ed = editTextTinggi;
                         if (!hasFocus) {
                             if (ed.getText().toString().isEmpty()) {
-                                ed.setText(df2.format(0.0));
+                                ed.setText(df.format(0.0));
                             } else {
-                                ed.setText(df2.format(Double.valueOf(ed.getText().toString())));
+                                ed.setText(df.format(Double.valueOf(ed.getText().toString())));
                             }
                             Hitung();
                         } else {
-                            ed.setText(String.valueOf(df2.parse(ed.getText().toString()).doubleValue()));
+                            ed.setText(String.valueOf(df.parse(ed.getText().toString()).longValue()));
                             ed.setSelection(0, ed.getText().toString().length());
                         }
                     } catch (Exception e) {
@@ -217,13 +248,13 @@ public class LabelInputActivity extends AppCompatActivity {
                         TextInputEditText ed = editTextGap;
                         if (!hasFocus) {
                             if (ed.getText().toString().isEmpty()) {
-                                ed.setText(df2.format(0.0));
+                                ed.setText(df.format(0.0));
                             } else {
-                                ed.setText(df2.format(Double.valueOf(ed.getText().toString())));
+                                ed.setText(df.format(Double.valueOf(ed.getText().toString())));
                             }
                             Hitung();
                         } else {
-                            ed.setText(String.valueOf(df2.parse(ed.getText().toString()).doubleValue()));
+                            ed.setText(String.valueOf(df.parse(ed.getText().toString()).longValue()));
                             ed.setSelection(0, ed.getText().toString().length());
                         }
                     } catch (Exception e) {
@@ -239,13 +270,13 @@ public class LabelInputActivity extends AppCompatActivity {
                         TextInputEditText ed = editTextPisau;
                         if (!hasFocus) {
                             if (ed.getText().toString().isEmpty()) {
-                                ed.setText(df2.format(0.0));
+                                ed.setText(df.format(0.0));
                             } else {
-                                ed.setText(df2.format(Double.valueOf(ed.getText().toString())));
+                                ed.setText(df.format(Double.valueOf(ed.getText().toString())));
                             }
                             Hitung();
                         } else {
-                            ed.setText(String.valueOf(df2.parse(ed.getText().toString()).doubleValue()));
+                            ed.setText(String.valueOf(df.parse(ed.getText().toString()).longValue()));
                             ed.setSelection(0, ed.getText().toString().length());
                         }
                     } catch (Exception e) {
@@ -452,13 +483,13 @@ public class LabelInputActivity extends AppCompatActivity {
                         TextInputEditText ed = editTextJualSesuaiOrder;
                         if (!hasFocus) {
                             if (ed.getText().toString().isEmpty()) {
-                                ed.setText(df2.format(0.0));
+                                ed.setText(df.format(0.0));
                             } else {
-                                ed.setText(df2.format(Double.valueOf(ed.getText().toString())));
+                                ed.setText(df.format(Double.valueOf(ed.getText().toString())));
                             }
                             Hitung();
                         } else {
-                            ed.setText(String.valueOf(df2.parse(ed.getText().toString()).doubleValue()));
+                            ed.setText(String.valueOf(df.parse(ed.getText().toString()).longValue()));
                             ed.setSelection(0, ed.getText().toString().length());
                         }
                     } catch (Exception e) {

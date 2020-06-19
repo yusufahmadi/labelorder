@@ -60,4 +60,20 @@ public class Label implements Serializable {
     public double getBiaya_total() {
         return biaya_pisau + biaya_tinta + biaya_toyobo + biaya_operator + biaya_kirim;
     }
+
+    public double net_profit_sesuai_order() {
+        double modal_bahan_utuh=0.0, modal_per_pcs=0.0, lebar_bahan_belanjanya = 0.0;
+        lebar_bahan_belanjanya = (lebar*pisau) + 8 + ((pisau-1)*gap);
+        modal_bahan_utuh = (harga_modal*lebar_bahan_belanjanya)*pembulatan;
+        modal_per_pcs = qty_order==0 ? 1 : modal_bahan_utuh / qty_order;
+        return ((jual_sesuai_order-modal_per_pcs)*qty_order)-getBiaya_total();
+    }
+
+    public double net_profit_sesuai_saran() {
+        double modal_bahan_utuh=0.0, modal_per_pcs=0.0, lebar_bahan_belanjanya = 0.0;
+        lebar_bahan_belanjanya = (lebar*pisau) + 8 + ((pisau-1)*gap);
+        modal_bahan_utuh = (harga_modal*lebar_bahan_belanjanya)*pembulatan;
+        modal_per_pcs = qty_order==0 ? 1 : modal_bahan_utuh / qty_order;
+        return ((jual_sesuai_order-modal_per_pcs)*qty_order)-getBiaya_total();
+    }
 }
