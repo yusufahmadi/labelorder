@@ -16,6 +16,7 @@ import java.util.Locale;
 import io.github.yusufahmadi.labelcalculator.helper.DataHelper;
 import io.github.yusufahmadi.labelcalculator.model.Bahan;
 import io.github.yusufahmadi.labelcalculator.model.Label;
+import io.github.yusufahmadi.labelcalculator.model.Paket;
 import io.github.yusufahmadi.labelcalculator.model.Ribbon;
 import io.github.yusufahmadi.labelcalculator.model.Taffeta;
 
@@ -814,6 +815,152 @@ public class DataAccess {
         } catch (Exception e) {
             e.printStackTrace();
             Log.e("saveTaffeta", e.getMessage(), e);
+            hasil = false;
+        } finally {
+            if (db.isOpen()) {
+                db.close();
+            }
+            dbcenter.close();
+        }
+        return hasil;
+    }
+
+    //Transaksi Paket
+    public static List<Paket> getListPaket(Context ctx, String Filter, int page, int limit) {
+        DataHelper dbcenter = new DataHelper(ctx);
+        SQLiteDatabase db = dbcenter.getReadableDatabase();
+        List<Paket> iList = new ArrayList<>();
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", new DateFormatSymbols(Locale.US));
+        try {
+            String selectQuery = "SELECT paket.* FROM paket ";
+            if (!Filter.isEmpty()) {
+                selectQuery = selectQuery + " WHERE " +
+                        " paket.dokumen like '%"+ Filter.replace("'", "''") +"%'";
+            }
+            selectQuery = selectQuery + " ORDER BY paket.tgl desc, paket.dokumen desc";
+
+            if (page>=1 && limit>=1) {
+                selectQuery = selectQuery + " LIMIT " + String.valueOf((page-1)*limit) + ", " + String.valueOf(limit);
+            }
+            Cursor cursor = db.rawQuery(selectQuery, null);
+
+            cursor.moveToFirst();
+            for (int cc=0; cc < cursor.getCount(); cc++) {
+                cursor.moveToPosition(cc);
+
+                Paket obj = new Paket();
+                obj.no       = cursor.getInt(0);
+                obj.dokumen  = cursor.getString(1);
+                obj.tgl      = df.parse(cursor.getString(2));
+                obj.customer_minta_bikin_jadinya_line	= cursor.getInt(3);
+                obj.qty_order_customer_pcs     			    = cursor.getDouble(4);
+                obj.isi_roll           					    = cursor.getInt(5);
+                obj.lebar          						= cursor.getDouble(6);
+                obj.tinggi             					= cursor.getDouble(7);
+                obj.pisau_yang_digunakan     = cursor.getDouble(8);
+                obj.dibulatkan      					= cursor.getDouble(9);
+                obj.lebar_ribbon       				= cursor.getDouble(10);
+                obj.panjang_ribbon 				= cursor.getDouble(11);
+
+                iList.add(obj);
+            }
+            cursor.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+
+            Log.e("getListPaket", e.getMessage(), e);
+            iList.clear();
+        } finally {
+            if (db.isOpen()) {
+                db.close();
+            }
+            dbcenter.close();
+        }
+        return iList;
+    }
+
+
+    public static boolean cekValidasiPaket(Context ctx, String Dokumen, int PK) {
+        DataHelper dbcenter = new DataHelper(ctx);
+        SQLiteDatabase db = dbcenter.getReadableDatabase();
+        boolean hasil = false;
+        try {
+            String selectQuery = "SELECT * FROM paket WHERE dokumen='"+ Dokumen.replace("'", "''") +"' AND [no]<>" + PK;
+            Cursor cursor = db.rawQuery(selectQuery, null);
+
+            if (cursor.getCount()>=1) {
+                hasil = false;
+            } else {
+                hasil = true;
+            }
+            cursor.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+            Log.e("cekValidasiPaket", e.getMessage(), e);
+            hasil = false;
+        } finally {
+            if (db.isOpen()) {
+                db.close();
+            }
+            dbcenter.close();
+        }
+        return hasil;
+    }
+
+    public static boolean savePaket(Context ctx, Paket obj) {
+        DataHelper dbcenter = new DataHelper(ctx);
+        SQLiteDatabase db = dbcenter.getWritableDatabase();
+        boolean hasil = false;
+        String SQL = "";
+        try {
+            if (obj.no>=1) {
+                SQL = "UPDATE paket SET " +
+                        "dokumen='"+ obj.dokumen.replace("'", "''") +"', " +
+                        "tgl='"+ dt.format(obj.tgl).replace("'", "''") +"', " +
+                        "customer_minta_bikin_jadinya_line =" + String.valueOf(obj.customer_minta_bikin_jadinya_line).replace(",", ".") + "," +
+                        "qty_order_customer_pcs=" + String.valueOf(obj.qty_order_customer_pcs).replace(",", ".") + "," +
+                        "isi_roll =" + String.valueOf(obj.isi_roll).replace(",", ".") + "," +
+                        "lebar =" + String.valueOf(obj.lebar).replace(",", ".") + "," +
+                        "tinggi =" + String.valueOf(obj.tinggi).replace(",", ".") + "," +
+                        "pisau_yang_digunakan =" + String.valueOf(obj.pisau_yang_digunakan).replace(",", ".") + "," +
+                        "dibulatkan =" + String.valueOf(obj.dibulatkan).replace(",", ".") + "," +
+                        "lebar_ribbon =" + String.valueOf(obj.lebar_ribbon).replace(",", ".") + "," +
+                        "panjang_ribbon =" + String.valueOf(obj.panjang_ribbon).replace(",", ".") + " " +
+                        " WHERE [no]=" + obj.no;
+            } else {
+                SQL = "SELECT max([no]) as nomax FROM paket";
+                Cursor cursor = db.rawQuery(SQL, null);
+                if (cursor != null) {
+                    if (cursor.getCount()>=1) {
+                        //error pas kosong belum ada data
+                        cursor.moveToFirst();
+                        obj.no = cursor.getInt(0) + 1;
+                    } else {
+                        obj.no = 1;
+                    }
+                } else {
+                    obj.no = 1;
+                }
+                cursor.close();
+                SQL = "INSERT INTO paket ([no],dokumen,tgl,customer_minta_bikin_jadinya_line,qty_order_customer_pcs,isi_roll,lebar,tinggi,pisau_yang_digunakan,dibulatkan,lebar_ribbon,panjang_ribbon) values ("+ obj.no +", " +
+
+                        "'"+ obj.dokumen.replace("'", "''") +"', " +
+                        "'"+ dt.format(obj.tgl).replace("'", "''") +"', " +
+                        String.valueOf(obj.customer_minta_bikin_jadinya_line).replace(",", ".") + "," +
+                        String.valueOf(obj.qty_order_customer_pcs).replace(",", ".") + "," +
+                        String.valueOf(obj.isi_roll).replace(",", ".") + "," +
+                        String.valueOf(obj.lebar).replace(",", ".") + "," +
+                        String.valueOf(obj.tinggi).replace(",", ".") + "," +
+                        String.valueOf(obj.pisau_yang_digunakan).replace(",", ".") + "," +
+                        String.valueOf(obj.dibulatkan).replace(",", ".") + "," +
+                        String.valueOf(obj.lebar_ribbon).replace(",", ".") + "," +
+                        String.valueOf(obj.panjang_ribbon).replace(",", ".") + ")";
+            }
+            db.execSQL(SQL);
+            hasil = true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            Log.e("savePaket", e.getMessage(), e);
             hasil = false;
         } finally {
             if (db.isOpen()) {

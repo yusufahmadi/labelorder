@@ -11,7 +11,7 @@ import io.github.yusufahmadi.labelcalculator.model.Bahan;
 
 public class DataHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "labelcalculator.db";
-    private static final int DATABASE_VERSION = 7;
+    private static final int DATABASE_VERSION = 8;
     public DataHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
         // TODO Auto-generated constructor stub
@@ -31,6 +31,7 @@ public class DataHelper extends SQLiteOpenHelper {
         dbUpgrade5(db);
         dbUpgrade6(db);
         dbUpgrade7(db);
+        dbUpgrade8(db);
     }
 
     @Override
@@ -59,6 +60,9 @@ public class DataHelper extends SQLiteOpenHelper {
 
         if (oldVersion<7) {
             dbUpgrade7(db);
+        }
+        if (oldVersion<8) {
+            dbUpgrade8(db);
         }
     }
 
@@ -179,6 +183,31 @@ public class DataHelper extends SQLiteOpenHelper {
                 "komisisalesprosen real," +
                 "netprofit real," +
                 "kurs real);";
+        db.execSQL(sql);
+    }
+
+    private void dbUpgrade8(SQLiteDatabase db) {
+        Log.d("On Upgrade", "DB Struktur 7");
+        String sql;
+        sql = "create table paket([no] integer primary key, " +
+                "dokumen text, " +
+                "tgl datetime default current_timestamp," +
+                "customer_minta_bikin_jadinya_line real," +
+                "qty_order_customer_pcs real," +
+                "isi_roll real," +
+//                "xtotal_jadi_roll  real," +
+                "lebar real," +
+                "tinggi real," +
+                "pisau_yang_digunakan real," +
+//                "xlebar_bahan  real," +
+//                "x1roll_jadiny_pcs real," +
+//                "xjadi_belanja_bahan_baku_label_dalam_Roll real," +
+                "dibulatkan real," +
+                "lebar_ribbon real," +
+                "panjang_ribbon real " +
+//                ", x1roll_ribbon_bisa_cetak_pcs real," +
+//                "xmaka_kebutuhan_ribbonnya real" +
+                ");";
         db.execSQL(sql);
     }
 }
