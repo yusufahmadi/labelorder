@@ -110,7 +110,22 @@ public class PaketInputActivity extends AppCompatActivity {
             editTextxmaka_kebutuhan_ribbonnya   = findViewById(R.id.editTextxmaka_kebutuhan_ribbonnya);
             editTextCatatan         = findViewById(R.id.editTextCatatan);
 
-
+            editTextcustomer_minta_bikin_jadinya_line.setSelectAllOnFocus(true);
+            editTextqty_order_customer_pcs.setSelectAllOnFocus(true);
+            editTextisi_roll.setSelectAllOnFocus(true);
+            editTextxtotal_jadi_roll.setSelectAllOnFocus(true);
+            editTextlebar.setSelectAllOnFocus(true);
+            editTexttinggi.setSelectAllOnFocus(true);
+            editTextpisau_yang_digunakan.setSelectAllOnFocus(true);
+            editTextxlebar_bahan.setSelectAllOnFocus(true);
+            editTextx1roll_jadiny_pcs.setSelectAllOnFocus(true);
+            editTextxjadi_belanja_bahan_baku_label_dalam_Roll.setSelectAllOnFocus(true);
+            editTextdibulatkan.setSelectAllOnFocus(true);
+            editTextlebar_ribbon.setSelectAllOnFocus(true);
+            editTextpanjang_ribbon.setSelectAllOnFocus(true);
+            editTextx1roll_ribbon_bisa_cetak_pcs.setSelectAllOnFocus(true);
+            editTextxmaka_kebutuhan_ribbonnya.setSelectAllOnFocus(true);
+            editTextCatatan.setSelectAllOnFocus(true);
 
             editTextcustomer_minta_bikin_jadinya_line.setOnFocusChangeListener(new View.OnFocusChangeListener() {
                 @Override
@@ -140,13 +155,13 @@ public class PaketInputActivity extends AppCompatActivity {
                         TextInputEditText ed = editTextqty_order_customer_pcs;
                         if (!hasFocus) {
                             if (ed.getText().toString().isEmpty()) {
-                                ed.setText(df2.format(0.0));
+                                ed.setText(df.format(0.0));
                             } else {
-                                ed.setText(df2.format(Double.valueOf(ed.getText().toString())));
+                                ed.setText(df.format(Double.valueOf(ed.getText().toString())));
                             }
                             Hitung();
                         } else {
-                            ed.setText(String.valueOf(df2.parse(ed.getText().toString()).doubleValue()));
+                            ed.setText(String.valueOf(df.parse(ed.getText().toString()).longValue()));
                             ed.setSelection(0, ed.getText().toString().length());
                         }
                     } catch (Exception e) {
@@ -169,7 +184,7 @@ public class PaketInputActivity extends AppCompatActivity {
                             }
                             Hitung();
                         } else {
-                            ed.setText(String.valueOf(df.parse(ed.getText().toString()).doubleValue()));
+                            ed.setText(String.valueOf(df.parse(ed.getText().toString()).longValue()));
                             ed.setSelection(0, ed.getText().toString().length());
                         }
                     } catch (Exception e) {
@@ -185,13 +200,13 @@ public class PaketInputActivity extends AppCompatActivity {
                         TextInputEditText ed = editTextlebar;
                         if (!hasFocus) {
                             if (ed.getText().toString().isEmpty()) {
-                                ed.setText(df2.format(0.0));
+                                ed.setText(df.format(0.0));
                             } else {
-                                ed.setText(df2.format(Double.valueOf(ed.getText().toString())));
+                                ed.setText(df.format(Double.valueOf(ed.getText().toString())));
                             }
                             Hitung();
                         } else {
-                            ed.setText(String.valueOf(df2.parse(ed.getText().toString()).doubleValue()));
+                            ed.setText(String.valueOf(df.parse(ed.getText().toString()).longValue()));
                             ed.setSelection(0, ed.getText().toString().length());
                         }
                     } catch (Exception e) {
@@ -207,13 +222,13 @@ public class PaketInputActivity extends AppCompatActivity {
                         TextInputEditText ed = editTexttinggi;
                         if (!hasFocus) {
                             if (ed.getText().toString().isEmpty()) {
-                                ed.setText(df2.format(0.0));
+                                ed.setText(df.format(0.0));
                             } else {
-                                ed.setText(df2.format(Double.valueOf(ed.getText().toString())));
+                                ed.setText(df.format(Double.valueOf(ed.getText().toString())));
                             }
                             Hitung();
                         } else {
-                            ed.setText(String.valueOf(df.parse(ed.getText().toString()).doubleValue()));
+                            ed.setText(String.valueOf(df.parse(ed.getText().toString()).longValue()));
                             ed.setSelection(0, ed.getText().toString().length());
                         }
                     } catch (Exception e) {
@@ -270,13 +285,13 @@ public class PaketInputActivity extends AppCompatActivity {
                         TextInputEditText ed = editTextlebar_ribbon;
                         if (!hasFocus) {
                             if (ed.getText().toString().isEmpty()) {
-                                ed.setText(df2.format(0));
+                                ed.setText(df.format(0));
                             } else {
-                                ed.setText(df2.format(Double.valueOf(ed.getText().toString())));
+                                ed.setText(df.format(Double.valueOf(ed.getText().toString())));
                             }
                             Hitung();
                         } else {
-                            ed.setText(String.valueOf(df2.parse(ed.getText().toString()).doubleValue()));
+                            ed.setText(String.valueOf(df.parse(ed.getText().toString()).longValue()));
                             ed.setSelection(0, ed.getText().toString().length());
                         }
                     } catch (Exception e) {
@@ -291,13 +306,13 @@ public class PaketInputActivity extends AppCompatActivity {
                         TextInputEditText ed = editTextpanjang_ribbon;
                         if (!hasFocus) {
                             if (ed.getText().toString().isEmpty()) {
-                                ed.setText(df2.format(0.0));
+                                ed.setText(df.format(0.0));
                             } else {
-                                ed.setText(df2.format(Double.valueOf(ed.getText().toString())));
+                                ed.setText(df.format(Double.valueOf(ed.getText().toString())));
                             }
                             Hitung();
                         } else {
-                            ed.setText(String.valueOf(df2.parse(ed.getText().toString()).doubleValue()));
+                            ed.setText(String.valueOf(df.parse(ed.getText().toString()).longValue()));
                             ed.setSelection(0, ed.getText().toString().length());
                         }
                     } catch (Exception e) {
@@ -460,7 +475,7 @@ public class PaketInputActivity extends AppCompatActivity {
                 editTextisi_roll.setText(df.format(0.0));
                 editTextxtotal_jadi_roll.setText(df.format(0.0));
                 editTextlebar.setText(df.format(0.0));
-                editTexttinggi.setText(df2.format(0.0));
+                editTexttinggi.setText(df.format(0.0));
                 editTextpisau_yang_digunakan.setText(df.format(0));
                 editTextxlebar_bahan.setText(df.format(0));
                 editTextx1roll_jadiny_pcs.setText(df.format(0));
@@ -476,7 +491,7 @@ public class PaketInputActivity extends AppCompatActivity {
 //                editTextxtotal_jadi_roll.setText(df.format(Obj.x));
                 editTextlebar.setText(df.format(Obj.lebar));
                 editTexttinggi.setText(df.format(Obj.tinggi));
-                editTextpisau_yang_digunakan.setText(df2.format(Obj.pisau_yang_digunakan));
+                editTextpisau_yang_digunakan.setText(df.format(Obj.pisau_yang_digunakan));
 //                editTextxlebar_bahan.setText(df.format(Obj.biaya_tinta));
 //                editTextx1roll_jadiny_pcs.setText(df.format(Obj.biaya_toyobo));
 //                editTextxjadi_belanja_bahan_baku_label_dalam_Roll.setText(df.format(Obj.biaya_operator));
@@ -496,29 +511,29 @@ public class PaketInputActivity extends AppCompatActivity {
         try {
 
 //            Qty_Order_Customer_Pcs/Isi_Roll
-            xtotal_jadi_roll =df2.parse(editTextqty_order_customer_pcs.getText().toString()).doubleValue()/df2.parse(editTextisi_roll.getText().toString()).doubleValue();
-            editTextxtotal_jadi_roll.setText(df2.format(xtotal_jadi_roll));
+            xtotal_jadi_roll =df.parse(editTextqty_order_customer_pcs.getText().toString()).doubleValue()/df.parse(editTextisi_roll.getText().toString()).doubleValue();
+            editTextxtotal_jadi_roll.setText(df.format(xtotal_jadi_roll));
 
 //            (Lebar * Pisau_yang_digunakan )+(3*(Pisau_yang_digunakan - 1)+8)
-            xlebar_bahan=(df2.parse(editTextlebar.getText().toString()).doubleValue() * df2.parse(editTextpisau_yang_digunakan.getText().toString()).doubleValue() ) +
-                    (3*(df2.parse(editTextpisau_yang_digunakan.getText().toString()).doubleValue() - 1)+8);
-            editTextxlebar_bahan.setText(df2.format(xlebar_bahan));
+            xlebar_bahan=(df.parse(editTextlebar.getText().toString()).doubleValue() * df.parse(editTextpisau_yang_digunakan.getText().toString()).doubleValue() ) +
+                    (3*(df.parse(editTextpisau_yang_digunakan.getText().toString()).doubleValue() - 1)+8);
+            editTextxlebar_bahan.setText(df.format(xlebar_bahan));
 
 //=	(975000/( Tinggi +3)*(Pisau Yang digunakan))
-            x1roll_jadiny_pcs=(975000/( df2.parse(editTexttinggi.getText().toString()).doubleValue() +3)*(df2.parse(editTextpisau_yang_digunakan.getText().toString()).doubleValue()));
-            editTextx1roll_jadiny_pcs.setText(df2.format(x1roll_jadiny_pcs));
+            x1roll_jadiny_pcs=(975000/( df.parse(editTexttinggi.getText().toString()).doubleValue() +3)*(df.parse(editTextpisau_yang_digunakan.getText().toString()).doubleValue()));
+            editTextx1roll_jadiny_pcs.setText(df.format(x1roll_jadiny_pcs));
 
 //            Qty_Order_Customer_Pcs / XJadi Belanja Bahan BakuLabel dalam Roll
-            xjadi_belanja_bahan_baku_label_dalam_Roll=df2.parse(editTextqty_order_customer_pcs.getText().toString()).doubleValue()  / df2.parse(editTextx1roll_jadiny_pcs.getText().toString()).doubleValue() ;
-            editTextxjadi_belanja_bahan_baku_label_dalam_Roll.setText(df2.format(xjadi_belanja_bahan_baku_label_dalam_Roll));
+            xjadi_belanja_bahan_baku_label_dalam_Roll=df.parse(editTextqty_order_customer_pcs.getText().toString()).doubleValue()  / df.parse(editTextx1roll_jadiny_pcs.getText().toString()).doubleValue() ;
+            editTextxjadi_belanja_bahan_baku_label_dalam_Roll.setText(df.format(xjadi_belanja_bahan_baku_label_dalam_Roll));
 
 //            =	(PanjangRibbon*1000)/(Tinggi +3)*Customer_Minta_Bikin_Jadinya_Line
-            x1roll_ribbon_bisa_cetak_pcs= (df2.parse(editTextpanjang_ribbon.getText().toString()).doubleValue()*1000)/(df2.parse(editTexttinggi.getText().toString()).doubleValue() +3)*df2.parse(editTextcustomer_minta_bikin_jadinya_line.getText().toString()).doubleValue();
-            editTextx1roll_ribbon_bisa_cetak_pcs.setText(df2.format(x1roll_ribbon_bisa_cetak_pcs));
+            x1roll_ribbon_bisa_cetak_pcs= (df.parse(editTextpanjang_ribbon.getText().toString()).doubleValue()*1000)/(df.parse(editTexttinggi.getText().toString()).doubleValue() +3)*df.parse(editTextcustomer_minta_bikin_jadinya_line.getText().toString()).doubleValue();
+            editTextx1roll_ribbon_bisa_cetak_pcs.setText(df.format(x1roll_ribbon_bisa_cetak_pcs));
 
 //            Qty_Order_Customer_Pcs /  X1_Roll_Ribbon_bisa_cetak_Pcs
-            xmaka_kebutuhan_ribbonnya=  df2.parse(editTextqty_order_customer_pcs.getText().toString()).doubleValue() /  df2.parse(editTextx1roll_ribbon_bisa_cetak_pcs.getText().toString()).doubleValue();
-            editTextxmaka_kebutuhan_ribbonnya.setText(df2.format(xmaka_kebutuhan_ribbonnya));
+            xmaka_kebutuhan_ribbonnya=  df.parse(editTextqty_order_customer_pcs.getText().toString()).doubleValue() /  df.parse(editTextx1roll_ribbon_bisa_cetak_pcs.getText().toString()).doubleValue();
+            editTextxmaka_kebutuhan_ribbonnya.setText(df.format(xmaka_kebutuhan_ribbonnya));
 
         } catch (Exception e) {
             Log.e("hitung", e.getMessage(), e);
