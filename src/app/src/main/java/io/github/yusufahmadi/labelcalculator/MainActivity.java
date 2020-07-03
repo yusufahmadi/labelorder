@@ -69,16 +69,32 @@ public class MainActivity extends AppCompatActivity {
                         fragment = new LabelFragment();
                         break;
                     case R.id.navigation_ribbon:
-                        fragment = new RibbonFragment();
+                        if (mdlPublic.level== mdlPublic.Level.Super) {
+                            fragment = new RibbonFragment();
+                        }else{
+                            Toast.makeText(getBaseContext(), "Menu ini hanya untuk Supervisor", Toast.LENGTH_SHORT).show();
+                        }
                         break;
                     case R.id.navigation_taffeta:
-                        fragment = new TaffetaFragment();
+                        if (mdlPublic.level== mdlPublic.Level.Super) {
+                            fragment = new TaffetaFragment();
+                        }else{
+                            Toast.makeText(getBaseContext(), "Menu ini hanya untuk Supervisor", Toast.LENGTH_SHORT).show();
+                        }
                         break;
                     case R.id.navigation_master:
-                        fragment = new MasterFragment();
+                        if (mdlPublic.level== mdlPublic.Level.Super) {
+                            fragment = new MasterFragment();
+                        }else{
+                            Toast.makeText(getBaseContext(), "Menu ini hanya untuk Supervisor", Toast.LENGTH_SHORT).show();
+                        }
                         break;
                     case R.id.navigation_paket:
-                        fragment = new PaketFragment();
+                        if (mdlPublic.level== mdlPublic.Level.Super) {
+                            fragment = new PaketFragment();
+                        }else{
+                            Toast.makeText(getBaseContext(), "Menu ini hanya untuk Supervisor", Toast.LENGTH_SHORT).show();
+                        }
                         break;
                     default:
                         fragment = null;

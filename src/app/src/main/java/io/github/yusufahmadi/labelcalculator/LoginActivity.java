@@ -61,13 +61,21 @@ public class LoginActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     if (txtPasscode.getText().toString().equals(settings.getString("Passcode", mdlPublic.PWD_DEFAULT_PASSCODE))) {
+                        mdlPublic.level = mdlPublic.Level.Super;
                         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                         startActivity(intent);
                         LoginActivity.this.finish();
                     } else {
-                        Toast.makeText(getApplicationContext(),
-                                "Passcode yang anda masukkan salah!",
-                                Toast.LENGTH_SHORT).show();
+                        if (txtPasscode.getText().toString().toLowerCase().equals("1234")) {
+                            mdlPublic.level = mdlPublic.Level.User;
+                            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                            startActivity(intent);
+                            LoginActivity.this.finish();
+                        } else {
+                            Toast.makeText(getApplicationContext(),
+                                    "Passcode yang anda masukkan salah!",
+                                    Toast.LENGTH_SHORT).show();
+                        }
                     }
                 }
             });

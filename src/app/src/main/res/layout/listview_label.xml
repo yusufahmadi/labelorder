@@ -24,6 +24,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="0.5"
                 android:text="Document"
+                android:textColor="@color/colorGreen"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"/>
 
             <TextView
@@ -86,6 +87,19 @@
                 android:layout_weight="0.5"
                 android:text="Gap (mm)"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:text="Mata Pisau"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"/>
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:text="Qty Order"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"/>
         </androidx.appcompat.widget.LinearLayoutCompat>
 
         <androidx.appcompat.widget.LinearLayoutCompat
@@ -115,6 +129,20 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="0.5"
                 android:text="0.0"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"/>
+            <TextView
+                android:id="@+id/tvMataPisau"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:text="0"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"/>
+            <TextView
+                android:id="@+id/tvQtyOrder"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:text="0"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"/>
         </androidx.appcompat.widget.LinearLayoutCompat>
 

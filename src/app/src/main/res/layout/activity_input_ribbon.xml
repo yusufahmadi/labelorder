@@ -58,6 +58,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="Bahan"
+                            android:textColor="@color/list_row_red_end_color"
                             android:textAlignment="center"
                             android:textSize="18sp" />
                     </androidx.appcompat.widget.LinearLayoutCompat>
@@ -67,38 +68,6 @@
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
                         android:padding="@dimen/small_padding">
-
-                        <com.google.android.material.textfield.TextInputLayout
-                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="@dimen/small_padding"
-                            android:hint="Lebar (mm)">
-
-                            <com.google.android.material.textfield.TextInputEditText
-                                android:id="@+id/editTextLebar"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:inputType="numberDecimal"
-                                android:text="0.0"
-                                android:textAlignment="textEnd" />
-                        </com.google.android.material.textfield.TextInputLayout>
-
-                        <com.google.android.material.textfield.TextInputLayout
-                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:hint="Panjang (Meter)">
-
-                            <com.google.android.material.textfield.TextInputEditText
-                                android:id="@+id/editTextPanjang"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:inputType="numberDecimal"
-                                android:text="0.0"
-                                android:textAlignment="textEnd" />
-                        </com.google.android.material.textfield.TextInputLayout>
-
                         <androidx.appcompat.widget.LinearLayoutCompat
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -111,13 +80,15 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="0.5"
                                 android:layout_marginEnd="@dimen/keyline_1"
+                                android:textColorHint="@color/colorGreen"
                                 android:hint="Bahan">
 
                                 <AutoCompleteTextView
                                     android:id="@+id/spinner_bahan"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:inputType="none" />
+                                    android:inputType="none"
+                                    android:nextFocusDown="@+id/editTextHargaModal"/>
                             </com.google.android.material.textfield.TextInputLayout>
 
                             <com.google.android.material.textfield.TextInputLayout
@@ -126,6 +97,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="0.5"
                                 android:layout_marginStart="@dimen/keyline_1"
+                                android:textColorHint="@color/colorGreen"
                                 android:hint="Harga Modal/M2">
 
                                 <com.google.android.material.textfield.TextInputEditText
@@ -134,8 +106,53 @@
                                     android:layout_height="wrap_content"
                                     android:inputType="numberDecimal"
                                     android:text="0.0"
-                                    android:textAlignment="textEnd" />
+                                    android:textAlignment="textEnd"
+                                    android:nextFocusDown="@+id/editTextLebar"/>
                             </com.google.android.material.textfield.TextInputLayout>
+                        </androidx.appcompat.widget.LinearLayoutCompat>
+
+                        <androidx.appcompat.widget.LinearLayoutCompat
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="@dimen/small_padding"
+                            android:orientation="horizontal">
+                            <com.google.android.material.textfield.TextInputLayout
+                                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.5"
+                                android:layout_marginEnd="@dimen/keyline_1"
+                                android:textColorHint="@color/colorGreen"
+                                    android:hint="Lebar (mm)">
+
+                                    <com.google.android.material.textfield.TextInputEditText
+                                        android:id="@+id/editTextLebar"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:inputType="numberDecimal"
+                                        android:text="0.0"
+                                        android:textAlignment="textEnd"
+                                        android:nextFocusDown="@+id/editTextPanjang"  />
+                                </com.google.android.material.textfield.TextInputLayout>
+
+                            <com.google.android.material.textfield.TextInputLayout
+                                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.5"
+                                android:layout_marginEnd="@dimen/keyline_1"
+                                android:textColorHint="@color/colorGreen"
+                                    android:hint="Panjang (Meter)">
+
+                                    <com.google.android.material.textfield.TextInputEditText
+                                        android:id="@+id/editTextPanjang"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:inputType="numberDecimal"
+                                        android:text="0.0"
+                                        android:textAlignment="textEnd"
+                                        android:nextFocusDown="@+id/editTextQty" />
+                                </com.google.android.material.textfield.TextInputLayout>
                         </androidx.appcompat.widget.LinearLayoutCompat>
 
                         <View
@@ -186,6 +203,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="Profit Kotor (Up)"
+                            android:textColor="@color/list_row_red_end_color"
                             android:textAlignment="center"
                             android:textSize="18sp" />
 
@@ -451,6 +469,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="PO"
+                            android:textColor="@color/list_row_red_end_color"
                             android:textAlignment="center"
                             android:textSize="18sp" />
                     </androidx.appcompat.widget.LinearLayoutCompat>
@@ -461,11 +480,19 @@
                         android:orientation="vertical"
                         android:padding="@dimen/small_padding">
 
-                        <com.google.android.material.textfield.TextInputLayout
-                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        <androidx.appcompat.widget.LinearLayoutCompat
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="@dimen/small_padding"
+                            android:orientation="horizontal">
+
+                            <com.google.android.material.textfield.TextInputLayout
+                                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.35"
+                                android:layout_marginEnd="@dimen/keyline_1"
+                                android:textColorHint="@color/colorGreen"
                             android:hint="Qty (Roll)">
 
                             <com.google.android.material.textfield.TextInputEditText
@@ -474,14 +501,17 @@
                                 android:layout_height="wrap_content"
                                 android:inputType="number"
                                 android:textAlignment="viewEnd"
-                                android:text="0.0"/>
+                                android:text="0.0"
+                                android:nextFocusDown="@+id/editTextJualRoll"/>
                         </com.google.android.material.textfield.TextInputLayout>
 
-                        <com.google.android.material.textfield.TextInputLayout
-                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="@dimen/small_padding"
+                            <com.google.android.material.textfield.TextInputLayout
+                                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.65"
+                                android:layout_marginEnd="@dimen/keyline_1"
+                                android:textColorHint="@color/colorGreen"
                             android:hint="Harga (Roll)">
 
                             <com.google.android.material.textfield.TextInputEditText
@@ -490,8 +520,10 @@
                                 android:layout_height="wrap_content"
                                 android:inputType="number"
                                 android:textAlignment="viewEnd"
-                                android:text="0.0"/>
+                                android:text="0.0"
+                                android:nextFocusDown="@+id/editTextTransport"/>
                         </com.google.android.material.textfield.TextInputLayout>
+                        </androidx.appcompat.widget.LinearLayoutCompat>
 
                         <View
                             android:layout_width="match_parent"
@@ -521,6 +553,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="@dimen/small_padding"
+                            android:textColorHint="@color/colorGreen"
                             android:hint="Transport">
 
                             <com.google.android.material.textfield.TextInputEditText
@@ -529,7 +562,8 @@
                                 android:layout_height="wrap_content"
                                 android:inputType="number"
                                 android:textAlignment="viewEnd"
-                                android:text="0.0"/>
+                                android:text="0.0"
+                                android:nextFocusDown="@+id/editTextKomisiSalesProsen"/>
                         </com.google.android.material.textfield.TextInputLayout>
 
                         <androidx.appcompat.widget.LinearLayoutCompat
@@ -544,6 +578,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginRight="@dimen/small_padding"
                                 android:layout_weight="0.3"
+                                android:textColorHint="@color/colorGreen"
                                 android:hint="Komisi Sales">
 
                                 <com.google.android.material.textfield.TextInputEditText
@@ -552,7 +587,8 @@
                                     android:layout_height="wrap_content"
                                     android:inputType="numberDecimal"
                                     android:textAlignment="viewEnd"
-                                    android:text="0.0"/>
+                                    android:text="0.0"
+                                    android:nextFocusDown="@+id/editTextCatatan"/>
                             </com.google.android.material.textfield.TextInputLayout>
 
                             <com.google.android.material.textfield.TextInputLayout
@@ -593,21 +629,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="@dimen/small_padding"
-                        android:hint="Catatan / No Dokumen">
-
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/editTextCatatan"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:inputType="text"
-                            android:textAlignment="textStart" />
-                    </com.google.android.material.textfield.TextInputLayout>
-
-                    <com.google.android.material.textfield.TextInputLayout
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="@dimen/small_padding"
                         android:hint="Net Profit">
 
                         <com.google.android.material.textfield.TextInputEditText
@@ -619,6 +640,24 @@
                             android:text="0.0"
                             android:textAlignment="viewEnd"
                             android:textStyle="bold" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/small_padding"
+                        android:textColorHint="@color/colorGreen"
+                        android:textColor="@color/colorGreen"
+                        android:hint="Catatan / No Dokumen">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/editTextCatatan"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="text"
+                            android:textAlignment="textStart"
+                            android:nextFocusDown="@+id/buttonSave" />
                     </com.google.android.material.textfield.TextInputLayout>
                 </androidx.appcompat.widget.LinearLayoutCompat>
             </com.google.android.material.card.MaterialCardView>

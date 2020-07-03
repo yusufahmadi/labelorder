@@ -44,6 +44,7 @@
                 android:layout_marginBottom="@dimen/small_padding">
 
                 <androidx.appcompat.widget.LinearLayoutCompat
+                    android:id="@+id/panelBahan"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
@@ -57,10 +58,68 @@
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:textColor="@color/list_row_red_end_color"
                             android:text="Bahan"
                             android:textAlignment="center"
                             android:textSize="18sp" />
                     </androidx.appcompat.widget.LinearLayoutCompat>
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/small_padding"
+                        android:orientation="horizontal">
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.5"
+                            android:layout_marginEnd="@dimen/keyline_1"
+                            android:textColorHint="@color/colorGreen"
+                            android:hint="Bahan">
+
+                            <AutoCompleteTextView
+                                android:id="@+id/spinner_bahan"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:inputType="none" />
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.5"
+                            android:layout_marginStart="@dimen/keyline_1"
+                            android:textColorHint="@color/colorGreen"
+                            android:hint="Harga lcl Tax">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/editTextHargaModal"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:inputType="numberDecimal"
+                                android:text="0.0"
+                                android:textAlignment="textEnd"
+                                android:nextFocusDown="@+id/editTextLebar" />
+                        </com.google.android.material.textfield.TextInputLayout>
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/small_padding">
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:id="@+id/panelUkuran"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
 
                     <androidx.appcompat.widget.LinearLayoutCompat
                         android:layout_width="match_parent"
@@ -75,50 +134,12 @@
                             android:orientation="horizontal">
 
                             <com.google.android.material.textfield.TextInputLayout
-                                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="0.5"
-                                android:layout_marginEnd="@dimen/keyline_1"
-                                android:hint="Bahan">
-
-                                <AutoCompleteTextView
-                                    android:id="@+id/spinner_bahan"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:inputType="none" />
-                            </com.google.android.material.textfield.TextInputLayout>
-
-                            <com.google.android.material.textfield.TextInputLayout
-                                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="0.5"
-                                android:layout_marginStart="@dimen/keyline_1"
-                                android:hint="Harga lcl Tax">
-
-                                <com.google.android.material.textfield.TextInputEditText
-                                    android:id="@+id/editTextHargaModal"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:inputType="numberDecimal"
-                                    android:text="0.0"
-                                    android:textAlignment="textEnd" />
-                            </com.google.android.material.textfield.TextInputLayout>
-                        </androidx.appcompat.widget.LinearLayoutCompat>
-
-                        <androidx.appcompat.widget.LinearLayoutCompat
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="@dimen/small_padding"
-                            android:orientation="horizontal">
-
-                            <com.google.android.material.textfield.TextInputLayout
                                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="0.5"
                                 android:layout_marginEnd="@dimen/keyline_1"
+                                android:textColorHint="@color/colorGreen"
                                 android:hint="Lebar (mm)">
 
                                 <com.google.android.material.textfield.TextInputEditText
@@ -127,7 +148,8 @@
                                     android:layout_height="wrap_content"
                                     android:inputType="numberSigned"
                                     android:text="0.0"
-                                    android:textAlignment="textEnd" />
+                                    android:textAlignment="textEnd"
+                                    android:nextFocusDown="@+id/editTextTinggi"/>
                             </com.google.android.material.textfield.TextInputLayout>
 
                             <com.google.android.material.textfield.TextInputLayout
@@ -136,6 +158,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="0.5"
                                 android:layout_marginHorizontal="@dimen/keyline_1"
+                                android:textColorHint="@color/colorGreen"
                                 android:hint="Tinggi (mm)">
 
                                 <com.google.android.material.textfield.TextInputEditText
@@ -144,7 +167,8 @@
                                     android:layout_height="wrap_content"
                                     android:inputType="numberSigned"
                                     android:text="0.0"
-                                    android:textAlignment="textEnd" />
+                                    android:textAlignment="textEnd"
+                                    android:nextFocusDown="@+id/editTextGap" />
                             </com.google.android.material.textfield.TextInputLayout>
 
                             <com.google.android.material.textfield.TextInputLayout
@@ -153,6 +177,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="0.5"
                                 android:layout_marginStart="@dimen/keyline_1"
+                                android:textColorHint="@color/colorGreen"
                                 android:hint="Gap (mm)">
 
                                 <com.google.android.material.textfield.TextInputEditText
@@ -161,7 +186,8 @@
                                     android:layout_height="wrap_content"
                                     android:inputType="numberSigned"
                                     android:text="0.0"
-                                    android:textAlignment="textEnd" />
+                                    android:textAlignment="textEnd"
+                                    android:nextFocusDown="@+id/editTextPisau" />
                             </com.google.android.material.textfield.TextInputLayout>
                         </androidx.appcompat.widget.LinearLayoutCompat>
 
@@ -170,6 +196,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="@dimen/small_padding"
+                            android:textColorHint="@color/colorGreen"
                             android:hint="Banyak Mata Pisau">
 
                             <com.google.android.material.textfield.TextInputEditText
@@ -178,7 +205,8 @@
                                 android:layout_height="wrap_content"
                                 android:inputType="numberSigned"
                                 android:text="0"
-                                android:textAlignment="textEnd" />
+                                android:textAlignment="textEnd"
+                                android:nextFocusDown="@+id/editTextQtyOrderPcs" />
                         </com.google.android.material.textfield.TextInputLayout>
 
                         <androidx.appcompat.widget.LinearLayoutCompat
@@ -234,6 +262,7 @@
                 android:layout_marginBottom="@dimen/small_padding">
 
                 <androidx.appcompat.widget.LinearLayoutCompat
+                    android:id="@+id/panelPO"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
@@ -247,6 +276,7 @@
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:textColor="@color/list_row_red_end_color"
                             android:text="PO"
                             android:textAlignment="center"
                             android:textSize="18sp" />
@@ -270,6 +300,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginEnd="@dimen/keyline_1"
                                 android:layout_weight="0.5"
+                                android:textColorHint="@color/colorGreen"
                                 android:hint="Qty Order (Pcs)">
 
                                 <com.google.android.material.textfield.TextInputEditText
@@ -278,7 +309,8 @@
                                     android:layout_height="wrap_content"
                                     android:inputType="numberSigned"
                                     android:text="0"
-                                    android:textAlignment="textEnd" />
+                                    android:textAlignment="textEnd"
+                                    android:nextFocusDown="@+id/editTextPembulatanRoll" />
                             </com.google.android.material.textfield.TextInputLayout>
 
                             <com.google.android.material.textfield.TextInputLayout
@@ -287,6 +319,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="@dimen/keyline_1"
                                 android:layout_weight="0.5"
+                                android:textColorHint="@color/colorGreen"
                                 android:hint="Pembulatan (Roll)">
 
                                 <com.google.android.material.textfield.TextInputEditText
@@ -295,9 +328,30 @@
                                     android:layout_height="wrap_content"
                                     android:inputType="numberDecimal"
                                     android:text="0"
-                                    android:textAlignment="textEnd" />
+                                    android:textAlignment="textEnd"
+                                    android:nextFocusDown="@+id/editTextBiayaPisau" />
                             </com.google.android.material.textfield.TextInputLayout>
                         </androidx.appcompat.widget.LinearLayoutCompat>
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/small_padding">
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:id="@+id/panelAnalisa"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
 
                         <androidx.appcompat.widget.LinearLayoutCompat
                             android:layout_width="match_parent"
@@ -342,7 +396,6 @@
                                     android:textAlignment="textEnd" />
                             </com.google.android.material.textfield.TextInputLayout>
                         </androidx.appcompat.widget.LinearLayoutCompat>
-
                     </androidx.appcompat.widget.LinearLayoutCompat>
 
                 </androidx.appcompat.widget.LinearLayoutCompat>
@@ -354,6 +407,7 @@
                 android:layout_marginBottom="@dimen/small_padding">
 
                 <androidx.appcompat.widget.LinearLayoutCompat
+                    android:id="@+id/panelBiaya"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
@@ -368,6 +422,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="Biaya"
+                            android:textColor="@color/list_row_red_end_color"
                             android:textAlignment="center"
                             android:textSize="18sp" />
                     </androidx.appcompat.widget.LinearLayoutCompat>
@@ -390,6 +445,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginEnd="@dimen/keyline_1"
                                 android:layout_weight="0.5"
+                                android:textColorHint="@color/colorGreen"
                                 android:hint="Biaya Pisau">
 
                                 <com.google.android.material.textfield.TextInputEditText
@@ -398,7 +454,8 @@
                                     android:layout_height="wrap_content"
                                     android:inputType="number"
                                     android:text="0"
-                                    android:textAlignment="textEnd" />
+                                    android:textAlignment="textEnd"
+                                    android:nextFocusDown="@+id/editTextBiayaTinta" />
                             </com.google.android.material.textfield.TextInputLayout>
 
                             <com.google.android.material.textfield.TextInputLayout
@@ -407,6 +464,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginHorizontal="@dimen/keyline_1"
                                 android:layout_weight="0.5"
+                                android:textColorHint="@color/colorGreen"
                                 android:hint="Tinta">
 
                                 <com.google.android.material.textfield.TextInputEditText
@@ -415,7 +473,8 @@
                                     android:layout_height="wrap_content"
                                     android:inputType="numberSigned"
                                     android:text="0"
-                                    android:textAlignment="textEnd" />
+                                    android:textAlignment="textEnd"
+                                    android:nextFocusDown="@+id/editTextBiayaToyobo"/>
                             </com.google.android.material.textfield.TextInputLayout>
 
                             <com.google.android.material.textfield.TextInputLayout
@@ -424,6 +483,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="@dimen/keyline_1"
                                 android:layout_weight="0.5"
+                                android:textColorHint="@color/colorGreen"
                                 android:hint="Toyobo">
 
                                 <com.google.android.material.textfield.TextInputEditText
@@ -432,7 +492,8 @@
                                     android:layout_height="wrap_content"
                                     android:inputType="numberSigned"
                                     android:text="0"
-                                    android:textAlignment="textEnd" />
+                                    android:textAlignment="textEnd"
+                                    android:nextFocusDown="@+id/editTextBiayaOperator"/>
                             </com.google.android.material.textfield.TextInputLayout>
                         </androidx.appcompat.widget.LinearLayoutCompat>
 
@@ -448,6 +509,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginEnd="@dimen/keyline_1"
                                 android:layout_weight="0.5"
+                                android:textColorHint="@color/colorGreen"
                                 android:hint="Waktu x Operator">
 
                                 <com.google.android.material.textfield.TextInputEditText
@@ -456,7 +518,8 @@
                                     android:layout_height="wrap_content"
                                     android:inputType="numberSigned"
                                     android:text="0"
-                                    android:textAlignment="textEnd" />
+                                    android:textAlignment="textEnd"
+                                    android:nextFocusDown="@+id/editTextBiayaKirim"/>
                             </com.google.android.material.textfield.TextInputLayout>
 
                             <com.google.android.material.textfield.TextInputLayout
@@ -464,6 +527,7 @@
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_marginHorizontal="@dimen/keyline_1"
+                                android:textColorHint="@color/colorGreen"
                                 android:layout_weight="0.5"
                                 android:hint="Biaya Kirim">
 
@@ -473,7 +537,8 @@
                                     android:layout_height="wrap_content"
                                     android:inputType="numberSigned"
                                     android:text="0"
-                                    android:textAlignment="textEnd" />
+                                    android:textAlignment="textEnd"
+                                    android:nextFocusDown="@+id/editTextBiayaKirim"/>
                             </com.google.android.material.textfield.TextInputLayout>
                             <com.google.android.material.textfield.TextInputLayout
                                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -499,12 +564,14 @@
                 </androidx.appcompat.widget.LinearLayoutCompat>
             </com.google.android.material.card.MaterialCardView>
 
+
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/small_padding">
 
                 <androidx.appcompat.widget.LinearLayoutCompat
+                    android:id="@+id/panelProfitKotor"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
@@ -520,6 +587,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="Profit Kotor (Up)"
+                            android:textColor="@color/list_row_red_end_color"
                             android:textAlignment="center"
                             android:textSize="18sp" />
 
@@ -771,25 +839,11 @@
                 android:layout_marginBottom="@dimen/small_padding">
 
                 <androidx.appcompat.widget.LinearLayoutCompat
+                    android:id="@+id/panelJual"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:padding="@dimen/small_padding">
-
-                    <com.google.android.material.textfield.TextInputLayout
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="@dimen/small_padding"
-                        android:hint="Catatan / No Dokumen">
-
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/editTextCatatan"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:inputType="text"
-                            android:textAlignment="textStart" />
-                    </com.google.android.material.textfield.TextInputLayout>
 
                     <androidx.appcompat.widget.LinearLayoutCompat
                         android:layout_width="match_parent"
@@ -848,6 +902,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginEnd="@dimen/keyline_1"
                             android:layout_weight="0.5"
+                            android:textColorHint="@color/colorGreen"
                             android:hint="Jual Sesuai Order">
 
                             <com.google.android.material.textfield.TextInputEditText
@@ -857,6 +912,7 @@
                                 android:inputType="numberDecimal"
                                 android:text="0.0"
                                 android:textAlignment="viewEnd"
+                                android:nextFocusDown="@+id/editTextCatatan"
                                 android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6" />
                         </com.google.android.material.textfield.TextInputLayout>
 
@@ -924,8 +980,29 @@
                                 android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6" />
                         </com.google.android.material.textfield.TextInputLayout>
                     </androidx.appcompat.widget.LinearLayoutCompat>
+
                 </androidx.appcompat.widget.LinearLayoutCompat>
             </com.google.android.material.card.MaterialCardView>
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/small_padding"
+                android:textColor="@color/colorGreen"
+                android:textColorHint="@color/colorGreen"
+                android:hint="Catatan / No Dokumen">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/editTextCatatan"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:textColorHint="@color/colorGreen"
+                    android:textAlignment="textStart"
+                    android:nextFocusDown="@+id/buttonSave"/>
+            </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/buttonSave"

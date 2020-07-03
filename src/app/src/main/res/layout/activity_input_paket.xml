@@ -57,6 +57,7 @@
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:textColor="@color/list_row_red_end_color"
                             android:text="Perhitungan Belanja Bahan Baku Label"
                             android:textAlignment="center"
                             android:textSize="18sp" />
@@ -80,6 +81,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="0.5"
                                 android:layout_marginEnd="@dimen/keyline_1"
+                                android:textColorHint="@color/colorGreen"
                                 android:hint="Cust Order Jadinya _Line">
 
                                 <com.google.android.material.textfield.TextInputEditText
@@ -88,6 +90,7 @@
                                     android:layout_height="wrap_content"
                                     android:inputType="numberDecimal"
                                     android:text="0"
+                                    android:nextFocusDown="@+id/editTextqty_order_customer_pcs"
                                     android:textAlignment="textEnd" />
                             </com.google.android.material.textfield.TextInputLayout>
 
@@ -97,6 +100,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="0.5"
                                 android:layout_marginStart="@dimen/keyline_1"
+                                android:textColorHint="@color/colorGreen"
                                 android:hint="Order Customer _Pcs">
 
                                 <com.google.android.material.textfield.TextInputEditText
@@ -105,6 +109,7 @@
                                     android:layout_height="wrap_content"
                                     android:inputType="numberDecimal"
                                     android:text="0"
+                                    android:nextFocusDown="@+id/editTextisi_roll"
                                     android:textAlignment="textEnd" />
                             </com.google.android.material.textfield.TextInputLayout>
                         </androidx.appcompat.widget.LinearLayoutCompat>
@@ -121,6 +126,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="0.5"
                                 android:layout_marginEnd="@dimen/keyline_1"
+                                android:textColorHint="@color/colorGreen"
                                 android:hint="Isi / Roll">
 
                                 <com.google.android.material.textfield.TextInputEditText
@@ -129,6 +135,7 @@
                                     android:layout_height="wrap_content"
                                     android:inputType="numberDecimal"
                                     android:text="0"
+                                    android:nextFocusDown="@+id/editTextlebar"
                                     android:textAlignment="textEnd" />
                             </com.google.android.material.textfield.TextInputLayout>
 
@@ -163,6 +170,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="0.5"
                                 android:layout_marginEnd="@dimen/keyline_1"
+                                android:textColorHint="@color/colorGreen"
                                 android:hint="Lebar (mm)">
 
                                 <com.google.android.material.textfield.TextInputEditText
@@ -171,6 +179,7 @@
                                     android:layout_height="wrap_content"
                                     android:inputType="numberSigned"
                                     android:text="0.0"
+                                    android:nextFocusDown="@+id/editTexttinggi"
                                     android:textAlignment="textEnd" />
                             </com.google.android.material.textfield.TextInputLayout>
 
@@ -180,6 +189,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="0.5"
                                 android:layout_marginHorizontal="@dimen/keyline_1"
+                                android:textColorHint="@color/colorGreen"
                                 android:hint="Tinggi (mm)">
 
                                 <com.google.android.material.textfield.TextInputEditText
@@ -188,6 +198,7 @@
                                     android:layout_height="wrap_content"
                                     android:inputType="numberSigned"
                                     android:text="0.0"
+                                    android:nextFocusDown="@+id/editTextpisau_yang_digunakan"
                                     android:textAlignment="textEnd" />
                             </com.google.android.material.textfield.TextInputLayout>
                             <com.google.android.material.textfield.TextInputLayout
@@ -196,6 +207,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="0.5"
                                 android:layout_marginHorizontal="@dimen/keyline_1"
+                                android:textColorHint="@color/colorGreen"
                                 android:hint="Pisau digunakan">
 
                                 <com.google.android.material.textfield.TextInputEditText
@@ -204,6 +216,7 @@
                                     android:layout_height="wrap_content"
                                     android:inputType="numberSigned"
                                     android:text="0"
+                                    android:nextFocusDown="@+id/editTextdibulatkan"
                                     android:textAlignment="textEnd" />
                             </com.google.android.material.textfield.TextInputLayout>
                         </androidx.appcompat.widget.LinearLayoutCompat>
@@ -280,6 +293,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="@dimen/keyline_1"
                                 android:layout_weight="0.4"
+                                android:textColorHint="@color/colorGreen"
                                 android:hint="Di Bulatkan">
 
                                 <com.google.android.material.textfield.TextInputEditText
@@ -288,6 +302,7 @@
                                     android:layout_height="wrap_content"
                                     android:inputType="numberSigned"
                                     android:text="0"
+                                    android:nextFocusDown="@+id/editTextlebar_ribbon"
                                     android:textAlignment="textEnd" />
                             </com.google.android.material.textfield.TextInputLayout>
                         </androidx.appcompat.widget.LinearLayoutCompat>
@@ -319,6 +334,7 @@
                             android:text="Perhitungan Pemakaian Ribbonnya
                              (Bila Customer meminta sesuai order label)"
                             android:textAlignment="center"
+                            android:textColor="@color/list_row_red_end_color"
                             android:textSize="18sp" />
                     </androidx.appcompat.widget.LinearLayoutCompat>
 
@@ -340,6 +356,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginEnd="@dimen/keyline_1"
                                 android:layout_weight="0.5"
+                                android:textColorHint="@color/colorGreen"
                                 android:hint="Lebar Ribbon (mm)">
 
                                 <com.google.android.material.textfield.TextInputEditText
@@ -348,6 +365,7 @@
                                     android:layout_height="wrap_content"
                                     android:inputType="numberSigned"
                                     android:text="0.0"
+                                    android:nextFocusDown="@+id/editTextpanjang_ribbon"
                                     android:textAlignment="textEnd" />
                             </com.google.android.material.textfield.TextInputLayout>
 
@@ -357,6 +375,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="@dimen/keyline_1"
                                 android:layout_weight="0.5"
+                                android:textColorHint="@color/colorGreen"
                                 android:hint="Panjang Ribbon (M)">
 
                                 <com.google.android.material.textfield.TextInputEditText
@@ -365,6 +384,7 @@
                                     android:layout_height="wrap_content"
                                     android:inputType="numberDecimal"
                                     android:text="0.0"
+                                    android:nextFocusDown="@+id/editTextCatatan"
                                     android:textAlignment="textEnd" />
                             </com.google.android.material.textfield.TextInputLayout>
                         </androidx.appcompat.widget.LinearLayoutCompat>
@@ -374,6 +394,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="@dimen/small_padding"
                             android:orientation="horizontal">
+
                             <com.google.android.material.textfield.TextInputLayout
                                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                                 android:layout_width="0dp"
@@ -386,11 +407,11 @@
                                     android:id="@+id/editTextx1roll_ribbon_bisa_cetak_pcs"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:inputType="none"
                                     android:enabled="false"
+                                    android:inputType="none"
                                     android:text="0"
                                     android:textAlignment="textEnd"
-                                    android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"/>
+                                    android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1" />
                             </com.google.android.material.textfield.TextInputLayout>
 
                             <com.google.android.material.textfield.TextInputLayout
@@ -405,11 +426,11 @@
                                     android:id="@+id/editTextxmaka_kebutuhan_ribbonnya"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:inputType="none"
                                     android:enabled="false"
+                                    android:inputType="none"
                                     android:text="0"
                                     android:textAlignment="textEnd"
-                                    android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"/>
+                                    android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1" />
                             </com.google.android.material.textfield.TextInputLayout>
                         </androidx.appcompat.widget.LinearLayoutCompat>
 
@@ -449,6 +470,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="0.5"
                             android:layout_marginStart="@dimen/keyline_1"
+                            android:textColorHint="@color/colorGreen"
                             android:hint="Catatan / No Dokumen">
 
 
@@ -457,6 +479,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:inputType="text"
+                                android:nextFocusDown="@+id/buttonSave"
                                 android:textAlignment="textStart" />
                         </com.google.android.material.textfield.TextInputLayout>
                     </androidx.appcompat.widget.LinearLayoutCompat>

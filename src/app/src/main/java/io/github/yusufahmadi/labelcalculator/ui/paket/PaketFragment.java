@@ -209,12 +209,12 @@ public class PaketFragment extends Fragment {
     private void ShowDetail(Paket obj) {
         Intent intent = new Intent(getActivity(), PaketInputActivity.class);
         intent.putExtra("key.Paket", obj);
-        startActivityForResult(intent, mdlPublic.Activity_TeffetaInput);
+        startActivityForResult(intent, mdlPublic.Activity_PaketInput);
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == mdlPublic.Activity_TeffetaInput) {
+        if (requestCode == mdlPublic.Activity_PaketInput) {
             if (resultCode == RESULT_OK) {
                 refreshList("", 1, item_limit);
             }

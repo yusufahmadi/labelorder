@@ -18,6 +18,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.LinearLayoutCompat;
 import androidx.appcompat.widget.Toolbar;
 
 import com.google.android.material.button.MaterialButton;
@@ -35,6 +36,7 @@ import io.github.yusufahmadi.labelcalculator.R;
 import io.github.yusufahmadi.labelcalculator.model.Bahan;
 import io.github.yusufahmadi.labelcalculator.model.Label;
 import io.github.yusufahmadi.labelcalculator.repository.DataAccess;
+import io.github.yusufahmadi.labelcalculator.repository.mdlPublic;
 
 public class LabelInputActivity extends AppCompatActivity {
     private Label Obj;
@@ -68,7 +70,12 @@ public class LabelInputActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        setTitle("Input Label");
+        if (mdlPublic.level==mdlPublic.Level.Super) {
+            setTitle("Input Label");
+        }else
+        {
+            setTitle("Hitung Bahan Label");
+        }
     }
 
     private void InitData() {
@@ -92,6 +99,7 @@ public class LabelInputActivity extends AppCompatActivity {
     private TextInputEditText editTextHargaModal, editTextLebar, editTextTinggi, editTextGap,editTextPisau,
             editTextLebarBahanBelanja,editText1RollPcs,editTextSaranOrderPcs,editTextQtyOrderPcs,editTextPembulatanRoll,editTextKebutuhanRoll,editTextBiayaPisau,editTextBiayaTinta,editTextBiayaToyobo,editTextBiayaOperator,editTextBiayaKirim, editTextBiayaTotal;
     private AutoCompleteTextView spinner_bahan;
+    private LinearLayoutCompat panelBahan,panelUkuran,panelProfitKotor,panelBiaya,panelJual,panelAnalisa;
     private TextInputEditText  editTextCatatan, editTextModalBahanUtuh ,editTextModalPerPcs ,editTextJualSesuaiOrder ,editTextProfit1 ,editTextJualSesuaiSaran ,editTextProfit2;
     private TextView textView30Persen,textView50Persen,textView100Persen,textView125Persen,textView150Persen,textView175Persen,textView200Persen,textView75Persen;
 
@@ -174,6 +182,43 @@ public class LabelInputActivity extends AppCompatActivity {
             editTextProfit2.setSelectAllOnFocus(true);
 
             spinner_bahan.setAdapter(arrayAdapter);
+
+            panelBahan          = findViewById(R.id.panelBahan);
+            panelUkuran         = findViewById(R.id.panelUkuran);
+            panelProfitKotor    = findViewById(R.id.panelProfitKotor);
+            panelBiaya             = findViewById(R.id.panelBiaya);
+            panelJual           = findViewById(R.id.panelJual);
+            panelAnalisa         = findViewById(R.id.panelAnalisa);
+
+            if (mdlPublic.level==mdlPublic.Level.User){
+                spinner_bahan.setVisibility(View.GONE);
+                editTextHargaModal.setVisibility(View.GONE);
+                editTextSaranOrderPcs.setVisibility(View.GONE);
+
+                editTextPembulatanRoll.setVisibility(View.GONE);
+                editTextKebutuhanRoll.setVisibility(View.GONE);
+
+                editTextBiayaPisau.setVisibility(View.GONE);
+                editTextBiayaTinta.setVisibility(View.GONE);
+                editTextBiayaToyobo.setVisibility(View.GONE);
+                editTextBiayaOperator.setVisibility(View.GONE);
+                editTextBiayaKirim.setVisibility(View.GONE);
+                editTextBiayaTotal.setVisibility(View.GONE);
+
+                panelBahan.setVisibility(View.GONE);
+                panelProfitKotor.setVisibility(View.GONE);
+                panelBiaya.setVisibility(View.GONE);
+                panelJual.setVisibility(View.GONE);
+                panelAnalisa.setVisibility(View.GONE);
+
+                editTextModalBahanUtuh.setVisibility(View.GONE);
+                editTextModalPerPcs.setVisibility(View.GONE);
+                editTextJualSesuaiOrder.setVisibility(View.GONE);
+                editTextProfit1.setVisibility(View.GONE);
+                editTextJualSesuaiSaran.setVisibility(View.GONE);
+                editTextProfit2.setVisibility(View.GONE);
+
+            }
             spinner_bahan.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(final View arg0) {
@@ -517,7 +562,7 @@ public class LabelInputActivity extends AppCompatActivity {
                                     Toast.LENGTH_SHORT).show();
                             isValidasi = false;
                         }
-                        if (isValidasi && idbahan < 0) {
+                        if (isValidasi && idbahan < 0 && mdlPublic.level == mdlPublic.Level.Super) {
                             Toast.makeText(getApplicationContext(),
                                     "Bahan harus diisi.",
                                     Toast.LENGTH_SHORT).show();
@@ -530,7 +575,7 @@ public class LabelInputActivity extends AppCompatActivity {
                                     Toast.LENGTH_SHORT).show();
                             isValidasi = false;
                         }
-                        if (isValidasi && df.parse(editTextJualSesuaiOrder.getText().toString()).doubleValue() <= 0) {
+                        if (isValidasi && df.parse(editTextJualSesuaiOrder.getText().toString()).doubleValue() <= 0 && mdlPublic.level == mdlPublic.Level.Super) {
                             Toast.makeText(getApplicationContext(),
                                     "Isi jual sesuai saran.",
                                     Toast.LENGTH_SHORT).show();

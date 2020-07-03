@@ -30,4 +30,9 @@ public class mdlPublic {
     public static String PREFS_PASSCODE = "Key.Passcode";
     public static String PWD_RESET_PASSCODE = "P@a5sC0t";
     public static String PWD_DEFAULT_PASSCODE = "000000";
+    public static Level level;
+    public enum  Level{
+        User,
+        Super
+    }
 }

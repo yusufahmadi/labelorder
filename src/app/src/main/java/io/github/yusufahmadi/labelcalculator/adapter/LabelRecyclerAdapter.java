@@ -114,6 +114,13 @@ public class LabelRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.View
                 holder.Lebar.setText(df.format(m.lebar));
                 holder.Tinggi.setText(df.format(m.tinggi));
                 holder.Gap.setText(df.format(m.gap));
+                holder.Pisau.setText(df.format(m.pisau));
+                holder.QtyOrder.setText(df.format(m.qty_order));
+
+                if (mdlPublic.level==mdlPublic.Level.User){
+                    holder.NetProfit.setVisibility(View.GONE);
+                    holder.Bahan.setVisibility(View.GONE);
+                }
             } catch (Exception ex) {
                 Toast.makeText(context, "Error : " + ex.getMessage(), Toast.LENGTH_SHORT).show();
             }
@@ -129,7 +136,7 @@ public class LabelRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.View
 
     public static class OriginalViewHolder extends RecyclerView.ViewHolder {
         // Layouting item
-        public TextView Document, Tanggal, Bahan, NetProfit, Tinggi, Lebar, Gap;
+        public TextView Document, Tanggal, Bahan, NetProfit, Tinggi, Lebar, Gap,Pisau,QtyOrder;
 
         public OriginalViewHolder(@NonNull View v) {
             super(v);
@@ -140,6 +147,8 @@ public class LabelRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.View
             Tinggi      = v.findViewById(R.id.tvTinggi);
             Lebar       = v.findViewById(R.id.tvLebar);
             Gap         = v.findViewById(R.id.tvGap);
+            Pisau         = v.findViewById(R.id.tvMataPisau);
+            QtyOrder         = v.findViewById(R.id.tvQtyOrder);
         }
     }
 
