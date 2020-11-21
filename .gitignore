@@ -13,3 +13,8 @@
 .externalNativeBuild
 .cxx
 *.apk
+/src/.idea/codeStyles/Project.xml
+/src/.idea/gradle.xml
+/src/.idea/misc.xml
+/src/.idea/render.experimental.xml
+/src/gradle/wrapper/gradle-wrapper.properties
