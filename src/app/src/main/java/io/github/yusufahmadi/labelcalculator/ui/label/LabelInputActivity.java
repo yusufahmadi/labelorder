@@ -99,9 +99,9 @@ public class LabelInputActivity extends AppCompatActivity {
     private TextInputEditText editTextHargaModal, editTextLebar, editTextTinggi, editTextGap,editTextPisau,
             editTextLebarBahanBelanja,editText1RollPcs,editTextSaranOrderPcs,editTextQtyOrderPcs,editTextPembulatanRoll,editTextKebutuhanRoll,editTextBiayaPisau,editTextBiayaTinta,editTextBiayaToyobo,editTextBiayaOperator,editTextBiayaKirim, editTextBiayaTotal;
     private AutoCompleteTextView spinner_bahan;
-    private LinearLayoutCompat panelBahan,panelUkuran,panelProfitKotor,panelBiaya,panelJual,panelAnalisa;
+    private LinearLayoutCompat panelBahan,panelUkuran,panelProfitKotor,panelBiaya,panelJual,panelAnalisa,panelEstimasiHarga;
     private TextInputEditText  editTextCatatan, editTextModalBahanUtuh ,editTextModalPerPcs ,editTextJualSesuaiOrder ,editTextProfit1 ,editTextJualSesuaiSaran ,editTextProfit2;
-    private TextView textView30Persen,textView50Persen,textView100Persen,textView125Persen,textView150Persen,textView175Persen,textView200Persen,textView75Persen;
+    private TextView textView30Persen,textView50Persen,textView100Persen,textView100Persen2nd,textView125Persen,textView150Persen,textView175Persen,textView200Persen,textView75Persen;
 
     private void initLayout() {
         try {
@@ -158,6 +158,8 @@ public class LabelInputActivity extends AppCompatActivity {
             textView50Persen        = findViewById(R.id.textView50Persen);
             textView75Persen        = findViewById(R.id.textView75Persen);
             textView100Persen       = findViewById(R.id.textView100Persen);
+            textView100Persen2nd = findViewById(R.id.textView100Persen2nd);
+
             textView125Persen       = findViewById(R.id.textView125Persen);
             textView150Persen       = findViewById(R.id.textView150Persen);
             textView175Persen       = findViewById(R.id.textView175Persen);
@@ -189,14 +191,14 @@ public class LabelInputActivity extends AppCompatActivity {
             panelBiaya             = findViewById(R.id.panelBiaya);
             panelJual           = findViewById(R.id.panelJual);
             panelAnalisa         = findViewById(R.id.panelAnalisa);
-
+            panelEstimasiHarga = findViewById(R.id.panelEstimasiHarga);
             if (mdlPublic.level==mdlPublic.Level.User){
-                spinner_bahan.setVisibility(View.GONE);
+//                spinner_bahan.setVisibility(View.GONE);
                 editTextHargaModal.setVisibility(View.GONE);
-                editTextSaranOrderPcs.setVisibility(View.GONE);
+                //editTextSaranOrderPcs.setVisibility(View.GONE);
 
-                editTextPembulatanRoll.setVisibility(View.GONE);
-                editTextKebutuhanRoll.setVisibility(View.GONE);
+                //editTextPembulatanRoll.setVisibility(View.GONE);
+                //editTextKebutuhanRoll.setVisibility(View.GONE);
 
                 editTextBiayaPisau.setVisibility(View.GONE);
                 editTextBiayaTinta.setVisibility(View.GONE);
@@ -205,11 +207,11 @@ public class LabelInputActivity extends AppCompatActivity {
                 editTextBiayaKirim.setVisibility(View.GONE);
                 editTextBiayaTotal.setVisibility(View.GONE);
 
-                panelBahan.setVisibility(View.GONE);
+               // panelBahan.setVisibility(View.GONE);
                 panelProfitKotor.setVisibility(View.GONE);
                 panelBiaya.setVisibility(View.GONE);
                 panelJual.setVisibility(View.GONE);
-                panelAnalisa.setVisibility(View.GONE);
+               // panelAnalisa.setVisibility(View.GONE);
 
                 editTextModalBahanUtuh.setVisibility(View.GONE);
                 editTextModalPerPcs.setVisibility(View.GONE);
@@ -217,9 +219,10 @@ public class LabelInputActivity extends AppCompatActivity {
                 editTextProfit1.setVisibility(View.GONE);
                 editTextJualSesuaiSaran.setVisibility(View.GONE);
                 editTextProfit2.setVisibility(View.GONE);
-
+            }else {
+                panelEstimasiHarga.setVisibility(View.GONE);
             }
-            spinner_bahan.setOnClickListener(new View.OnClickListener() {
+                spinner_bahan.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(final View arg0) {
                     spinner_bahan.showDropDown();
@@ -692,7 +695,7 @@ public class LabelInputActivity extends AppCompatActivity {
                 editTextBiayaPisau.setText(df.format(0));
                 editTextBiayaTinta.setText(df.format(0));
                 editTextBiayaToyobo.setText(df.format(0));
-                editTextBiayaOperator.setText(df.format(0));
+                editTextBiayaOperator.setText(df.format(1000000)); //df.format(0)
                 editTextBiayaKirim.setText(df.format(0));
                 editTextQtyOrderPcs.setText(df.format(0.0));
                 editTextJualSesuaiOrder.setText(df.format(0.0));
@@ -762,6 +765,7 @@ public class LabelInputActivity extends AppCompatActivity {
             textView50Persen.setText(df.format(ModalperPcs*(1+0.5)));
             textView75Persen.setText(df.format(ModalperPcs*(1+0.75)));
             textView100Persen.setText(df.format(ModalperPcs*(1+1.0)));
+            textView100Persen2nd.setText(df.format(ModalperPcs*(1+1.0)));
             textView125Persen.setText(df.format(ModalperPcs*(1+1.25)));
             textView150Persen.setText(df.format(ModalperPcs*(1+1.5)));
             textView175Persen.setText(df.format(ModalperPcs*(1+1.75)));

@@ -119,7 +119,7 @@ public class LabelRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.View
 
                 if (mdlPublic.level==mdlPublic.Level.User){
                     holder.NetProfit.setVisibility(View.GONE);
-                    holder.Bahan.setVisibility(View.GONE);
+                   // holder.Bahan.setVisibility(View.GONE);
                 }
             } catch (Exception ex) {
                 Toast.makeText(context, "Error : " + ex.getMessage(), Toast.LENGTH_SHORT).show();
